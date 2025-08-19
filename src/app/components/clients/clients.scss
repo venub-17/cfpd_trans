@@ -1,0 +1,51 @@
+.image-container {
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 10px;
+  border-radius: 5px;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 10%,
+    black 90%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 10%,
+    black 90%,
+    transparent
+  );
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+.img_inner {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  animation: scroll-left 20s linear infinite;
+}
+
+.client-logo {
+  flex: 0 0 auto;
+  padding: 0 1.5rem;
+}
+
+.client-logo img {
+  max-height: 50px;
+  object-fit: contain;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-101%);
+  }
+}

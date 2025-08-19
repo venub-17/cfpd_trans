@@ -1,0 +1,143 @@
+<header
+  id="header"
+  class="bg-primary-700 shadow-sm sticky top-0 z-50 text-white"
+>
+  <div class="px-4 py-3">
+    <div class="flex justify-between gap-4 items-center">
+      <!-- Logo and tagline -->
+      <div class="flex items-center space-x-4">
+        <h1 class="text-2xl md:text-xl font-bold mr-2" [routerLink]="['/']">
+          PowerTrans
+        </h1>
+        <nav class="hidden md:flex items-center space-x-8">
+          <!-- <span
+          [routerLink]="['/']"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="text-gray-600 hover:text-primary-600 transition-colors cursor-pointer"
+          >Home</span
+        > -->
+          <span
+            [routerLink]="['/products']"
+            routerLinkActive="active"
+            class="hover:text-primary-100 transition-colors cursor-pointer"
+            >Products</span
+          >
+          <span
+            [routerLink]="['/services']"
+            routerLinkActive="active"
+            class="hover:text-primary-100 transition-colors cursor-pointer"
+            >Services</span
+          >
+          <!-- <span
+          [routerLink]="['/clients']"
+          routerLinkActive="active"
+          class=" hover:text-primary-100 transition-colors cursor-pointer"
+          >Clients</span
+        > -->
+        </nav>
+      </div>
+
+      <!-- Desktop Navigation -->
+
+      <!-- Desktop CTA Buttons -->
+      <div class="hidden md:flex items-center space-x-4">
+        <span
+          [routerLink]="['/contact']"
+          routerLinkActive="active"
+          class="hover:text-primary-100 transition-colors cursor-pointer"
+          >Contact</span
+        >
+        <span
+          [routerLink]="['/login']"
+          routerLinkActive="active"
+          class="hover:text-primary-100 transition-colors cursor-pointer"
+          >Login</span
+        >
+
+        <button
+          *ngIf="isLoggedIn"
+          class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-md text-sm transition-colors"
+        >
+          Get Started
+        </button>
+      </div>
+
+      <!-- Mobile Menu Toggle Button -->
+      <div class="md:hidden flex items-center">
+        <button (click)="onToggleMenu()">
+          <ng-container *ngIf="!toggleState">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+              />
+            </svg>
+          </ng-container>
+          <ng-container *ngIf="toggleState">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18 18 6M6 6l12 12"
+              />
+            </svg>
+          </ng-container>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div *ngIf="toggleState" class="md:hidden mt-4 space-y-4">
+      <nav class="flex flex-col space-y-2">
+        <span
+          class="hover:text-primary-100 transition-colors cursor-pointer"
+          [routerLink]="['/products']"
+          routerLinkActive="active"
+          >Products</span
+        >
+        <span
+          [routerLink]="['/services']"
+          routerLinkActive="active"
+          class="hover:text-primary-100 transition-colors cursor-pointer"
+          >Services</span
+        >
+
+        <span
+          class="hover:text-primary-100 transition-colors cursor-pointer"
+          [routerLink]="['/contact']"
+          routerLinkActive="active"
+          >Contact</span
+        >
+      </nav>
+      <div class="flex flex-col space-y-2 pt-2">
+        <span
+          [routerLink]="['/login']"
+          routerLinkActive="active"
+          class="hover:text-primary-100 transition-colors cursor-pointer"
+          >Login</span
+        >
+        <button
+          class="bg-primary-600 hover:bg-primary-100 text-white px-4 py-2 rounded-md text-sm transition-colors"
+        >
+          Get Started
+        </button>
+      </div>
+    </div>
+  </div>
+</header>

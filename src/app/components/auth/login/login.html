@@ -1,0 +1,129 @@
+<main
+  id="main-content"
+  class="min-h-[600px] bg-neutral-50 flex items-center justify-center px-6 py-12"
+>
+  <div id="login-container" class="max-w-md w-full space-y-8">
+    <div class="text-center">
+      <h2 class="text-3xl text-neutral-900 mb-2">Sign in to your account</h2>
+      <p class="text-neutral-600">
+        Access your transformer management dashboard
+      </p>
+    </div>
+
+    <div
+      id="login-form-wrapper"
+      class="bg-white py-8 px-6 shadow-sm rounded-lg border-t-4 border-primary-600"
+    >
+      <form
+        id="login-form"
+        class="space-y-6"
+        [formGroup]="loginForm"
+        (ngSubmit)="onSubmit()"
+      >
+        <div>
+          <label for="username" class="block text-sm text-neutral-700 mb-2">
+            Username
+          </label>
+          <div class="relative">
+            <input
+              type="text"
+              class="w-full px-3 py-2 border focus:outline-none border-neutral-300 rounded-md shadow-sm placeholder-neutral-400"
+              placeholder="Enter your username"
+              [ngClass]="{
+                'border-red-500':
+                  (f['username'].touched || isFormSubmitted) &&
+                  f['username'].invalid
+              }"
+              formControlName="username"
+            />
+            <div
+              *ngIf="
+                f['username'].errors &&
+                f['username'].errors['required'] &&
+                (f['username'].dirty ||
+                  f['username'].touched ||
+                  isFormSubmitted)
+              "
+              class="text-red-500 text-sm mt-1"
+            >
+              Username is required
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label for="password" class="block text-sm text-neutral-700 mb-2">
+            Password
+          </label>
+          <div class="relative">
+            <input
+              type="password"
+              class="w-full px-3 py-2 border focus:outline-none border-neutral-300 rounded-md shadow-sm placeholder-neutral-400"
+              placeholder="Enter your password"
+              formControlName="password"
+              [ngClass]="{
+                'border-red-500':
+                  (f['password'].touched || isFormSubmitted) &&
+                  f['password'].invalid
+              }"
+            />
+            <div
+              *ngIf="
+                f['password'].errors &&
+                f['password'].errors['required'] &&
+                (f['password'].dirty ||
+                  f['password'].touched ||
+                  isFormSubmitted)
+              "
+              class="text-red-500 text-sm mt-1"
+            >
+              Password is required
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <input
+              id="remember-me"
+              name="remember-me"
+              type="checkbox"
+              class="h-4 w-4 text-neutral-900 outline-none focus:ring-neutral-900 border-neutral-300 rounded"
+            />
+            <label
+              for="remember-me"
+              class="ml-2 block text-sm text-neutral-700"
+            >
+              Remember me
+            </label>
+          </div>
+          <span
+            class="text-sm text-neutral-900 hover:text-neutral-700 cursor-pointer"
+          >
+            Forgot password?
+          </span>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-md shadow-sm text-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-900 transition-colors"
+        >
+          Sign in
+        </button>
+      </form>
+
+      <div class="mt-6 text-center">
+        <p class="text-sm text-neutral-600">
+          Don't have an account?
+          <span
+            [routerLink]="['/signup']"
+            routerLinkActive="router-link-active"
+            class="text-neutral-900 hover:underline cursor-pointer"
+          >
+            Creat an account
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+</main>

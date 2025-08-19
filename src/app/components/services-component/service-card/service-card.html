@@ -1,0 +1,36 @@
+<div
+  id="service-card-1"
+  class="bg-white rounded-lg border border-border-gray overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+  (click)="openModal(service)"
+>
+  <img
+    class="w-full h-48 object-cover"
+    src="{{ service.imgUrl }}"
+    alt="professional transformer installation site with industrial equipment and technicians"
+  />
+  <div class="p-6">
+    <h3 class="text-xl font-semibold text-primary-blue mb-3">
+      {{ service.serviceName }}
+    </h3>
+    <p class="text-gray-600 mb-4">
+      {{ service.description }}
+    </p>
+    <div class="flex items-center justify-between">
+      <span class="text-accent-green font-medium">24/7 Available</span>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+        />
+      </svg>
+    </div>
+  </div>
+</div>

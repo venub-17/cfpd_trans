@@ -1,0 +1,417 @@
+<section
+  id="hero"
+  class="md:bg-gradient-to-r ultraSm:bg-gradient-to-b from-primary-700 to-primary-900 text-white py-16"
+>
+  <div class="px-4 container mx-auto">
+    <div class="flex flex-col md:flex-row lg:flex-row items-center gap-16">
+      <div class="md:w-1/2 mb-10 md:mb-0">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">
+          Powering The Future With Innovative Transformers
+        </h1>
+        <p class="text-primary-100 mb-8">
+          Industry-leading power transformers designed for reliability,
+          efficiency, and performance in demanding environments.
+        </p>
+        <div
+          class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4"
+        >
+          <button
+            class="bg-white text-primary-700 hover:bg-gray-100 font-medium px-6 py-3 rounded-md transition-colors"
+            [routerLink]="['/products']"
+            routerLinkActive="router-link-active"
+          >
+            Explore Products
+          </button>
+          <button
+            class="bg-transparent border border-white text-white hover:bg-white/10 px-6 py-3 rounded-md transition-colors"
+          >
+            Contact Sales
+          </button>
+        </div>
+      </div>
+      <div class="md:w-1/2">
+        <img
+          class="rounded-lg shadow-lg"
+          src="https://storage.googleapis.com/uxpilot-auth.appspot.com/e87a95d67d-598d136908c3655942ad.png"
+          alt="3D rendering of a modern power transformer in blue and silver colors, industrial equipment, professional lighting"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+<section id="features" class="py-16 bg-white">
+  <div class="mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold mb-4">Why Choose PowerTrans?</h2>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+        Our transformers are designed with cutting-edge technology to provide
+        superior performance, energy efficiency, and reliability.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8">
+      <div id="feature-1" class="bg-gray-50 p-6 rounded-lg">
+        <div
+          class="w-12 h-12 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center mb-4"
+        >
+          <img
+            src="https://www.svgrepo.com/show/446297/power.svg"
+            width="{25}"
+            alt=""
+          />
+        </div>
+        <h3 class="text-xl font-semibold mb-2">High Efficiency</h3>
+        <p class="text-gray-600">
+          Our transformers achieve industry-leading efficiency ratings, reducing
+          energy losses and operational costs.
+        </p>
+      </div>
+
+      <div id="feature-2" class="bg-gray-50 p-6 rounded-lg">
+        <div
+          class="w-12 h-12 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center mb-4"
+        >
+          <img
+            src="https://www.svgrepo.com/show/527879/shield-minimalistic.svg"
+            width="{25}"
+            alt=""
+          />
+        </div>
+        <h3 class="text-xl font-semibold mb-2">Reliable Performance</h3>
+        <p class="text-gray-600">
+          Built to withstand extreme conditions with robust designs that ensure
+          uninterrupted power supply.
+        </p>
+      </div>
+
+      <div id="feature-3" class="bg-gray-50 p-6 rounded-lg">
+        <div
+          class="w-12 h-12 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center mb-4"
+        >
+          <img
+            src="https://www.svgrepo.com/show/503405/leaf.svg"
+            width="{25}"
+            alt=""
+          />
+        </div>
+        <h3 class="text-xl font-semibold mb-2">Eco-Friendly</h3>
+        <p class="text-gray-600">
+          Environmentally conscious designs with biodegradable insulating fluids
+          and recyclable materials.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="product-showcase" class="py-16 bg-gray-50">
+  <div class="mx-auto px-4">
+    <div class="flex justify-between items-end mb-8">
+      <div>
+        <h2 class="text-3xl font-bold mb-2">Our Product Range</h2>
+        <p class="text-gray-600">
+          Explore our comprehensive range of transformers for various
+          applications
+        </p>
+      </div>
+      <span
+        class="text-primary-600 hover:text-primary-700 font-medium flex items-center cursor-pointer"
+        [routerLink]="['/products']"
+      >
+        View all products
+        <i class="ml-2" data-fa-i2svg="">
+          <svg
+            class="svg-inline--fa fa-arrow-right"
+            aria-hidden="true"
+            focusable="false"
+            data-prefix="fas"
+            data-icon="arrow-right"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 448 512"
+            data-fa-i2svg=""
+          >
+            <path
+              fill="currentColor"
+              d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"
+            ></path>
+          </svg>
+        </i>
+      </span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div
+        id="product-1"
+        class="bg-white rounded-lg overflow-hidden shadow-md transition-transform hover:shadow-lg hover:-translate-y-1"
+      >
+        <div class="h-48 overflow-hidden">
+          <img
+            class="w-full h-full object-cover"
+            src="https://storage.googleapis.com/uxpilot-auth.appspot.com/7601e79a7f-e3ad286c63e106e67c22.png"
+            alt="industrial power transformer, blue color, technical equipment, studio lighting"
+          />
+        </div>
+        <div class="p-6">
+          <div class="flex justify-between items-center mb-2">
+            <h3 class="text-xl font-semibold">Power Transformer PT-5000</h3>
+            <span
+              class="bg-primary-100 text-primary-700 text-xs px-2 py-1 rounded-full"
+            >
+              New
+            </span>
+          </div>
+          <p class="text-gray-600 mb-4">
+            High-capacity power transformer designed for utility substations and
+            industrial applications.
+          </p>
+          <div class="flex justify-between items-center">
+            <span class="text-primary-700 font-semibold">
+              Starting at $12,500
+            </span>
+            <button class="text-primary-600 hover:text-primary-700">
+              <i data-fa-i2svg="">
+                <svg
+                  class="svg-inline--fa fa-arrow-right"
+                  aria-hidden="true"
+                  focusable="false"
+                  data-prefix="fas"
+                  data-icon="arrow-right"
+                  role="img"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 448 512"
+                  data-fa-i2svg=""
+                >
+                  <path
+                    fill="currentColor"
+                    d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"
+                  ></path>
+                </svg>
+              </i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="product-2"
+        class="bg-white rounded-lg overflow-hidden shadow-md transition-transform hover:shadow-lg hover:-translate-y-1"
+      >
+        <div class="h-48 overflow-hidden">
+          <img
+            class="w-full h-full object-cover"
+            src="https://storage.googleapis.com/uxpilot-auth.appspot.com/a613b9f163-a3878fc918da2499f173.png"
+            alt="distribution transformer on electric pole, technical equipment, outdoor installation"
+          />
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-semibold mb-2">
+            Distribution Transformer DT-1000
+          </h3>
+          <p class="text-gray-600 mb-4">
+            Medium-capacity distribution transformer for commercial buildings
+            and residential complexes.
+          </p>
+          <div class="flex justify-between items-center">
+            <span class="text-primary-700 font-semibold">
+              Starting at $8,200
+            </span>
+            <button class="text-primary-600 hover:text-primary-700">
+              <i data-fa-i2svg="">
+                <svg
+                  class="svg-inline--fa fa-arrow-right"
+                  aria-hidden="true"
+                  focusable="false"
+                  data-prefix="fas"
+                  data-icon="arrow-right"
+                  role="img"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 448 512"
+                  data-fa-i2svg=""
+                >
+                  <path
+                    fill="currentColor"
+                    d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"
+                  ></path>
+                </svg>
+              </i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="product-3"
+        class="bg-white rounded-lg overflow-hidden shadow-md transition-transform hover:shadow-lg hover:-translate-y-1"
+      >
+        <div class="h-48 overflow-hidden">
+          <img
+            class="w-full h-full object-cover"
+            src="https://storage.googleapis.com/uxpilot-auth.appspot.com/80369b423c-87291d130b6a0dcea177.png"
+            alt="compact dry-type transformer, modern design, industrial equipment"
+          />
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-semibold mb-2">
+            Dry-Type Transformer DT-500
+          </h3>
+          <p class="text-gray-600 mb-4">
+            Fire-resistant dry-type transformer for indoor installations in
+            sensitive environments.
+          </p>
+          <div class="flex justify-between items-center">
+            <span class="text-primary-700 font-semibold">
+              Starting at $6,800
+            </span>
+            <button class="text-primary-600 hover:text-primary-700">
+              <i data-fa-i2svg="">
+                <svg
+                  class="svg-inline--fa fa-arrow-right"
+                  aria-hidden="true"
+                  focusable="false"
+                  data-prefix="fas"
+                  data-icon="arrow-right"
+                  role="img"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 448 512"
+                  data-fa-i2svg=""
+                >
+                  <path
+                    fill="currentColor"
+                    d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"
+                  ></path>
+                </svg>
+              </i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="dashboard-preview" class="py-16 bg-white">
+  <div class="mx-auto px-4">
+    <div class="flex flex-col md:flex-row items-center">
+      <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+        <h2 class="text-3xl font-bold mb-4">
+          Monitor Your Transformers in Real-Time
+        </h2>
+        <p class="text-gray-600 mb-6">
+          Our advanced client dashboard gives you complete visibility of your
+          transformer performance metrics, maintenance schedules, and energy
+          efficiency data.
+        </p>
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="#37b24d"
+              class="size-4"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+
+            <span>Real-time performance monitoring</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="#37b24d"
+              class="size-4"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+
+            <span>Predictive maintenance alerts</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="#37b24d"
+              class="size-4"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+
+            <span>Energy efficiency analytics</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="#37b24d"
+              class="size-4"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+
+            <span>Customizable reporting tools</span>
+          </li>
+        </ul>
+        <button
+          class="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-md transition-colors"
+        >
+          Try Dashboard Demo
+        </button>
+      </div>
+      <div class="md:w-1/2">
+        <div class="bg-gray-800 rounded-lg p-3 shadow-xl">
+          <img
+            class="rounded-md w-full"
+            src="https://storage.googleapis.com/uxpilot-auth.appspot.com/2c7bb1765c-c7cc3d4a66dde57d0a33.png"
+            alt="dashboard user interface for transformer monitoring system with graphs, gauges and status indicators, dark theme, professional UI design"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="testimonials" class="py-16 bg-gray-50">
+  <app-customer-reviews></app-customer-reviews>
+</section>
+<section id="client-logos" class="py-12 bg-white">
+  <app-clients></app-clients>
+</section>
+<section id="cta" class="py-16 bg-primary-700 text-white">
+  <div class="mx-auto px-4 text-center">
+    <h2 class="text-3xl font-bold mb-4">
+      Ready to Transform Your Power Infrastructure?
+    </h2>
+    <p class="text-primary-100 max-w-2xl mx-auto mb-8">
+      Contact our team today to discuss your transformer needs and discover how
+      our solutions can improve your efficiency and reliability.
+    </p>
+    <div
+      class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4"
+    >
+      <button
+        class="bg-white text-primary-700 hover:bg-gray-100 font-medium px-6 py-3 rounded-md transition-colors"
+      >
+        Request a Quote
+      </button>
+      <button
+        class="bg-transparent border border-white text-white hover:bg-white/10 px-6 py-3 rounded-md transition-colors"
+      >
+        Schedule Consultation
+      </button>
+    </div>
+  </div>
+</section>

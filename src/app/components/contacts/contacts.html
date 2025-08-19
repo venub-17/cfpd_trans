@@ -1,0 +1,126 @@
+<main id="main-content" class="flex-1 py-12">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div id="form-header" class="text-center mb-8">
+      <h1 class="text-3xl font-bold text-gray-900 mb-2">Contact Us</h1>
+      <p class="text-gray-600">
+        We'd love to hear from you. Send us a message and we'll respond as soon
+        as possible.
+      </p>
+    </div>
+    <div
+      id="contact-form-section"
+      class="bg-white rounded-lg shadow-xl p-8 border-t-4 border-primary-600"
+    >
+      <div id="form-container" class="bg-opacity-30 rounded-lg p-6">
+        <form id="contact-form" class="space-y-6">
+          <div id="name-field" class="form-group">
+            <label
+              for="name"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Full Name</label
+            >
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required=""
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500"
+              placeholder="Enter your full name"
+            />
+          </div>
+
+          <div id="email-field" class="form-group">
+            <label
+              for="email"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Email Address</label
+            >
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required=""
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500"
+              placeholder="Enter your email address"
+            />
+          </div>
+
+          <div id="phone-field" class="form-group">
+            <label
+              for="phone"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Phone Number</label
+            >
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500"
+              placeholder="Enter your phone number"
+            />
+          </div>
+          <div>
+            <label for="subject" class="block text-sm text-neutral-700 mb-2">
+              Subject
+            </label>
+            <select
+              id="subject"
+              name="subject"
+              class="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:border-transparent"
+            >
+              <option value="">Select a subject</option>
+              <option value="general">General Inquiry</option>
+              <option value="sales">Sales</option>
+              <option value="support">Technical Support</option>
+              <option value="partnership">Partnership</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div id="message-field" class="form-group">
+            <label
+              for="message"
+              class="block text-sm font-medium text-gray-700 mb-2"
+              >Message</label
+            >
+            <textarea
+              id="message"
+              name="message"
+              rows="6"
+              required=""
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500 resize-none"
+              placeholder="Enter your message here..."
+            ></textarea>
+          </div>
+
+          <div id="submit-section" class="pt-4 flex justify-center">
+            <button
+              type="submit"
+              class="w-1/2 bg-primary-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-primary-700 focus:outline-none"
+            >
+              Send Message
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- <div
+        id="contact-info"
+        class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 text-center"
+      >
+        <div id="phone-info" class="bg-gray-50 p-4 rounded-lg">
+          <h3 class="font-semibold text-gray-900">Phone</h3>
+          <p class="text-gray-600">+1 (555) 123-4567</p>
+        </div>
+        <div id="email-info" class="bg-gray-50 p-4 rounded-lg">
+          <h3 class="font-semibold text-gray-900">Email</h3>
+          <p class="text-gray-600">info@techcorp.com</p>
+        </div>
+        <div id="location-info" class="bg-gray-50 p-4 rounded-lg">
+          <h3 class="font-semibold text-gray-900">Office</h3>
+          <p class="text-gray-600">123 Business Ave, Suite 100</p>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</main>
