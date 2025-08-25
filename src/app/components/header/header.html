@@ -6,54 +6,168 @@
     <div class="flex justify-between gap-4 items-center">
       <!-- Logo and tagline -->
       <div class="flex items-center space-x-4">
-        <h1 class="text-2xl md:text-xl font-bold mr-2" [routerLink]="['/']">
+        <h1
+          class="text-2xl md:text-xl font-bold mr-2 cursor-pointer"
+          [routerLink]="['/']"
+          (click)="onToggleDropdown('')"
+        >
           PowerTrans
         </h1>
-        <nav class="hidden md:flex items-center space-x-8">
-          <!-- <span
-          [routerLink]="['/']"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-          class="text-gray-600 hover:text-primary-600 transition-colors cursor-pointer"
-          >Home</span
-        > -->
-          <span
-            [routerLink]="['/products']"
-            routerLinkActive="active"
-            class="hover:text-primary-100 transition-colors cursor-pointer"
-            >Products</span
-          >
-          <span
-            [routerLink]="['/services']"
-            routerLinkActive="active"
-            class="hover:text-primary-100 transition-colors cursor-pointer"
-            >Services</span
-          >
-          <!-- <span
-          [routerLink]="['/clients']"
-          routerLinkActive="active"
-          class=" hover:text-primary-100 transition-colors cursor-pointer"
-          >Clients</span
-        > -->
-        </nav>
       </div>
 
       <!-- Desktop Navigation -->
 
       <!-- Desktop CTA Buttons -->
       <div class="hidden md:flex items-center space-x-4">
-        <span
-          [routerLink]="['/contact']"
+        <nav class="hidden md:flex items-center space-x-8">
+          <span
+            [routerLink]="['/']"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            (click)="onToggleDropdown('')"
+            class="hover:text-primary-100 transition-colors cursor-pointer"
+            >Home</span
+          >
+          <span
+            [routerLink]="['/products']"
+            routerLinkActive="active"
+            (click)="onToggleDropdown('')"
+            class="hover:text-primary-100 transition-colors cursor-pointer"
+            >Products</span
+          >
+          <span
+            [routerLink]="['/services']"
+            routerLinkActive="active"
+            (click)="onToggleDropdown('')"
+            class="hover:text-primary-100 transition-colors cursor-pointer"
+            >Services</span
+          >
+          <div class="relative">
+            <span
+              class="hover:text-primary-100 transition-colors cursor-pointer"
+              (click)="onToggleDropdown('services')"
+              >Services</span
+            >
+
+            <!-- Dropdown menu -->
+            <div
+              *ngIf="openDropdown === 'services'"
+              id="dropdown"
+              class="z-10 min-w-[900px] absolute top-10 right-0 bg-white rounded-lg shadow-sm dark:bg-gray-700"
+            >
+              <div class="flex justify-between items-start">
+                <!-- Grid container with 3 columns -->
+                <ul
+                  class="grid grid-cols-3 gap-2 p-4 text-sm text-gray-700 dark:text-gray-200"
+                >
+                  <li *ngFor="let service of services">
+                    <a
+                      [routerLink]="['/contact']"
+                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded"
+                      (click)="onToggleDropdown('')"
+                    >
+                      {{ service.serviceName }}
+                    </a>
+                  </li>
+                </ul>
+
+                <!-- Close icon -->
+                <div
+                  class="text-primary-600 mt-2 mr-2 cursor-pointer"
+                  (click)="onToggleDropdown('')"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="size-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M6 18 18 6M6 6l12 12"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative">
+            <span
+              class="hover:text-primary-100 transition-colors cursor-pointer"
+              (click)="onToggleDropdown('Contact')"
+              >Contact</span
+            >
+
+            <!-- Dropdown menu -->
+            <div
+              *ngIf="openDropdown === 'Contact'"
+              id="dropdown"
+              class="z-10 absolute top-10 right-0 bg-white rounded-lg shadow-sm w-fit dark:bg-gray-700"
+            >
+              <div class="flex justify-between">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
+                  <li>
+                    <a
+                      [routerLink]="['/contact']"
+                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      >Contact Us</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      >Emergency Info</a
+                    >
+                  </li>
+                </ul>
+
+                <div
+                  class="text-primary-600 mt-2 mr-2 cursor-pointer"
+                  (click)="onToggleDropdown('')"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="size-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M6 18 18 6M6 6l12 12"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- <span
+          [routerLink]="['/clients']"
           routerLinkActive="active"
-          class="hover:text-primary-100 transition-colors cursor-pointer"
-          >Contact</span
-        >
-        <span
-          [routerLink]="['/login']"
-          routerLinkActive="active"
-          class="hover:text-primary-100 transition-colors cursor-pointer"
-          >Login</span
-        >
+          class=" hover:text-primary-100 transition-colors cursor-pointer"
+          >Clients</span
+        > -->
+          <!-- <span
+            routerLinkActive="active"
+            class="hover:text-primary-100 transition-colors cursor-pointer"
+            >Contact</span
+          > -->
+          <span
+            [routerLink]="['/login']"
+            routerLinkActive="active"
+            (click)="onToggleDropdown('')"
+            class="hover:text-primary-100 transition-colors cursor-pointer"
+            >Login</span
+          >
+        </nav>
 
         <button
           *ngIf="isLoggedIn"
