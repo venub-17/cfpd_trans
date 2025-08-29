@@ -4,10 +4,17 @@ import { RouterLink } from '@angular/router';
 
 import { CustomerReviews } from '../customer-reviews/customer-reviews';
 import { Clients } from '../clients/clients';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-hero',
-  imports: [RouterLink, CommonModule, CustomerReviews, Clients],
+  imports: [
+    RouterLink,
+    CommonModule,
+    CustomerReviews,
+    Clients,
+    TranslateModule,
+  ],
   templateUrl: './hero.html',
   styleUrl: './hero.scss',
 })

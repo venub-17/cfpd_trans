@@ -6,5 +6,9 @@
 "SERVICES":"Services",
 "CONTACT":"Contact",
 "LOGIN":"Login"
-}
+},
+ "HOME_SCREEN": {
+    "TAGLINE": "Powering The Future With Innovative Transformers",
+    "DESCRIPTION": "Industry-leading power transformers designed for reliability, efficiency, and performance in demanding environments."
+  }
 }

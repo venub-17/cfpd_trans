@@ -5,5 +5,9 @@
     "SERVICES": "Servicios",
     "CONTACT": "Contacto",
     "LOGIN": "Iniciar sesión"
+  },
+   "HOME_SCREEN": {
+    "TAGLINE": "Impulsando el futuro con transformadores innovadores",
+    "DESCRIPTION": "Transformadores de potencia líderes en la industria, diseñados para la fiabilidad, la eficiencia y el rendimiento en entornos exigentes."
   }
 }
