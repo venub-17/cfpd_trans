@@ -42,18 +42,16 @@
             class="hover:text-primary-100 transition-colors cursor-pointer"
             >Services</span
           >
-          <div class="relative">
+          <div class="relative group">
             <span
               class="hover:text-primary-100 transition-colors cursor-pointer"
-              (click)="onToggleDropdown('services')"
               >Services</span
             >
 
             <!-- Dropdown menu -->
             <div
-              *ngIf="openDropdown === 'services'"
               id="dropdown"
-              class="z-10 min-w-[900px] absolute top-10 right-0 bg-white rounded-lg shadow-sm dark:bg-gray-700"
+              class="z-10 min-w-[900px] absolute top-10 right-0 bg-white rounded-lg shadow-sm w-fit dark:bg-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200"
             >
               <div class="flex justify-between items-start">
                 <!-- Grid container with 3 columns -->
@@ -95,7 +93,7 @@
             </div>
           </div>
 
-          <div class="relative">
+          <div class="relative group">
             <span
               class="hover:text-primary-100 transition-colors cursor-pointer"
               (click)="onToggleDropdown('Contact')"
@@ -104,9 +102,8 @@
 
             <!-- Dropdown menu -->
             <div
-              *ngIf="openDropdown === 'Contact'"
               id="dropdown"
-              class="z-10 absolute top-10 right-0 bg-white rounded-lg shadow-sm w-fit dark:bg-gray-700"
+              class="z-10 absolute top-10 right-0 bg-white rounded-lg shadow-sm w-fit dark:bg-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200"
             >
               <div class="flex justify-between">
                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
