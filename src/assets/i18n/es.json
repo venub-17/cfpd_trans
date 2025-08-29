@@ -1,0 +1,9 @@
+{
+  "NAVIGATION": {
+    "HOME": "Inicio",
+    "PRODUCT": "Producto",
+    "SERVICES": "Servicios",
+    "CONTACT": "Contacto",
+    "LOGIN": "Iniciar sesión"
+  }
+}
