@@ -35,13 +35,13 @@
             class="hover:text-primary-100 transition-colors cursor-pointer"
             >Products</span
           >
-          <span
+          <!-- <span
             [routerLink]="['/services']"
             routerLinkActive="active"
             (click)="onToggleDropdown('')"
             class="hover:text-primary-100 transition-colors cursor-pointer"
             >Services</span
-          >
+          > -->
           <div class="relative group">
             <span
               class="hover:text-primary-100 transition-colors cursor-pointer"
@@ -93,59 +93,12 @@
             </div>
           </div>
 
-          <div class="relative group">
-            <span
-              class="hover:text-primary-100 transition-colors cursor-pointer"
-              (click)="onToggleDropdown('Contact')"
-              >Contact</span
-            >
-
-            <!-- Dropdown menu -->
-            <div
-              id="dropdown"
-              class="z-10 absolute top-10 right-0 bg-white rounded-lg shadow-sm w-fit dark:bg-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200"
-            >
-              <div class="flex justify-between">
-                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
-                  <li>
-                    <a
-                      [routerLink]="['/contact']"
-                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >Contact Us</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >Emergency Info</a
-                    >
-                  </li>
-                </ul>
-
-                <div
-                  class="text-primary-600 mt-2 mr-2 cursor-pointer"
-                  (click)="onToggleDropdown('')"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="size-6"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M6 18 18 6M6 6l12 12"
-                    />
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
-
+          <span
+            [routerLink]="['/contact']"
+            routerLinkActive="active"
+            class="hover:text-primary-100 transition-colors cursor-pointer"
+            >Contact</span
+          >
           <!-- <span
           [routerLink]="['/clients']"
           routerLinkActive="active"

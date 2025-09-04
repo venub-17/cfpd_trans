@@ -1,0 +1,43 @@
+export const siteData = [
+  {
+    name: 'Plant 1 - Houston',
+    address: '123 Voltage St, Houston, TX',
+    status: 'Up to Date',
+    statusColor: 'green',
+    contact: 'Michael Rivera - Electrical Lead',
+    lastMaintenance: 'August 15, 2025',
+    activeTransformers: '8 Units',
+    nextService: 'Dec 20, 2025',
+    id: 'site1', // from onclick="showAssets('site1')"
+  },
+  {
+    name: 'Plant 2 - Dallas',
+    address: '456 Power Ave, Dallas, TX',
+    status: 'Scheduled',
+    statusColor: 'yellow',
+    contact: 'Sarah Johnson - Operations',
+    lastMaintenance: 'July 10, 2025',
+    activeTransformers: '12 Units',
+    nextService: 'Oct 15, 2025',
+  },
+  {
+    name: 'Distribution Center - Austin',
+    address: '789 Grid Rd, Austin, TX',
+    status: 'Overdue',
+    statusColor: 'red',
+    contact: 'David Chen - Maintenance',
+    lastMaintenance: 'March 5, 2025',
+    activeTransformers: '6 Units',
+    nextService: 'Sep 1, 2025',
+  },
+  {
+    name: 'Substation - San Antonio',
+    address: '321 Electric Blvd, San Antonio, TX',
+    status: 'Up to Date',
+    statusColor: 'green',
+    contact: 'Lisa Rodriguez - Engineer',
+    lastMaintenance: 'June 22, 2025',
+    activeTransformers: '4 Units',
+    nextService: 'Nov 30, 2025',
+  },
+];

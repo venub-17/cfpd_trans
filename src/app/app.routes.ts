@@ -46,6 +46,13 @@ export const routes: Routes = [
     component: Signup,
   },
   {
+    path: 'user-details',
+    loadComponent: () =>
+      import('./components/user/home-component/home-component').then(
+        (m) => m.HomeComponent
+      ),
+  },
+  {
     path: '**',
     component: NotFound,
   },

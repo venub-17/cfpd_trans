@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginType } from '../../../shared/types';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import {
   FormBuilder,
   FormControl,
@@ -21,7 +21,7 @@ export class Login implements OnInit {
   loginForm!: FormGroup;
   isFormSubmitted: boolean = false;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -44,6 +44,7 @@ export class Login implements OnInit {
       console.log('Form invalid');
       return;
     }
+    this.router.navigate(['/user-details']);
     console.log('Form Submitted', this.loginForm.value);
   }
 }
