@@ -52,3 +52,7 @@ export interface Site {
   activeTransformers: string;
   nextService: string;
 }
+
+export interface SiteRowData {
+  transiformerId: string;
+}
