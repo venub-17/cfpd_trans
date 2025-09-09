@@ -6,6 +6,8 @@ import {
   AllCommunityModule,
   GridReadyEvent,
 } from 'ag-grid-community';
+import { Location } from '@angular/common';
+import { ButtonRendererComponent } from './btnRendererComponent';
 
 // Register all community features once in your app
 ModuleRegistry.registerModules([AllCommunityModule]);
@@ -16,122 +18,120 @@ ModuleRegistry.registerModules([AllCommunityModule]);
   styleUrl: './site.scss',
 })
 export class Site {
+  public ButtonRendererComponent = ButtonRendererComponent;
+  constructor(private location: Location) {}
+
   public columnDefs: ColDef[] = [
     {
-      headerName: 'Customer Name',
-      field: 'name',
-      sortable: true,
+      headerName: 'Transformer ID',
+      field: 'TransformerID',
+      width: 130,
     },
     {
-      headerName: 'Activity Log',
-      field: 'tenantid',
-      sortable: true,
-      filter: 'agMultiColumnFilter',
+      headerName: 'Serial Number',
+      field: 'serialNumber',
     },
     {
-      headerName: 'Change Log',
-      field: 'gdap',
-      sortable: true,
+      headerName: 'KV KVA',
+      field: 'kv_kva',
     },
     {
-      headerName: 'Entry By',
-      field: 'dap',
-      sortable: true,
+      headerName: 'Fluid Type',
+      field: 'fluidType',
+      width: 120,
     },
     {
-      headerName: 'Entry Source',
-      field: 'permission',
-      sortable: true,
+      headerName: 'Breathing Type',
+      field: 'breathingType',
     },
     {
-      headerName: 'Date/Time',
-      field: 'rolecategory',
-      sortable: true,
+      headerName: 'Manufacturer',
+      field: 'manufacturer',
     },
     {
-      headerName: 'Date/Time',
-      field: 'duration',
-      sortable: true,
+      headerName: 'MFR Year',
+      field: 'mfrYear',
+      width: 120,
     },
     {
-      headerName: 'Date/Time',
-      field: 'expiration',
-      sortable: true,
+      headerName: 'Oil Volume (Gallons)',
+      field: 'oilVolumeGallons',
     },
     {
-      headerName: 'Date/Time',
-      field: 'relation',
-      sortable: true,
-    },
-    {
-      headerName: 'Date/Time',
-      field: 'autonotify',
-      sortable: true,
+      headerName: 'Actions',
+      cellRenderer: 'buttonRenderer',
+      cellRendererParams: {
+        label: 'Edit',
+        onClick: (params: any) => this.onRowClick(params),
+      },
     },
   ];
-  // DefaultColDef sets props common to all Columns
-  public defaultColDef: ColDef = {
-    sortable: true,
-    filter: true,
-  };
 
-  // Data that gets displayed in the grid
   public rowData$: any;
 
   // For accessing the Grid's API
 
   rowData = [
     {
-      name: 'Manoj',
-      tenantid: 'ID#',
-      gdap: 'status',
-      dap: 'status',
-      permission: 'low',
-      rolecategory: 'identity',
-      duration: '7 days',
-      expiration: '2022-06-02 10:03:32 AM UTC',
-      relation: 'active',
-      autonotify: 'on',
+      TransformerID: 'TX-9834-HOU',
+      serialNumber: 'SN-2020-4567',
+      kv_kva: '132 KV / 2500 KVA',
+      fluidType: 'Mineral Oil',
+      breathingType: 'Conservator',
+      manufacturer: 'ABB',
+      mfrYear: 2019,
+      oilVolumeGallons: 1200,
     },
     {
-      name: 'Manoj',
-      tenantid: 'ID#',
-      gdap: 'status',
-      dap: 'status',
-      permission: 'high',
-      rolecategory: 'identity',
-      duration: '7 days',
-      expiration: '2022-06-02 10:03:32 AM UTC',
-      relation: 'active',
-      autonotify: 'on',
+      TransformerID: 'TX-5743-DAL',
+      serialNumber: 'SN-2018-9832',
+      kv_kva: '66 KV / 1500 KVA',
+      fluidType: 'Silicone Oil',
+      breathingType: 'Sealed',
+      manufacturer: 'GE',
+      mfrYear: 2018,
+      oilVolumeGallons: 850,
     },
     {
-      name: 'Krishna',
-      tenantid: 'ID#',
-      gdap: 'status',
-      dap: 'status',
-      permission: 'high',
-      rolecategory: 'identity',
-      duration: '7 days',
-      expiration: '2022-06-02 10:03:32 AM UTC',
-      relation: 'expired',
-      autonotify: 'on',
+      TransformerID: 'TX-7632-AUS',
+      serialNumber: 'SN-2021-3344',
+      kv_kva: '220 KV / 5000 KVA',
+      fluidType: 'Mineral Oil',
+      breathingType: 'Conservator',
+      manufacturer: 'Siemens',
+      mfrYear: 2021,
+      oilVolumeGallons: 1600,
     },
     {
-      name: 'Sam',
-      tenantid: 'ID#',
-      gdap: 'status',
-      dap: 'status',
-      permission: 'low',
-      rolecategory: 'identity',
-      duration: '7 days',
-      expiration: '2022-06-02 10:03:32 AM UTC',
-      relation: 'expired',
-      autonotify: 'on',
+      TransformerID: 'TX-2291-SAT',
+      serialNumber: 'SN-2017-7741',
+      kv_kva: '33 KV / 1000 KVA',
+      fluidType: 'Natural Ester',
+      breathingType: 'Sealed',
+      manufacturer: 'Schneider Electric',
+      mfrYear: 2017,
+      oilVolumeGallons: 600,
+    },
+    {
+      TransformerID: 'TX-3105-ELP',
+      serialNumber: 'SN-2022-1122',
+      kv_kva: '132 KV / 2500 KVA',
+      fluidType: 'Mineral Oil',
+      breathingType: 'Conservator',
+      manufacturer: 'ABB',
+      mfrYear: 2022,
+      oilVolumeGallons: 1250,
     },
   ];
   // Example load data from server
   onGridReady(params: GridReadyEvent) {
     this.rowData$ = this.rowData;
+  }
+  onRowClick(params: any) {
+    console.log('rowClicke', params.data);
+  }
+
+  onGoBack() {
+    this.location.back();
   }
 }

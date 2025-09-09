@@ -1,3 +1,12 @@
-.ag_grid {
-  background-color: red;
+.nav_back {
+  border: 1px solid #0369a1;
+  margin-bottom: 2rem;
+  width: 100px;
+  border-radius: 25px;
+  text-align: center;
+  cursor: pointer;
+}
+.nav_back:hover {
+  background-color: #0369a1;
+  color: white;
 }
