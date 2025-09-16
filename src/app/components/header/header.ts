@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Service } from '../../shared/types';
 import { serviceData } from '../../shared/temp/service.data';
+import { AuthService } from '../../shared/services/auth.service';
+import { LoadService } from '../../shared/services/loadService.service';
 
 @Component({
   selector: 'app-header',
@@ -13,16 +15,21 @@ import { serviceData } from '../../shared/temp/service.data';
 export class Header implements OnInit {
   isLoggedIn: boolean = false;
   openDropdown: string = '';
-  services: Service[] = [];
-  ngOnInit(): void {}
-  constructor(private router: Router) {
+  services: any[] = [];
+  toggleState: boolean = false;
+  constructor(
+    private router: Router,
+    public authService: AuthService,
+    private servicesService: LoadService
+  ) {
     this.services = serviceData;
   }
-  toggleState: boolean = false;
+  ngOnInit(): void {}
   onToggleMenu() {
     this.toggleState = !this.toggleState;
   }
-  onToggleDropdown(name: string) {
-    this.openDropdown = name ? name : '';
+  onSelectService(service: any) {
+    this.servicesService.getServie(service);
+    this.router.navigate(['/services']);
   }
 }

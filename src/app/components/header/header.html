@@ -9,86 +9,55 @@
         <h1
           class="text-2xl md:text-xl font-bold mr-2 cursor-pointer"
           [routerLink]="['/']"
-          (click)="onToggleDropdown('')"
         >
           PowerTrans
         </h1>
       </div>
 
       <!-- Desktop Navigation -->
-
-      <!-- Desktop CTA Buttons -->
       <div class="hidden md:flex items-center space-x-4">
         <nav class="hidden md:flex items-center space-x-8">
           <span
             [routerLink]="['/']"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
-            (click)="onToggleDropdown('')"
             class="hover:text-primary-100 transition-colors cursor-pointer"
             >Home</span
           >
           <span
             [routerLink]="['/products']"
             routerLinkActive="active"
-            (click)="onToggleDropdown('')"
             class="hover:text-primary-100 transition-colors cursor-pointer"
             >Products</span
           >
-          <!-- <span
-            [routerLink]="['/services']"
-            routerLinkActive="active"
-            (click)="onToggleDropdown('')"
-            class="hover:text-primary-100 transition-colors cursor-pointer"
-            >Services</span
-          > -->
+
+          <!-- Dropdown menu for Services -->
           <div class="relative group">
             <span
+              [routerLink]="['/services']"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: false }"
               class="hover:text-primary-100 transition-colors cursor-pointer"
-              >Services</span
             >
-
-            <!-- Dropdown menu -->
+              Services
+            </span>
             <div
               id="dropdown"
               class="z-10 min-w-[900px] absolute top-10 right-0 bg-white rounded-lg shadow-sm w-fit dark:bg-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200"
             >
               <div class="flex justify-between items-start">
-                <!-- Grid container with 3 columns -->
                 <ul
                   class="grid grid-cols-3 gap-2 p-4 text-sm text-gray-700 dark:text-gray-200"
                 >
                   <li *ngFor="let service of services">
                     <a
-                      [routerLink]="['/contact']"
                       class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded"
-                      (click)="onToggleDropdown('')"
+                      (click)="onSelectService(service)"
                     >
-                      {{ service.serviceName }}
+                      {{ service.title }}
                     </a>
                   </li>
                 </ul>
-
-                <!-- Close icon -->
-                <div
-                  class="text-primary-600 mt-2 mr-2 cursor-pointer"
-                  (click)="onToggleDropdown('')"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="size-6"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M6 18 18 6M6 6l12 12"
-                    />
-                  </svg>
-                </div>
               </div>
             </div>
           </div>
@@ -99,23 +68,28 @@
             class="hover:text-primary-100 transition-colors cursor-pointer"
             >Contact</span
           >
-          <!-- <span
-          [routerLink]="['/clients']"
-          routerLinkActive="active"
-          class=" hover:text-primary-100 transition-colors cursor-pointer"
-          >Clients</span
-        > -->
-          <!-- <span
+          <span
+            *ngIf="authService.isLoggedIn$ | async"
+            [routerLink]="['/user-details']"
             routerLinkActive="active"
             class="hover:text-primary-100 transition-colors cursor-pointer"
-            >Contact</span
-          > -->
+            >Dashboard</span
+          >
+
           <span
+            *ngIf="!(authService.isLoggedIn$ | async)"
             [routerLink]="['/login']"
             routerLinkActive="active"
-            (click)="onToggleDropdown('')"
             class="hover:text-primary-100 transition-colors cursor-pointer"
             >Login</span
+          >
+          <span
+            *ngIf="authService.isLoggedIn$ | async"
+            [routerLink]="['/login']"
+            routerLinkActive="active"
+            (click)="authService.setLoginStatus(false)"
+            class="hover:text-primary-100 transition-colors cursor-pointer"
+            >Logout</span
           >
         </nav>
 
@@ -131,6 +105,7 @@
       <div class="md:hidden flex items-center">
         <button (click)="onToggleMenu()">
           <ng-container *ngIf="!toggleState">
+            <!-- Hamburger Icon -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -147,6 +122,7 @@
             </svg>
           </ng-container>
           <ng-container *ngIf="toggleState">
+            <!-- Close Icon -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -170,22 +146,38 @@
     <div *ngIf="toggleState" class="md:hidden mt-4 space-y-4">
       <nav class="flex flex-col space-y-2">
         <span
+          [routerLink]="['/']"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
           class="hover:text-primary-100 transition-colors cursor-pointer"
+          >Home</span
+        >
+        <span
           [routerLink]="['/products']"
           routerLinkActive="active"
+          class="hover:text-primary-100 transition-colors cursor-pointer"
           >Products</span
         >
-        <span
-          [routerLink]="['/services']"
-          routerLinkActive="active"
-          class="hover:text-primary-100 transition-colors cursor-pointer"
-          >Services</span
-        >
+
+        <!-- Mobile Services List -->
+        <div>
+          <span class="block font-medium">Services</span>
+          <ul class="pl-4 space-y-1">
+            <li *ngFor="let service of services">
+              <a
+                [routerLink]="['/contact']"
+                class="block text-sm hover:text-primary-100 transition-colors cursor-pointer"
+              >
+                {{ service.serviceName }}
+              </a>
+            </li>
+          </ul>
+        </div>
 
         <span
-          class="hover:text-primary-100 transition-colors cursor-pointer"
           [routerLink]="['/contact']"
           routerLinkActive="active"
+          class="hover:text-primary-100 transition-colors cursor-pointer"
           >Contact</span
         >
       </nav>

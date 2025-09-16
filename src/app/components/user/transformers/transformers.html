@@ -1,1 +1,944 @@
-<p>transformers works!</p>
+<section id="breadcrumb" class="mb-6">
+  <div class="nav_back">
+    <div
+      class="flex items-center justify-center gap-2 p-1"
+      (click)="onGoBack()"
+    >
+      <span
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="size-4"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+          />
+        </svg>
+      </span>
+      <p>back</p>
+    </div>
+  </div>
+</section>
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <section
+    id="transformer-info"
+    class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8"
+  >
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-2xl font-bold text-gray-900">Transformer TX-2023-0456</h2>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <label class="text-sm font-medium text-gray-600">Serial Number</label>
+        <p class="text-lg font-semibold text-gray-900 mt-1">TX-2023-0456</p>
+      </div>
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <label class="text-sm font-medium text-gray-600">KV Rating</label>
+        <p class="text-lg font-semibold text-gray-900 mt-1">132 KV</p>
+      </div>
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <label class="text-sm font-medium text-gray-600">KVA Rating</label>
+        <p class="text-lg font-semibold text-gray-900 mt-1">2500 KVA</p>
+      </div>
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <label class="text-sm font-medium text-gray-600">Phase</label>
+        <p class="text-lg font-semibold text-gray-900 mt-1">3-Phase</p>
+      </div>
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <label class="text-sm font-medium text-gray-600">Fluid Type</label>
+        <p class="text-lg font-semibold text-gray-900 mt-1">Mineral Oil</p>
+      </div>
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <label class="text-sm font-medium text-gray-600">Breathing Type</label>
+        <p class="text-lg font-semibold text-gray-900 mt-1">Conservator</p>
+      </div>
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <label class="text-sm font-medium text-gray-600">Manufacturer</label>
+        <p class="text-lg font-semibold text-gray-900 mt-1">ABB</p>
+      </div>
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <label class="text-sm font-medium text-gray-600">MFR Year</label>
+        <p class="text-lg font-semibold text-gray-900 mt-1">2019</p>
+      </div>
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <label class="text-sm font-medium text-gray-600">Oil Capacity</label>
+        <p class="text-lg font-semibold text-gray-900 mt-1">1,100 gal</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div class="lg:col-span-2 space-y-8">
+      <!-- <section
+        id="reports-section"
+        class="bg-white rounded-xl shadow-sm border border-gray-200 p-6"
+      >
+        <h3 class="text-xl font-bold text-gray-900 mb-6">
+          Reports &amp; Test Data
+        </h3>
+
+        <div class="space-y-4">
+          <div class="border border-gray-200 rounded-lg">
+            <button
+              class="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50"
+              onclick="toggleSection('inspection-reports')"
+            >
+              <div class="flex items-center">
+                <span class="font-medium text-gray-900"
+                  >Inspection Reports</span
+                >
+                <span class="ml-2 text-sm text-gray-500">(3 files)</span>
+              </div>
+            </button>
+            <div
+              id="inspection-reports"
+              class="hidden border-t border-gray-200 p-4 bg-gray-50"
+            >
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center">
+                    <div>
+                      <p class="font-medium text-gray-900">
+                        Annual Inspection 2024
+                      </p>
+                      <p class="text-sm text-gray-500">Jan 15, 2024</p>
+                    </div>
+                  </div>
+                  <div class="flex space-x-2">
+                    <button class="text-blue-600 hover:text-blue-800">
+                      button1
+                    </button>
+                    <button class="text-blue-600 hover:text-blue-800">
+                      button2
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="border border-gray-200 rounded-lg">
+            <button
+              class="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50"
+              onclick="toggleSection('powerdb-tests')"
+            >
+              <div class="flex items-center">
+                <span class="font-medium text-gray-900">PowerDB Test Data</span>
+                <span class="ml-2 text-sm text-gray-500">(5 files)</span>
+              </div>
+            
+            </button>
+            <div
+              id="powerdb-tests"
+              class="hidden border-t border-gray-200 p-4 bg-gray-50"
+            >
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center">
+                 
+                    <div>
+                      <p class="font-medium text-gray-900">
+                        Insulation Resistance Test
+                      </p>
+                      <p class="text-sm text-gray-500">Dec 20, 2023</p>
+                    </div>
+                  </div>
+                  <button class="text-blue-600 hover:text-blue-800">
+                
+                  </button>
+                </div>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center">
+                
+                    <div>
+                      <p class="font-medium text-gray-900">
+                        Turns Ratio Test (TTR)
+                      </p>
+                      <p class="text-sm text-gray-500">Dec 18, 2023</p>
+                    </div>
+                  </div>
+                  <button class="text-blue-600 hover:text-blue-800">
+                    <i data-fa-i2svg=""
+                      ><svg
+                        class="svg-inline--fa fa-download"
+                        aria-hidden="true"
+                        focusable="false"
+                        data-prefix="fas"
+                        data-icon="download"
+                        role="img"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512"
+                        data-fa-i2svg=""
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"
+                        ></path></svg
+                    ></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="border border-gray-200 rounded-lg">
+            <button
+              class="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50"
+              onclick="toggleSection('dga-results')"
+            >
+              <div class="flex items-center">
+                <i class="text-blue-500 mr-3" data-fa-i2svg=""
+                  ><svg
+                    class="svg-inline--fa fa-flask"
+                    aria-hidden="true"
+                    focusable="false"
+                    data-prefix="fas"
+                    data-icon="flask"
+                    role="img"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 448 512"
+                    data-fa-i2svg=""
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M288 0H160 128C110.3 0 96 14.3 96 32s14.3 32 32 32V196.8c0 11.8-3.3 23.5-9.5 33.5L10.3 406.2C3.6 417.2 0 429.7 0 442.6C0 480.9 31.1 512 69.4 512H378.6c38.3 0 69.4-31.1 69.4-69.4c0-12.8-3.6-25.4-10.3-36.4L329.5 230.4c-6.2-10.1-9.5-21.7-9.5-33.5V64c17.7 0 32-14.3 32-32s-14.3-32-32-32H288zM192 196.8V64h64V196.8c0 23.7 6.6 46.9 19 67.1L309.5 320h-171L173 263.9c12.4-20.2 19-43.4 19-67.1z"
+                    ></path></svg
+                ></i>
+                <span class="font-medium text-gray-900"
+                  >DGA Sample Results</span
+                >
+                <span class="ml-2 text-sm text-gray-500">(4 files)</span>
+              </div>
+              <i class="text-gray-400" data-fa-i2svg=""
+                ><svg
+                  class="svg-inline--fa fa-chevron-down"
+                  aria-hidden="true"
+                  focusable="false"
+                  data-prefix="fas"
+                  data-icon="chevron-down"
+                  role="img"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                  data-fa-i2svg=""
+                >
+                  <path
+                    fill="currentColor"
+                    d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
+                  ></path></svg
+              ></i>
+            </button>
+            <div
+              id="dga-results"
+              class="hidden border-t border-gray-200 p-4 bg-gray-50"
+            >
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center">
+                    <i class="text-green-500 mr-3" data-fa-i2svg=""
+                      ><svg
+                        class="svg-inline--fa fa-file-csv"
+                        aria-hidden="true"
+                        focusable="false"
+                        data-prefix="fas"
+                        data-icon="file-csv"
+                        role="img"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512"
+                        data-fa-i2svg=""
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384V304H176c-35.3 0-64 28.7-64 64V512H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128zM200 352h16c22.1 0 40 17.9 40 40v8c0 8.8-7.2 16-16 16s-16-7.2-16-16v-8c0-4.4-3.6-8-8-8H200c-4.4 0-8 3.6-8 8v80c0 4.4 3.6 8 8 8h16c4.4 0 8-3.6 8-8v-8c0-8.8 7.2-16 16-16s16 7.2 16 16v8c0 22.1-17.9 40-40 40H200c-22.1 0-40-17.9-40-40V392c0-22.1 17.9-40 40-40zm133.1 0H368c8.8 0 16 7.2 16 16s-7.2 16-16 16H333.1c-7.2 0-13.1 5.9-13.1 13.1c0 5.2 3 9.9 7.8 12l37.4 16.6c16.3 7.2 26.8 23.4 26.8 41.2c0 24.9-20.2 45.1-45.1 45.1H304c-8.8 0-16-7.2-16-16s7.2-16 16-16h42.9c7.2 0 13.1-5.9 13.1-13.1c0-5.2-3-9.9-7.8-12l-37.4-16.6c-16.3-7.2-26.8-23.4-26.8-41.2c0-24.9 20.2-45.1 45.1-45.1zm98.9 0c8.8 0 16 7.2 16 16v31.6c0 23 5.5 45.6 16 66c10.5-20.3 16-42.9 16-66V368c0-8.8 7.2-16 16-16s16 7.2 16 16v31.6c0 34.7-10.3 68.7-29.6 97.6l-5.1 7.7c-3 4.5-8 7.1-13.3 7.1s-10.3-2.7-13.3-7.1l-5.1-7.7c-19.3-28.9-29.6-62.9-29.6-97.6V368c0-8.8 7.2-16 16-16z"
+                        ></path></svg
+                    ></i>
+                    <div>
+                      <p class="font-medium text-gray-900">
+                        DGA Analysis - Q4 2023
+                      </p>
+                      <p class="text-sm text-gray-500">Dec 15, 2023</p>
+                    </div>
+                  </div>
+                  <button class="text-blue-600 hover:text-blue-800">
+                    <i data-fa-i2svg=""
+                      ><svg
+                        class="svg-inline--fa fa-download"
+                        aria-hidden="true"
+                        focusable="false"
+                        data-prefix="fas"
+                        data-icon="download"
+                        role="img"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512"
+                        data-fa-i2svg=""
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"
+                        ></path></svg
+                    ></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> -->
+
+      <section
+        id="trend-analysis"
+        class="bg-white rounded-xl shadow-sm border border-gray-200 p-6"
+      >
+        <h3 class="text-xl font-bold text-gray-900 mb-6">
+          Comparative Trend Analysis
+        </h3>
+        <div
+          id="trend-chart"
+          class="h-80"
+          data-highcharts-chart="0"
+          style="overflow: hidden"
+        >
+          <div
+            id="highcharts-t3alrk5-0"
+            dir="ltr"
+            style="
+              position: relative;
+              overflow: hidden;
+              width: 686px;
+              height: 320px;
+              text-align: left;
+              line-height: normal;
+              z-index: 0;
+              -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+              user-select: none;
+              touch-action: manipulation;
+              outline: none;
+              padding: 0px;
+            "
+            class="highcharts-container"
+          >
+            <svg
+              version="1.1"
+              class="highcharts-root"
+              style="
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+                  Roboto, Helvetica, Arial, 'Apple Color Emoji',
+                  'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+                font-size: 1rem;
+              "
+              xmlns="http://www.w3.org/2000/svg"
+              width="686"
+              height="320"
+              viewBox="0 0 686 320"
+              role="img"
+              aria-label="DGA H2 Level Trend"
+            >
+              <desc>Created with Highcharts 12.4.0</desc>
+              <defs>
+                <filter id="highcharts-drop-shadow-0">
+                  <feDropShadow
+                    dx="1"
+                    dy="1"
+                    flood-color="#000000"
+                    flood-opacity="0.75"
+                    stdDeviation="2.5"
+                  ></feDropShadow>
+                </filter>
+                <clipPath id="highcharts-t3alrk5-9-">
+                  <rect x="0" y="0" width="603" height="181" fill="none"></rect>
+                </clipPath>
+              </defs>
+              <rect
+                fill="#ffffff"
+                class="highcharts-background"
+                filter="none"
+                x="0"
+                y="0"
+                width="686"
+                height="320"
+                rx="0"
+                ry="0"
+              ></rect>
+              <rect
+                fill="none"
+                class="highcharts-plot-background"
+                x="73"
+                y="50"
+                width="603"
+                height="181"
+                filter="none"
+              ></rect>
+              <g class="highcharts-grid highcharts-xaxis-grid" data-z-index="1">
+                <path
+                  fill="none"
+                  stroke="#e6e6e6"
+                  stroke-width="0"
+                  stroke-dasharray="none"
+                  data-z-index="1"
+                  class="highcharts-grid-line"
+                  d="M 193.5 50 L 193.5 231"
+                  opacity="1"
+                ></path>
+                <path
+                  fill="none"
+                  stroke="#e6e6e6"
+                  stroke-width="0"
+                  stroke-dasharray="none"
+                  data-z-index="1"
+                  class="highcharts-grid-line"
+                  d="M 314.5 50 L 314.5 231"
+                  opacity="1"
+                ></path>
+                <path
+                  fill="none"
+                  stroke="#e6e6e6"
+                  stroke-width="0"
+                  stroke-dasharray="none"
+                  data-z-index="1"
+                  class="highcharts-grid-line"
+                  d="M 434.5 50 L 434.5 231"
+                  opacity="1"
+                ></path>
+                <path
+                  fill="none"
+                  stroke="#e6e6e6"
+                  stroke-width="0"
+                  stroke-dasharray="none"
+                  data-z-index="1"
+                  class="highcharts-grid-line"
+                  d="M 555.5 50 L 555.5 231"
+                  opacity="1"
+                ></path>
+                <path
+                  fill="none"
+                  stroke="#e6e6e6"
+                  stroke-width="0"
+                  stroke-dasharray="none"
+                  data-z-index="1"
+                  class="highcharts-grid-line"
+                  d="M 676.5 50 L 676.5 231"
+                  opacity="1"
+                ></path>
+                <path
+                  fill="none"
+                  stroke="#e6e6e6"
+                  stroke-width="0"
+                  stroke-dasharray="none"
+                  data-z-index="1"
+                  class="highcharts-grid-line"
+                  d="M 73.5 50 L 73.5 231"
+                  opacity="1"
+                ></path>
+              </g>
+              <g class="highcharts-grid highcharts-yaxis-grid" data-z-index="1">
+                <path
+                  fill="none"
+                  stroke="#e6e6e6"
+                  stroke-width="1"
+                  stroke-dasharray="none"
+                  data-z-index="1"
+                  class="highcharts-grid-line"
+                  d="M 73 231.5 L 676 231.5"
+                  opacity="1"
+                ></path>
+                <path
+                  fill="none"
+                  stroke="#e6e6e6"
+                  stroke-width="1"
+                  stroke-dasharray="none"
+                  data-z-index="1"
+                  class="highcharts-grid-line"
+                  d="M 73 185.5 L 676 185.5"
+                  opacity="1"
+                ></path>
+                <path
+                  fill="none"
+                  stroke="#e6e6e6"
+                  stroke-width="1"
+                  stroke-dasharray="none"
+                  data-z-index="1"
+                  class="highcharts-grid-line"
+                  d="M 73 140.5 L 676 140.5"
+                  opacity="1"
+                ></path>
+                <path
+                  fill="none"
+                  stroke="#e6e6e6"
+                  stroke-width="1"
+                  stroke-dasharray="none"
+                  data-z-index="1"
+                  class="highcharts-grid-line"
+                  d="M 73 95.5 L 676 95.5"
+                  opacity="1"
+                ></path>
+                <path
+                  fill="none"
+                  stroke="#e6e6e6"
+                  stroke-width="1"
+                  stroke-dasharray="none"
+                  data-z-index="1"
+                  class="highcharts-grid-line"
+                  d="M 73 50.5 L 676 50.5"
+                  opacity="1"
+                ></path>
+              </g>
+              <rect
+                fill="none"
+                class="highcharts-plot-border"
+                data-z-index="1"
+                stroke="#cccccc"
+                stroke-width="0"
+                x="73"
+                y="50"
+                width="603"
+                height="181"
+              ></rect>
+              <g class="highcharts-axis highcharts-xaxis" data-z-index="2">
+                <path
+                  fill="none"
+                  class="highcharts-axis-line"
+                  stroke="#333333"
+                  stroke-width="1"
+                  data-z-index="7"
+                  d="M 73 231.5 L 676 231.5"
+                ></path>
+              </g>
+              <g class="highcharts-axis highcharts-yaxis" data-z-index="2">
+                <text
+                  x="25.958332061767578"
+                  data-z-index="7"
+                  text-anchor="middle"
+                  transform="translate(0,0) rotate(270 25.958332061767578 140.5)"
+                  class="highcharts-axis-title"
+                  style="font-size: 0.8em; fill: rgb(102, 102, 102)"
+                  y="140.5"
+                >
+                  H2 Level (ppm)
+                </text>
+                <path
+                  fill="none"
+                  class="highcharts-axis-line"
+                  stroke="#333333"
+                  stroke-width="0"
+                  data-z-index="7"
+                  d="M 73 50 L 73 231"
+                ></path>
+              </g>
+              <g class="highcharts-series-group" data-z-index="3" filter="none">
+                <g
+                  class="highcharts-series highcharts-series-0 highcharts-line-series"
+                  data-z-index="0.1"
+                  opacity="1"
+                  transform="translate(73,50) scale(1 1)"
+                  clip-path="url(#highcharts-t3alrk5-9-)"
+                >
+                  <path
+                    fill="none"
+                    d="M 60.3 144.8 L 180.9 139.37 L 301.5 126.7 L 422.1 65.16 L 542.7 27.15"
+                    class="highcharts-graph"
+                    data-z-index="1"
+                    stroke="#3B82F6"
+                    stroke-width="2"
+                    stroke-linejoin="round"
+                    stroke-linecap="round"
+                    filter="none"
+                  ></path>
+                  <path
+                    fill="none"
+                    d="M 60.3 144.8 L 180.9 139.37 L 301.5 126.7 L 422.1 65.16 L 542.7 27.15"
+                    data-z-index="2"
+                    class="highcharts-tracker-line"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke="rgba(192,192,192,0.0001)"
+                    stroke-width="22"
+                  ></path>
+                </g>
+                <g
+                  class="highcharts-markers highcharts-series-0 highcharts-line-series highcharts-tracker"
+                  data-z-index="0.1"
+                  opacity="1"
+                  transform="translate(73,50) scale(1 1)"
+                  clip-path="none"
+                >
+                  <path
+                    fill="#3B82F6"
+                    d="M 60.5 150.8 A 6 6 0 1 1 60.500199999999964 150.79999999666668 Z"
+                    stroke="#ffffff"
+                    stroke-width="0"
+                    opacity="1"
+                    class="highcharts-point"
+                  ></path>
+                  <path
+                    fill="#3B82F6"
+                    d="M 180.5 145.37 A 6 6 0 1 1 180.50019999999998 145.36999999666668 Z"
+                    stroke="#ffffff"
+                    stroke-width="0"
+                    opacity="1"
+                    class="highcharts-point"
+                  ></path>
+                  <path
+                    fill="#3B82F6"
+                    d="M 301.5 132.7 A 6 6 0 1 1 301.50019999999995 132.69999999666666 Z"
+                    stroke="#ffffff"
+                    stroke-width="0"
+                    opacity="1"
+                    class="highcharts-point"
+                  ></path>
+                  <path
+                    fill="#3B82F6"
+                    d="M 422.5 71.16 A 6 6 0 1 1 422.50019999999995 71.15999999666667 Z"
+                    stroke="#ffffff"
+                    stroke-width="0"
+                    opacity="1"
+                    class="highcharts-point"
+                  ></path>
+                  <path
+                    fill="#3B82F6"
+                    d="M 542.5 33.15 A 6 6 0 1 1 542.5002 33.149999996666665 Z"
+                    stroke="#ffffff"
+                    stroke-width="0"
+                    opacity="1"
+                    class="highcharts-point"
+                  ></path>
+                </g>
+              </g>
+              <text
+                x="343"
+                class="highcharts-title"
+                data-z-index="4"
+                text-align="center"
+                y="25"
+                text-anchor="middle"
+                transform-origin="100.23958587646484 22"
+                transform="translate(0,0) scale(1 1)"
+                style="
+                  font-size: 1.2em;
+                  font-weight: bold;
+                  fill: rgb(51, 51, 51);
+                "
+              >
+                DGA H2 Level Trend
+              </text>
+              <text
+                x="343"
+                class="highcharts-subtitle"
+                data-z-index="4"
+                text-align="center"
+                y="49"
+                text-anchor="middle"
+                transform-origin="10 15"
+                transform="translate(0,0) scale(1 1)"
+                style="font-size: 0.8em; fill: rgb(102, 102, 102)"
+              ></text>
+              <text
+                x="10"
+                text-anchor="start"
+                class="highcharts-caption"
+                data-z-index="4"
+                style="font-size: 0.8em; fill: rgb(102, 102, 102)"
+                text-align="left"
+                y="317"
+                transform-origin="10 15"
+                transform="translate(0,0) scale(1 1)"
+              ></text>
+              <g class="highcharts-datalabels-group" data-z-index="6"></g>
+              <g
+                class="highcharts-legend highcharts-no-tooltip"
+                data-z-index="7"
+                text-align="center"
+                transform="translate(300,275)"
+              >
+                <rect
+                  fill="none"
+                  class="highcharts-legend-box"
+                  rx="0"
+                  ry="0"
+                  stroke="#999999"
+                  stroke-width="0"
+                  filter="none"
+                  x="0"
+                  y="0"
+                  width="85"
+                  height="30"
+                ></rect>
+                <g data-z-index="1">
+                  <g>
+                    <g
+                      class="highcharts-legend-item highcharts-line-series highcharts-color-undefined highcharts-series-0"
+                      data-z-index="1"
+                      transform="translate(8,3)"
+                    >
+                      <path
+                        fill="none"
+                        class="highcharts-graph"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        d="M 1 13 L 15 13"
+                        stroke="#3B82F6"
+                      ></path>
+                      <path
+                        fill="#3B82F6"
+                        d="M 8 19 A 6 6 0 1 1 8.000199999999966 18.999999996666666 Z"
+                        class="highcharts-point"
+                        stroke="#ffffff"
+                        stroke-width="0"
+                        opacity="1"
+                      ></path>
+                      <text
+                        x="21"
+                        text-anchor="start"
+                        data-z-index="2"
+                        style="
+                          cursor: pointer;
+                          font-size: 0.8em;
+                          text-decoration: none;
+                          fill: rgb(51, 51, 51);
+                        "
+                        y="17"
+                      >
+                        H2 Level
+                      </text>
+                    </g>
+                  </g>
+                </g>
+              </g>
+              <g
+                class="highcharts-axis-labels highcharts-xaxis-labels"
+                data-z-index="7"
+              >
+                <text
+                  x="133.3"
+                  text-anchor="middle"
+                  transform="translate(0,0)"
+                  style="
+                    cursor: default;
+                    font-size: 0.8em;
+                    fill: rgb(51, 51, 51);
+                  "
+                  y="258"
+                  opacity="1"
+                >
+                  Jan 2023
+                </text>
+                <text
+                  x="253.89999999999998"
+                  text-anchor="middle"
+                  transform="translate(0,0)"
+                  style="
+                    cursor: default;
+                    font-size: 0.8em;
+                    fill: rgb(51, 51, 51);
+                  "
+                  y="258"
+                  opacity="1"
+                >
+                  Apr 2023
+                </text>
+                <text
+                  x="374.5"
+                  text-anchor="middle"
+                  transform="translate(0,0)"
+                  style="
+                    cursor: default;
+                    font-size: 0.8em;
+                    fill: rgb(51, 51, 51);
+                  "
+                  y="258"
+                  opacity="1"
+                >
+                  Jul 2023
+                </text>
+                <text
+                  x="495.09999999999997"
+                  text-anchor="middle"
+                  transform="translate(0,0)"
+                  style="
+                    cursor: default;
+                    font-size: 0.8em;
+                    fill: rgb(51, 51, 51);
+                  "
+                  y="258"
+                  opacity="1"
+                >
+                  Oct 2023
+                </text>
+                <text
+                  x="615.7"
+                  text-anchor="middle"
+                  transform="translate(0,0)"
+                  style="
+                    cursor: default;
+                    font-size: 0.8em;
+                    fill: rgb(51, 51, 51);
+                  "
+                  y="258"
+                  opacity="1"
+                >
+                  Dec 2023
+                </text>
+              </g>
+              <g
+                class="highcharts-axis-labels highcharts-yaxis-labels"
+                data-z-index="7"
+              >
+                <text
+                  x="58"
+                  text-anchor="end"
+                  transform="translate(0,0)"
+                  style="
+                    cursor: default;
+                    font-size: 0.8em;
+                    fill: rgb(51, 51, 51);
+                  "
+                  y="234"
+                  opacity="1"
+                >
+                  25
+                </text>
+                <text
+                  x="58"
+                  text-anchor="end"
+                  transform="translate(0,0)"
+                  style="
+                    cursor: default;
+                    font-size: 0.8em;
+                    fill: rgb(51, 51, 51);
+                  "
+                  y="189"
+                  opacity="1"
+                >
+                  50
+                </text>
+                <text
+                  x="58"
+                  text-anchor="end"
+                  transform="translate(0,0)"
+                  style="
+                    cursor: default;
+                    font-size: 0.8em;
+                    fill: rgb(51, 51, 51);
+                  "
+                  y="144"
+                  opacity="1"
+                >
+                  75
+                </text>
+                <text
+                  x="58"
+                  text-anchor="end"
+                  transform="translate(0,0)"
+                  style="
+                    cursor: default;
+                    font-size: 0.8em;
+                    fill: rgb(51, 51, 51);
+                  "
+                  y="99"
+                  opacity="1"
+                >
+                  100
+                </text>
+                <text
+                  x="58"
+                  text-anchor="end"
+                  transform="translate(0,0)"
+                  style="
+                    cursor: default;
+                    font-size: 0.8em;
+                    fill: rgb(51, 51, 51);
+                  "
+                  y="53"
+                  opacity="1"
+                >
+                  125
+                </text>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="space-y-8">
+      <section
+        id="recommendations"
+        class="bg-white rounded-xl shadow-sm border border-gray-200 p-6"
+      >
+        <h3 class="text-xl font-bold text-gray-900 mb-6">Recommendations</h3>
+        <div class="space-y-4">
+          <div
+            class="border-l-4 border-yellow-400 bg-yellow-50 p-4 rounded-r-lg"
+          >
+            <div class="flex items-start">
+              <div>
+                <p class="font-medium text-gray-900">DGA Monitoring Required</p>
+                <p class="text-sm text-gray-600 mt-1">
+                  Monitor for increasing acetylene level
+                </p>
+                <p class="text-xs text-gray-500 mt-2">Dec 2023</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-green-400 bg-green-50 p-4 rounded-r-lg">
+            <div class="flex items-start">
+              <div>
+                <p class="font-medium text-gray-900">Power Factor Test</p>
+                <p class="text-sm text-gray-600 mt-1">Re-test in 6 months</p>
+                <p class="text-xs text-gray-500 mt-2">July 2024</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="timeline"
+        class="bg-white rounded-xl shadow-sm border border-gray-200 p-6"
+      >
+        <h3 class="text-xl font-bold text-gray-900 mb-6">Activity Timeline</h3>
+        <div class="space-y-4">
+          <div class="flex items-start">
+            <div
+              class="flex-shrink-0 w-2 h-2 bg-blue-500 rounded-full mt-2 mr-4"
+            ></div>
+            <div class="flex-1">
+              <p class="font-medium text-gray-900">DGA Sample Collected</p>
+              <p class="text-sm text-gray-600">Gas analysis completed</p>
+              <p class="text-xs text-gray-500">Dec 15, 2023</p>
+            </div>
+          </div>
+
+          <div class="flex items-start">
+            <div
+              class="flex-shrink-0 w-2 h-2 bg-green-500 rounded-full mt-2 mr-4"
+            ></div>
+            <div class="flex-1">
+              <p class="font-medium text-gray-900">Insulation Test</p>
+              <p class="text-sm text-gray-600">Results within normal range</p>
+              <p class="text-xs text-gray-500">Nov 28, 2023</p>
+            </div>
+          </div>
+
+          <div class="flex items-start">
+            <div
+              class="flex-shrink-0 w-2 h-2 bg-purple-500 rounded-full mt-2 mr-4"
+            ></div>
+            <div class="flex-1">
+              <p class="font-medium text-gray-900">Scheduled Maintenance</p>
+              <p class="text-sm text-gray-600">
+                Preventive maintenance completed
+              </p>
+              <p class="text-xs text-gray-500">Oct 10, 2023</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>

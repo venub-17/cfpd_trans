@@ -63,6 +63,13 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./components/user/sites/site/site').then((m) => m.Site),
       },
+      {
+        path: 'transformers',
+        loadComponent: () =>
+          import('./components/user/transformers/transformers').then(
+            (m) => m.Transformers
+          ),
+      },
     ],
   },
   {

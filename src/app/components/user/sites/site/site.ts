@@ -8,6 +8,7 @@ import {
 } from 'ag-grid-community';
 import { Location } from '@angular/common';
 import { ButtonRendererComponent } from './btnRendererComponent';
+import { Router } from '@angular/router';
 
 // Register all community features once in your app
 ModuleRegistry.registerModules([AllCommunityModule]);
@@ -19,7 +20,7 @@ ModuleRegistry.registerModules([AllCommunityModule]);
 })
 export class Site {
   public ButtonRendererComponent = ButtonRendererComponent;
-  constructor(private location: Location) {}
+  constructor(private location: Location, private router: Router) {}
 
   public columnDefs: ColDef[] = [
     {
@@ -128,6 +129,7 @@ export class Site {
     this.rowData$ = this.rowData;
   }
   onRowClick(params: any) {
+    this.router.navigate(['/user-details/transformers']);
     console.log('rowClicke', params.data);
   }
 
