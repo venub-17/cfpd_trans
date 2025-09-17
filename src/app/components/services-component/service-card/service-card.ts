@@ -1,6 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Service } from '../../../shared/types';
-import { ModalService } from '../../../shared/services/modal.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -12,7 +10,7 @@ import { CommonModule } from '@angular/common';
 export class ServiceCard implements OnInit {
   @Input() service!: any;
 
-  constructor(private modalService: ModalService) {}
+  constructor() {}
   ngOnInit(): void {}
   activeItem: any = null; // Holds the currently expanded section
 
