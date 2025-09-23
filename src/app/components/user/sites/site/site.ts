@@ -65,6 +65,8 @@ export class Site {
         label: 'Edit',
         onClick: (params: any) => this.onRowClick(params),
       },
+      pinned: 'right',
+      lockPinned: true,
     },
   ];
 
