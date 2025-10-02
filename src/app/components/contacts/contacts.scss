@@ -8,3 +8,35 @@
   padding: 10px;
   border-radius: 5px;
 }
+
+.modal {
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 65px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+  background-color: rgba(0, 0, 0, 0.2); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  width: fit-content;
+  border-radius: 5px;
+}
+
+.modal-footer {
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 12px;
+  padding-top: 15px;
+}
