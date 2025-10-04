@@ -24,7 +24,6 @@ export class Products implements OnInit {
   }
 
   onDelete() {
-    console.log('Product deleted');
     this.modalService.close();
   }
   onActionButtonClick() {

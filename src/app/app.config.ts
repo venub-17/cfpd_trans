@@ -3,7 +3,7 @@ import {
   importProvidersFrom,
   provideZoneChangeDetection,
 } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withInMemoryScrolling } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
@@ -38,6 +38,11 @@ export const appConfig: ApplicationConfig = {
           useFactory: HttpLoaderFactory,
           deps: [HttpClient], // keep deps for injection even if loader takes none
         },
+    provideRouter(
+      routes,
+      withInMemoryScrolling({
+        scrollPositionRestoration: 'top',
+        anchorScrolling: 'enabled',
       })
     ),
   ],

@@ -42,3 +42,17 @@ export interface Service {
   description: string;
   duration: string;
 }
+
+export interface Site {
+  name: string;
+  address: string;
+  status: string;
+  contact: string;
+  lastMaintenance: string;
+  activeTransformers: string;
+  nextService: string;
+}
+
+export interface SiteRowData {
+  transiformerId: string;
+}

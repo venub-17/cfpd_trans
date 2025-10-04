@@ -1,92 +1,685 @@
+import { Title } from '@angular/platform-browser';
+
 export const serviceData = [
   {
-    serviceId: 1,
-    serviceName: 'Transformer Testing, Remediation and Replacement',
-    imgUrl:
-      'https://storage.googleapis.com/uxpilot-auth.appspot.com/3015eaf1ac-973ad3af2d950f216121.png',
-    description:
-      'Comprehensive transformer testing, fault remediation, and replacement services to ensure safe and reliable power distribution.',
-
-    duration: '3-5 days',
+    title: 'Transformer Testing, Remediation & Replacement',
+    categories: [
+      {
+        name: 'Testing Services',
+        items: [
+          {
+            title: 'Transformer Oil Analysis',
+            content: [
+              'Dissolved Gas Analysis (DGA)',
+              'Moisture Content',
+              'Interfacial Tension',
+              'Acid Number',
+              'Viscosity',
+              'PCB Screening (EPA 8082)',
+            ],
+          },
+          {
+            title: 'Power Factor Analysis (Doble Testing)',
+          },
+          {
+            title: 'Infrared Thermography',
+          },
+          {
+            title: 'Turn-to-Turn Ratio (TTR) Testing',
+          },
+          {
+            title: 'Insulation Resistance Testing (Megger)',
+          },
+          {
+            title: 'Ductoring / Contact Resistance',
+          },
+          {
+            title: 'Bushing Testing and Repair',
+          },
+        ],
+      },
+      {
+        name: 'Transformer Service & Repairs',
+        items: [
+          {
+            title: 'Oil Servicing & Processing',
+            content: [
+              'Dehydrating',
+              'De-gassing',
+              'Neutralizing Acids',
+              'Filtering Particulates',
+            ],
+          },
+          {
+            title: 'Internal Repairs',
+            content: [
+              'Rewinding (Oil or Dry)',
+              'Aluminum/Copper Windings',
+              'Restacking Core Steel',
+              'Bushing Replacements',
+            ],
+          },
+        ],
+      },
+      {
+        name: 'Transformer Remediation & Replacement',
+        items: [
+          {
+            title: 'Transformer Removal and Oil Disposal',
+          },
+          {
+            title: 'Soil Remediation and Replacement Fill',
+          },
+          {
+            title: 'New or Used Transformer Installation',
+          },
+          {
+            title: 'Transformer Re-energization',
+          },
+        ],
+      },
+    ],
   },
   {
-    serviceId: 2,
-    serviceName: 'Circuit Breaker Services',
-    imgUrl:
-      'https://storage.googleapis.com/uxpilot-auth.appspot.com/326ac20dfc-dae94cb90083865e79c0.png',
-    description:
-      'Inspection, testing, and maintenance of circuit breakers to protect your electrical systems from faults and overloads.',
-
-    duration: '1-2 days',
+    title: 'Circuit Breaker Services',
+    categories: [
+      {
+        name: 'Circuit Breaker Repair & Sales',
+        items: [
+          {
+            title: 'On-site and in-shop repair',
+          },
+          {
+            title: 'Preventive and corrective maintenance',
+          },
+          {
+            title: 'Refurbishment and technology upgrades',
+          },
+          {
+            title: 'New and replacement breaker sales',
+          },
+        ],
+      },
+      {
+        name: 'Circuit Breaker Maintenance & Testing',
+        items: [
+          {
+            title: 'Physical inspection for material integrity',
+          },
+          {
+            title: 'Cleaning of insulating members',
+          },
+          {
+            title: 'Contact resistance measurement',
+          },
+          {
+            title: 'Overcurrent protection testing',
+          },
+          {
+            title: 'Shunt trip functionality check',
+          },
+          {
+            title: 'Insulation Resistance (Megger) testing',
+          },
+        ],
+      },
+      {
+        name: 'Breaker Types Supported',
+        items: [
+          {
+            title: 'Low Voltage',
+            content: [
+              'Molded Case Breakers',
+              'Insulated Case Breakers',
+              'Low Voltage Solid-State Trip Devices',
+              'Power Monitored Breakers',
+            ],
+          },
+          {
+            title: 'Medium Voltage',
+            content: [
+              'Vacuum Breakers',
+              'SF6 Breakers (including gas analysis)',
+            ],
+          },
+          {
+            title: 'High Voltage',
+            content: [
+              'Oil Circuit Breakers',
+              'Air Circuit Breakers',
+              'SF6 with Partial Discharge Monitoring',
+            ],
+          },
+        ],
+      },
+      {
+        name: 'Circuit Breaker Reconditioning',
+        items: [
+          {
+            title: 'Fully cleaned and disassembled',
+          },
+          {
+            title: 'Inspected for signs of wear',
+          },
+          {
+            title: 'Worn components replaced with new OEM-grade parts',
+          },
+          {
+            title: 'Mechanically tested and reset to service-ready condition',
+          },
+        ],
+      },
+      {
+        name: 'Circuit Breaker Retrofitting',
+        items: [
+          {
+            title: 'New solid-state trip units',
+          },
+          {
+            title: 'Power monitoring modules',
+          },
+          {
+            title: 'Medium voltage vacuum interrupters',
+          },
+          {
+            title: 'Modern SF6 trip systems',
+          },
+        ],
+      },
+    ],
   },
   {
-    serviceId: 3,
-    serviceName: 'Oil Processing Services',
-    imgUrl:
-      'https://storage.googleapis.com/uxpilot-auth.appspot.com/fc498b315a-f9ac44be2848f956fea3.png',
-    description:
-      'Purification and regeneration of insulating transformer oil to extend equipment life and improve performance.',
-
-    duration: '2-3 days',
+    title: 'Oil Processing Services',
+    categories: [
+      {
+        name: 'Mobile Oil Processing Capabilities',
+        items: [
+          {
+            title: 'Mineral Oil',
+          },
+          {
+            title: 'FR3 (Natural Ester Fluid)',
+          },
+        ],
+      },
+      {
+        name: 'Full Vacuum Degasification & Dehydration',
+        items: [
+          {
+            title: 'Remove moisture, oxygen, and dissolved gases',
+          },
+          {
+            title: 'Eliminate acids, sludge, and sediment',
+          },
+          {
+            title: 'Restore oil clarity and dielectric strength',
+          },
+        ],
+      },
+      {
+        name: 'Fuller\u2019s Earth Filtration System',
+        items: [
+          {
+            title: 'Improve interfacial tension',
+          },
+          {
+            title: 'Remove oxidation byproducts',
+          },
+          {
+            title: 'Clarify oil through chemical adsorption',
+          },
+        ],
+      },
+      {
+        name: 'Oil Inhibitor Treatment',
+        items: [
+          {
+            title: 'Replenishes oxidation inhibitors',
+          },
+          {
+            title: 'Enhances long-term oil stability',
+          },
+          {
+            title: 'Meets OEM and ASTM treatment specifications',
+          },
+        ],
+      },
+    ],
   },
   {
-    serviceId: 4,
-    serviceName: 'Electric Motor Maintenance',
-    imgUrl:
-      'https://storage.googleapis.com/uxpilot-auth.appspot.com/73aa5581da-3074e6caaa4552629b49.png',
-    description:
-      'Comprehensive electric motor inspection, cleaning, lubrication, and rewinding to ensure reliable performance.',
-
-    duration: '1-2 days',
+    title: 'Electric Motor Maintenance',
+    categories: [
+      {
+        name: 'Core Services Provided',
+        items: [
+          {
+            title: 'Electric Motor Testing',
+          },
+          {
+            title: 'Electric Motor Removal',
+          },
+          {
+            title: 'Motor Performance Monitoring',
+          },
+          {
+            title: 'Electric Motor Diagnostics',
+          },
+          {
+            title: 'Generator Removal',
+          },
+          {
+            title: 'Application Engineering & Analysis',
+          },
+          {
+            title: 'Infrared Thermography',
+          },
+          {
+            title: 'Laser Shaft Alignment',
+          },
+          {
+            title: 'Vibration Analysis',
+          },
+          {
+            title: 'Factory Start-up Assistance',
+          },
+          {
+            title: 'OEM-Certified Parts Supply (New & Replacement Motors)',
+          },
+        ],
+      },
+      {
+        name: 'OEM Support',
+        items: [
+          {
+            title:
+              'Authorized supplier of OEM-certified parts and new electric motors',
+          },
+        ],
+      },
+    ],
   },
   {
-    serviceId: 5,
-    serviceName: 'Infrared Thermographic Testing',
-    imgUrl:
-      'https://storage.googleapis.com/uxpilot-auth.appspot.com/2e0e7bcacb-d2893c9a484b04b7635e.png',
-    description:
-      'Non-contact thermal imaging to detect hot spots, loose connections, and potential failures in electrical systems.',
-
-    duration: '1 day',
+    title: 'Infrared Thermographic Testing',
+    categories: [
+      {
+        name: 'Service Overview',
+        items: [
+          {
+            title:
+              'Detect loose connections, overloading, or insulation failure',
+          },
+          {
+            title: 'Prevent unplanned downtime',
+          },
+          {
+            title: 'Support preventive maintenance strategies',
+          },
+        ],
+      },
+      {
+        name: 'Equipment & Systems Covered',
+        items: [
+          {
+            title: 'Electrical Switchgear & Control Equipment',
+          },
+          {
+            title: 'Electrical Distribution Panels',
+          },
+          {
+            title: 'Transmission Lines & Substations',
+          },
+          {
+            title: 'Electric Induction Furnaces',
+          },
+          {
+            title: 'Electric Arc Furnaces',
+          },
+          {
+            title: 'Roof & Building Envelope Inspections',
+          },
+          {
+            title: 'Data Center Maintenance Programs',
+          },
+          {
+            title: 'Industrial Process Monitoring',
+          },
+        ],
+      },
+    ],
   },
   {
-    serviceId: 6,
-    serviceName: 'General Electrical Equipment',
-    imgUrl:
-      'https://storage.googleapis.com/uxpilot-auth.appspot.com/608d8695bf-89ed5e5e7e0d0823a6e6.png',
-    description:
-      'Supply, installation, and maintenance of switchgear, panels, relays, and protective electrical devices.',
-
-    duration: '2 days',
+    title: 'General Electrical Equipment Installation, Maintenance & Testing',
+    categories: [
+      {
+        name: 'Equipment Supported',
+        items: [
+          {
+            title: 'Switchgear Assemblies',
+          },
+          {
+            title: 'Unit Substations',
+          },
+          {
+            title: 'Power Centers & Motor Control Centers',
+          },
+          {
+            title: 'Medium Voltage Starters',
+          },
+          {
+            title: 'Generator Switchgear',
+          },
+          {
+            title: 'Lightning Arrestors',
+          },
+          {
+            title: 'Control Devices',
+          },
+          {
+            title: 'Electronic Overcurrent Devices',
+          },
+          {
+            title: 'Ground Resistance Equipment',
+          },
+          {
+            title: 'Medium Voltage Contactors',
+          },
+          {
+            title: 'Ground Fault Equipment',
+          },
+          {
+            title: 'Transfer Switches',
+          },
+          {
+            title: 'Emergency Power Systems (Generators)',
+          },
+          {
+            title: 'Variable Frequency Drives (VFDs)',
+          },
+          {
+            title: 'Instruments and Meters',
+          },
+          {
+            title: 'Bolted Pressure Switches',
+          },
+          {
+            title: 'Protective Relays',
+          },
+          {
+            title: 'Cable Integrity Testing (VLF & High-Pot)',
+          },
+        ],
+      },
+    ],
   },
   {
-    serviceId: 7,
-    serviceName: 'Field Services',
-    imgUrl:
-      'https://storage.googleapis.com/uxpilot-auth.appspot.com/608d8695bf-89ed5e5e7e0d0823a6e6.png',
-    description:
-      'On-site troubleshooting, commissioning, and emergency repair services to minimize downtime and ensure reliable operations.',
-
-    duration: 'Varies',
+    title: 'Field Services, Line Work & Engineering Solutions',
+    categories: [
+      {
+        name: 'Line Work & Substation Construction',
+        items: [
+          {
+            title: 'Fleet',
+            content: [
+              'All-Terrain Vehicles',
+              'Bucket Trucks',
+              'Line Trucks',
+              'Pole & Reel Trailers',
+              'Wire Trailers',
+            ],
+          },
+          {
+            title: 'Power Line Installation (overhead & underground)',
+          },
+          {
+            title: 'Substation Construction',
+          },
+          {
+            title: 'Fiberoptic Cable Installation (Overhead & Underground)',
+          },
+        ],
+      },
+      {
+        name: 'Engineering Services',
+        items: [
+          {
+            title: 'Power Quality & Harmonic Analysis',
+          },
+          {
+            title: 'Arc Flash Studies',
+          },
+          {
+            title: 'Fault Current Analysis',
+          },
+          {
+            title: 'Coordination Studies',
+          },
+          {
+            title: 'Load Flow / Load Studies',
+          },
+          {
+            title: 'Power Factor Evaluation',
+          },
+          {
+            title: 'Preventive Maintenance Programs',
+          },
+          {
+            title: 'Power Monitoring Retrofits',
+          },
+          {
+            title: 'PCB Reviews & Mitigation Plans',
+          },
+          {
+            title: 'Delivered by licensed professional engineers',
+          },
+        ],
+      },
+      {
+        name: 'Electrical Safety & Customer Training',
+        items: [
+          {
+            title: 'Electrical Safety Best Practices',
+          },
+          {
+            title: 'Equipment Maintenance Training',
+          },
+          {
+            title: 'Grounding Out Procedures',
+          },
+          {
+            title: 'Customer-Specific Operational Training',
+          },
+          {
+            title: 'Tailored to OSHA, NETA/IEEE standards',
+          },
+        ],
+      },
+      {
+        name: 'On-Site Electrical Services',
+        items: [
+          {
+            title: 'Field Testing & Commissioning',
+          },
+          {
+            title: 'Preventive & Emergency Maintenance',
+          },
+          {
+            title: 'Oil Analysis & Insulation Testing',
+          },
+          {
+            title: 'Protective Relay Testing & Calibration',
+          },
+          {
+            title: 'Commercial & Industrial Electrical Contracting',
+          },
+          {
+            title: 'VFD & PLC Programming & Installation',
+          },
+          {
+            title: 'Switchgear Design, Cleaning & Wiring',
+          },
+          {
+            title: 'Bus System Design',
+          },
+          {
+            title: 'Custom Electrical Design by Staff Engineers',
+          },
+          {
+            title: '24/7 support for mission-critical systems',
+          },
+        ],
+      },
+    ],
   },
   {
-    serviceId: 8,
-    serviceName: 'Industrial Electrical Construction',
-    imgUrl:
-      'https://storage.googleapis.com/uxpilot-auth.appspot.com/608d8695bf-89ed5e5e7e0d0823a6e6.png',
-    description:
-      'Design, installation, and commissioning of electrical infrastructure for industrial facilities and expansions.',
-
-    duration: '1-2 weeks',
+    title: 'Industrial Electrical Construction',
+    categories: [
+      {
+        name: 'Electrical Construction & Installation',
+        items: [
+          {
+            title: 'State-licensed electrical contractor (License #EC-0000526)',
+          },
+          {
+            title: 'Electrical Equipment Installation',
+          },
+          {
+            title: 'Instrumentation & Fiber Optic Installation',
+          },
+          {
+            title: 'Ground Testing & Ground Penetrating Radar (GPR)',
+          },
+          {
+            title: 'Startup / Commissioning Support',
+          },
+          {
+            title: 'Preventive & Corrective Maintenance',
+          },
+          {
+            title: 'Complete Turnkey Installations (design to energization)',
+          },
+        ],
+      },
+      {
+        name: 'Turnkey Electrical Projects',
+        items: [
+          {
+            title: 'Site Survey & Electrical Design',
+          },
+          {
+            title: 'Procurement of Switchgear, Cabling, Breakers, etc.',
+          },
+          {
+            title: 'Installation & Interconnection',
+          },
+          {
+            title: 'Testing & Startup',
+          },
+          {
+            title: 'Final Certification & Customer Handoff',
+          },
+        ],
+      },
+      {
+        name: 'Custom Electrical Fabrication',
+        items: [
+          {
+            title: 'Electrical Skids (for Mining Sites)',
+          },
+          {
+            title: 'Custom Relay / PLC Cabinets',
+          },
+          {
+            title: 'Prefabricated Substation Structures',
+          },
+          {
+            title: 'Enclosures with Switches, Breakers, Transformers',
+          },
+          {
+            title: 'Medium/Low Voltage Cable Assemblies',
+          },
+          {
+            title:
+              'Units shipped complete, wired, tested, and ready for rapid field deployment',
+          },
+        ],
+      },
+    ],
   },
   {
-    serviceId: 9,
-    serviceName: 'Automation, Telemetry & Analytics',
-    imgUrl:
-      'https://storage.googleapis.com/uxpilot-auth.appspot.com/608d8695bf-89ed5e5e7e0d0823a6e6.png',
-    description:
-      'Implementation of automation systems, remote monitoring, and data analytics to optimize industrial operations.',
-
-    duration: '1 week',
+    title: 'Automation, Telemetry & Analytics',
+    categories: [
+      {
+        name: 'Industrial Automation Programming',
+        items: [
+          {
+            title: 'PLC/PAC Programming',
+            content: [
+              'Rockwell / Allen-Bradley',
+              'Schneider Electric',
+              'Siemens',
+            ],
+          },
+          {
+            title: 'HMI/SCADA Programming',
+            content: ['VTScada', 'Wonderware', 'FactoryTalk ME / SE'],
+          },
+          {
+            title: 'Services',
+            content: [
+              'IP addressing',
+              'Device mapping',
+              'Custom alarm logic',
+              'Protocol translation',
+              'Control logic',
+              'User-friendly interfaces',
+            ],
+          },
+        ],
+      },
+      {
+        name: 'Telemetry & Remote Monitoring',
+        items: [
+          {
+            title: 'Point-to-Multipoint Networks',
+          },
+          {
+            title: 'RF Mesh & Backbone Systems',
+          },
+          {
+            title: 'Cellular Modem Integration for long-distance access',
+          },
+          {
+            title: 'Remote Monitoring',
+            content: [
+              'Tank levels',
+              'Substations',
+              'Pump stations',
+              'Energy usage',
+              'Field asset conditions',
+            ],
+          },
+        ],
+      },
+      {
+        name: 'Cloud & Predictive Analytics',
+        items: [
+          {
+            title: 'Remote Monitoring Dashboards (AWS cloud infrastructure)',
+          },
+          {
+            title: 'Predictive Maintenance Forecasting',
+          },
+          {
+            title: 'Machine Learning Insights',
+            content: [
+              'Asset Health',
+              'Logistics Planning',
+              'Load Analysis',
+              'Failure Probability',
+            ],
+          },
+        ],
+      },
+    ],
   },
 ];

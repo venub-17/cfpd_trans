@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginType } from '../../../shared/types';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import {
   FormBuilder,
   FormControl,
@@ -9,6 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,11 @@ export class Login implements OnInit {
   loginForm!: FormGroup;
   isFormSubmitted: boolean = false;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -44,6 +49,7 @@ export class Login implements OnInit {
       console.log('Form invalid');
       return;
     }
-    console.log('Form Submitted', this.loginForm.value);
+    this.authService.setLoginStatus(true);
+    this.router.navigate(['/user-details']);
   }
 }

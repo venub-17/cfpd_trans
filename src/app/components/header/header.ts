@@ -4,6 +4,8 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Service } from '../../shared/types';
 import { serviceData } from '../../shared/temp/service.data';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { AuthService } from '../../shared/services/auth.service';
+import { LoadService } from '../../shared/services/loadService.service';
 
 @Component({
   selector: 'app-header',
@@ -17,6 +19,13 @@ export class Header implements OnInit {
   services: Service[] = [];
   ngOnInit(): void {}
   constructor(private translate: TranslateService) {
+  services: any[] = [];
+  toggleState: boolean = false;
+  constructor(
+    private router: Router,
+    public authService: AuthService,
+    private servicesService: LoadService
+  ) {
     this.services = serviceData;
 
     // Set available languages
@@ -29,17 +38,16 @@ export class Header implements OnInit {
   }
 
   switchLanguage(event: any) {
-    const lang = event.target.value;
     console.log(lang, 'lang');
     this.translate.use(lang);
     localStorage.setItem('lang', lang);
   }
 
   toggleState: boolean = false;
-  onToggleMenu() {
+  ngOnInit(): void {}
     this.toggleState = !this.toggleState;
-  }
-  onToggleDropdown(name: string) {
-    this.openDropdown = name ? name : '';
+  onSelectService(service: any) {
+    this.servicesService.getServie(service);
+    this.router.navigate(['/services']);
   }
 }
