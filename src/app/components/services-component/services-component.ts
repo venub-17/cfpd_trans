@@ -4,6 +4,7 @@ import { serviceData } from '../../shared/temp/service.data';
 import { CommonModule } from '@angular/common';
 import { LoadService } from '../../shared/services/loadService.service';
 import { ServiceCard } from './service-card/service-card';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-services-component',
@@ -12,12 +13,19 @@ import { ServiceCard } from './service-card/service-card';
   styleUrl: './services-component.scss',
 })
 export class ServicesComponent implements OnInit {
+  serviceTitle: string | any;
   service: any;
-  constructor(private servicesService: LoadService) {}
+  constructor(
+    private servicesService: LoadService,
+    private readonly route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.servicesService.selectedService$.subscribe((data) => {
-      this.service = data;
+    this.route.paramMap.subscribe((params) => {
+      this.serviceTitle = params.get('id');
+      if (this.serviceTitle) {
+        this.service = this.servicesService.getServiceById(this.serviceTitle);
+      }
     });
   }
 }

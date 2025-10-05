@@ -99,6 +99,7 @@
           </div>
           <span
             class="text-sm text-neutral-900 hover:text-neutral-700 cursor-pointer"
+            [routerLink]="['/forgot-password']"
           >
             Forgot password?
           </span>
@@ -116,7 +117,7 @@
         <p class="text-sm text-neutral-600">
           Don't have an account?
           <span
-            [routerLink]="['/signup']"
+            [routerLink]="['/verify-email']"
             routerLinkActive="router-link-active"
             class="text-neutral-900 hover:underline cursor-pointer"
           >

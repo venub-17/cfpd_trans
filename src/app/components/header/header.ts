@@ -1,6 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import {
+  ActivatedRoute,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+} from '@angular/router';
 import { Service } from '../../shared/types';
 import { serviceData } from '../../shared/temp/service.data';
 import { AuthService } from '../../shared/services/auth.service';
@@ -18,7 +23,7 @@ export class Header implements OnInit {
   services: any[] = [];
   toggleState: boolean = false;
   constructor(
-    private router: Router,
+    public router: Router,
     public authService: AuthService,
     private servicesService: LoadService
   ) {
@@ -29,7 +34,7 @@ export class Header implements OnInit {
     this.toggleState = !this.toggleState;
   }
   onSelectService(service: any) {
-    this.servicesService.getServie(service);
-    this.router.navigate(['/services']);
+    this.servicesService.selectServiceById(service.title);
+    this.router.navigate(['/services', service.title]);
   }
 }

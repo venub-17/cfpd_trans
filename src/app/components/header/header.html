@@ -34,9 +34,9 @@
           <!-- Dropdown menu for Services -->
           <div class="relative group">
             <span
-              [routerLink]="['/services']"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: false }"
+              [ngClass]="{
+                'border-b': router.url.startsWith('/services')
+              }"
               class="hover:text-primary-100 transition-colors cursor-pointer"
             >
               Services

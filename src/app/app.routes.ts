@@ -4,6 +4,7 @@ import { Hero } from './components/hero/hero';
 import { NotFound } from './components/not-found/not-found';
 import { Signup } from './components/auth/signup/signup';
 import { Sites } from './components/user/sites/sites';
+import { VerifyEmail } from './components/auth/verify-email/verify-email';
 
 export const routes: Routes = [
   {
@@ -20,7 +21,7 @@ export const routes: Routes = [
       import('./components/products/products').then((m) => m.Products),
   },
   {
-    path: 'services',
+    path: 'services/:id',
     loadComponent: () =>
       import('./components/services-component/services-component').then(
         (m) => m.ServicesComponent
@@ -43,8 +44,17 @@ export const routes: Routes = [
     component: Login,
   },
   {
+    path: 'verify-email',
+    component: VerifyEmail,
+  },
+  {
     path: 'signup',
     component: Signup,
+  },
+  {
+    path: 'forgot-password',
+    loadComponent: () =>
+      import('./components/auth/forgotpwd/forgotpwd').then((m) => m.Forgotpwd),
   },
   {
     path: 'user-details',

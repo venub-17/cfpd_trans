@@ -1,0 +1,66 @@
+<div class="flex space-x-2 justify-center mt-10">
+  <input
+    #otp0
+    type="text"
+    maxlength="1"
+    autocomplete="one-time-code"
+    class="w-12 h-12 text-center border border-gray-300 rounded-md text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+    (input)="onInput($event, 0)"
+    (keydown)="onKeyDown($event, 0)"
+  />
+  <input
+    #otp1
+    type="text"
+    maxlength="1"
+    autocomplete="one-time-code"
+    class="w-12 h-12 text-center border border-gray-300 rounded-md text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+    (input)="onInput($event, 1)"
+    (keydown)="onKeyDown($event, 1)"
+  />
+  <input
+    #otp2
+    type="text"
+    maxlength="1"
+    autocomplete="one-time-code"
+    class="w-12 h-12 text-center border border-gray-300 rounded-md text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+    (input)="onInput($event, 2)"
+    (keydown)="onKeyDown($event, 2)"
+  />
+  <input
+    #otp3
+    type="text"
+    maxlength="1"
+    autocomplete="one-time-code"
+    class="w-12 h-12 text-center border border-gray-300 rounded-md text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+    (input)="onInput($event, 3)"
+    (keydown)="onKeyDown($event, 3)"
+  />
+  <input
+    #otp4
+    type="text"
+    maxlength="1"
+    autocomplete="one-time-code"
+    class="w-12 h-12 text-center border border-gray-300 rounded-md text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+    (input)="onInput($event, 4)"
+    (keydown)="onKeyDown($event, 4)"
+  />
+  <input
+    #otp5
+    type="text"
+    maxlength="1"
+    autocomplete="one-time-code"
+    class="w-12 h-12 text-center border border-gray-300 rounded-md text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+    (input)="onInput($event, 5)"
+    (keydown)="onKeyDown($event, 5)"
+  />
+</div>
+
+<div class="mt-6 text-center">
+  <button
+    class="w-auto mt-4 py-2 px-3 border border-transparent rounded shadow-sm text-sm text-white bg-primary-600 hover:bg-primary-700 outline-none disabled:opacity-50"
+    [disabled]="!isOtpComplete()"
+    (click)="submitOtp()"
+  >
+    Verify OTP
+  </button>
+</div>
