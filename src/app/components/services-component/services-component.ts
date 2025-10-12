@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { serviceData } from '../../shared/temp/service.data';
 import { CommonModule } from '@angular/common';
-import { LoadService } from '../../shared/services/loadService.service';
+import { ServiceDataService } from '../../shared/services/service-data.service';
 import { ServiceCard } from './service-card/service-card';
 import { ActivatedRoute } from '@angular/router';
 
@@ -16,7 +15,7 @@ export class ServicesComponent implements OnInit {
   serviceTitle: string | any;
   service: any;
   constructor(
-    private servicesService: LoadService,
+    private servicesService: ServiceDataService,
     private readonly route: ActivatedRoute
   ) {}
 

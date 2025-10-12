@@ -33,4 +33,12 @@ export class ModalService {
   onActionButtonClick() {
     this.actionButton.value();
   }
+  setResContent(title: string, content: string, isConfirmButton?: boolean) {
+    this.setContent({
+      title,
+      content,
+      isConfirmButton: isConfirmButton ?? false,
+    });
+    this.open();
+  }
 }

@@ -10,6 +10,10 @@ import {
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { confirmPasswordValidator } from '../../../shared/utils';
+import { AuthService } from '../../../shared/services/auth.service';
+import { LoaderService } from '../../../shared/services/loader.service';
+import { ModalService } from '../../../shared/services/modal.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-signup',
@@ -22,7 +26,12 @@ export class Signup implements OnInit {
 
   signupForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private readonly authService: AuthService,
+    private readonly modalService: ModalService,
+    private readonly loaderService: LoaderService
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -51,5 +60,34 @@ export class Signup implements OnInit {
 
   onSubmit() {
     this.isFormSubmitted = true;
+    if (this.signupForm.invalid) {
+      return;
+    }
+    this.loaderService.show();
+    this.authService
+      .onCompleteRegisetration({
+        email: this.f['email'].value,
+        first_name: this.f['firstName'].value,
+        last_name: this.f['lastName'].value,
+        password: this.f['password'].value,
+      })
+      .pipe(finalize(() => this.loaderService.hide()))
+      .subscribe({
+        next: (res) => {
+          const message =
+            res?.message ||
+            'Registration successful! Please login to continue.';
+          this.modalService.setResContent('Success', message);
+          this.signupForm.reset();
+          this.isFormSubmitted = false;
+        },
+        error: (err) => {
+          const message =
+            err?.error?.error ??
+            err?.message ??
+            'Something went wrong, please try again.';
+          this.modalService.setResContent('Error', message);
+        },
+      });
   }
 }

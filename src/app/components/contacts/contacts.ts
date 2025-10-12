@@ -29,7 +29,6 @@ export class Contacts {
     });
   }
   onAssitance() {
-    console.log('Assistance clicked');
     this.showAssitanceModal = true;
   }
   closeAssitanceModal() {

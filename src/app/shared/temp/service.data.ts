@@ -1,5 +1,3 @@
-import { Title } from '@angular/platform-browser';
-
 export const serviceData = [
   {
     title: 'Transformer Testing, Remediation & Replacement',

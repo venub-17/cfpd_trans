@@ -10,6 +10,9 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../shared/services/auth.service';
+import { finalize, take } from 'rxjs';
+import { LoaderService } from '../../../shared/services/loader.service';
+import { ModalService } from '../../../shared/services/modal.service';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +28,9 @@ export class Login implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private readonly loaderService: LoaderService,
+    private readonly modalService: ModalService
   ) {}
 
   ngOnInit(): void {
@@ -33,23 +38,52 @@ export class Login implements OnInit {
   }
 
   initForm() {
+    // strict email: must include full domain + TLD (e.g. user@example.com)
+    const strictEmailPattern =
+      '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[A-Za-z]{2,}$';
+
     this.loginForm = this.fb.group({
-      username: new FormControl('', Validators.required),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.pattern(strictEmailPattern),
+      ]),
       password: new FormControl('', Validators.required),
+      rememberMe: new FormControl(false),
     });
   }
 
   get f() {
     return this.loginForm.controls;
   }
-
+  private navigateToUserDetails() {
+    this.router.navigate(['/user-details']);
+  }
+  private openModal(title: string, content: string, isConfirmButton = false) {
+    this.modalService.setContent({ title, content, isConfirmButton });
+    this.modalService.open();
+  }
   onSubmit() {
     this.isFormSubmitted = true;
-    if (this.loginForm.invalid) {
-      console.log('Form invalid');
+    if (!this.loginForm.valid) {
       return;
     }
-    this.authService.setLoginStatus(true);
-    this.router.navigate(['/user-details']);
+    this.loaderService.show();
+    this.authService
+      .onLogin(this.loginForm.value)
+      .pipe(
+        take(1),
+        finalize(() => this.loaderService.hide())
+      )
+      .subscribe({
+        next: () => this.navigateToUserDetails(),
+        error: (err) => {
+          console.error('Login error:', err);
+          const message =
+            err?.error?.error ??
+            err?.message ??
+            'An error occurred during login';
+          this.openModal('Error', message);
+        },
+      });
   }
 }

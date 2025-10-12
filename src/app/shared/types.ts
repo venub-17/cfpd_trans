@@ -56,3 +56,8 @@ export interface Site {
 export interface SiteRowData {
   transiformerId: string;
 }
+export interface authReqBody {
+  email?: string;
+  username?: string;
+  password?: string;
+}

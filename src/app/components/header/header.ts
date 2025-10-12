@@ -9,7 +9,7 @@ import {
 import { Service } from '../../shared/types';
 import { serviceData } from '../../shared/temp/service.data';
 import { AuthService } from '../../shared/services/auth.service';
-import { LoadService } from '../../shared/services/loadService.service';
+import { ServiceDataService } from '../../shared/services/service-data.service';
 
 @Component({
   selector: 'app-header',
@@ -25,11 +25,15 @@ export class Header implements OnInit {
   constructor(
     public router: Router,
     public authService: AuthService,
-    private servicesService: LoadService
+    private servicesService: ServiceDataService
   ) {
     this.services = serviceData;
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.servicesService.getAllServices().subscribe((services) => {
+      this.services = services;
+    });
+  }
   onToggleMenu() {
     this.toggleState = !this.toggleState;
   }

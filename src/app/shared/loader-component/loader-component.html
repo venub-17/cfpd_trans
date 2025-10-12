@@ -1,6 +1,8 @@
 <!-- loader.component.html -->
 <div *ngIf="(isLoading$ | async)?.isLoading" class="loader-overlay">
-  <div class="flex gap-3 items-center justify-center">
+  <div
+    class="flex gap-3 items-center justify-center bg-white px-20 py-2 rounded"
+  >
     <div class="loader"></div>
     <span>{{ (isLoading$ | async)?.message }}</span>
   </div>

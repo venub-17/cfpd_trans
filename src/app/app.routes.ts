@@ -5,6 +5,7 @@ import { NotFound } from './components/not-found/not-found';
 import { Signup } from './components/auth/signup/signup';
 import { Sites } from './components/user/sites/sites';
 import { VerifyEmail } from './components/auth/verify-email/verify-email';
+import { ResetTokenGuard } from './components/auth/resetpwd/reset-token.guard';
 
 export const routes: Routes = [
   {
@@ -50,6 +51,12 @@ export const routes: Routes = [
   {
     path: 'signup',
     component: Signup,
+  },
+  {
+    path: 'reset-password/:token',
+    loadComponent: () =>
+      import('./components/auth/resetpwd/resetpwd').then((m) => m.Resetpwd),
+    canActivate: [ResetTokenGuard],
   },
   {
     path: 'forgot-password',
