@@ -58,15 +58,15 @@ export class Otpverify {
 
   submitOtp() {
     this.loaderService.show();
-    const email = '';
+    let recevied_email = '';
     this.authService.email$.subscribe((email) => {
       if (email) {
-        email = email;
+        recevied_email = email;
       }
     });
     const otp = this.otpValues.join('');
     this.authService
-      .verifyOtp({ email, otp })
+      .verifyOtp({ email: recevied_email, otp })
       .pipe(finalize(() => this.loaderService.hide()))
       .subscribe({
         next: (res) => {

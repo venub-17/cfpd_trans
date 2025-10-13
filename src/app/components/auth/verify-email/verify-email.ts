@@ -30,7 +30,6 @@ export class VerifyEmail {
     this.authService.setEmail(form.value.email);
     this.loaderService.show();
     const reqBody = { email: form.value.email };
-
     this.authService
       .onSignup(reqBody)
       .pipe(
