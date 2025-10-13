@@ -53,10 +53,10 @@ export const routes: Routes = [
     component: Signup,
   },
   {
-    path: 'reset-password',
+    path: 'reset-password/:token',
     loadComponent: () =>
       import('./components/auth/resetpwd/resetpwd').then((m) => m.Resetpwd),
-    // canActivate: [ResetTokenGuard],
+    canActivate: [ResetTokenGuard],
   },
   {
     path: 'forgot-password',
