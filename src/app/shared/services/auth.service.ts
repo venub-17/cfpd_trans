@@ -50,7 +50,10 @@ export class AuthService {
     email: string;
     otp: string;
   }): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.baseUrl}/verify-otp`, data);
+    return this.http.post<AuthResponse>(
+      `${this.baseUrl}/auth/verify-otp`,
+      data
+    );
   }
 
   public onCompleteRegisetration(data: {
@@ -60,7 +63,7 @@ export class AuthService {
     password: string;
   }): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(
-      `${this.baseUrl}/complete-registration`,
+      `${this.baseUrl}/auth/complete-registration`,
       data
     );
   }
@@ -81,7 +84,7 @@ export class AuthService {
     data: authReqBody
   ): Observable<{ message: string }> {
     return this.http.post<{ message: string }>(
-      `${this.baseUrl}/request-reset`,
+      `${this.baseUrl}/auth/request-reset`,
       data
     );
   }
@@ -91,7 +94,7 @@ export class AuthService {
     email?: string
   ): Observable<{ valid: boolean; email?: string }> {
     return this.http.get<{ valid: boolean; email?: string }>(
-      `${this.baseUrl}/verify-reset-token/${token},${email}`
+      `${this.baseUrl}/auth/verify-reset-token/${token},${email}`
     );
   }
   public resetPassword(
@@ -100,7 +103,7 @@ export class AuthService {
     newPassword: any
   ): Observable<{ message: string }> {
     return this.http.post<{ message: string }>(
-      `${this.baseUrl}/reset-password`,
+      `${this.baseUrl}/auth/reset-password`,
       { email, token, newPassword }
     );
   }
