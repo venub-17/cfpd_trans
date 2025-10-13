@@ -12,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../shared/services/auth.service';
 import { LoaderService } from '../../../shared/services/loader.service';
 import { ModalService } from '../../../shared/services/modal.service';
+import { confirmPasswordValidator } from '../../../shared/utils';
 
 @Component({
   selector: 'app-resetpwd',
@@ -54,7 +55,9 @@ export class Resetpwd implements OnInit {
         ],
         confirmPassword: ['', Validators.required],
       },
-      { validators: this.passwordsMatch }
+      {
+        validators: confirmPasswordValidator('newPassword', 'confirmPassword'),
+      }
     );
   }
 

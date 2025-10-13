@@ -136,23 +136,22 @@
 
           <div
             *ngIf="
-              f['confirmPassword'].errors?.['required'] &&
+              f['confirmPassword'].errors &&
+              f['confirmPassword'].errors['required'] &&
               (f['confirmPassword'].dirty ||
                 f['confirmPassword'].touched ||
                 isFormSubmitted)
             "
             class="text-red-500 text-sm mt-1"
           >
-            Confirm password is required
+            Confirm Password is required
           </div>
 
           <div
-            *ngIf="
-              resetForm.errors?.['passwordMismatch'] && isFormSubmitted
-            "
+            *ngIf="f['confirmPassword'].errors?.['confirmPasswordValidator']"
             class="text-red-500 text-sm mt-1"
           >
-            Passwords do not match
+            Passsword and Confirm Password didn't match.
           </div>
         </div>
 
