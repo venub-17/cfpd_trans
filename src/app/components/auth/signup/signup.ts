@@ -47,7 +47,6 @@ export class Signup implements OnInit {
           Validators.minLength(6),
         ]),
         confirmPassword: new FormControl('', [Validators.required]),
-        acceptTerms: new FormControl(false, Validators.requiredTrue),
       },
       {
         validators: confirmPasswordValidator('password', 'confirmPassword'),
@@ -59,10 +58,13 @@ export class Signup implements OnInit {
   }
 
   onSubmit() {
-    this.isFormSubmitted = true;
-    if (this.signupForm.invalid) {
+    this.isFormSubmitted = true; // move here
+    console.log('Form submission initiated.', this.signupForm.valid);
+    if (!this.signupForm.valid) {
+      this.signupForm.markAllAsTouched(); // ensure errors show
       return;
     }
+    console.log('Signup form submitted with values:', this.signupForm.value);
     this.loaderService.show();
     this.authService
       .onCompleteRegisetration({

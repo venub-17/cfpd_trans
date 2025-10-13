@@ -1,18 +1,26 @@
-import { Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  QueryList,
+  ViewChildren,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../shared/services/auth.service';
-import { finalize } from 'rxjs';
+import { finalize, take } from 'rxjs';
 import { LoaderService } from '../../../shared/services/loader.service';
 import { ModalService } from '../../../shared/services/modal.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-otpverify',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './otpverify.html',
   styleUrl: './otpverify.scss',
 })
-export class Otpverify {
+export class Otpverify implements OnInit {
   otpValues: string[] = ['', '', '', '', '', ''];
+  countdown: number = 60;
 
   @ViewChildren('otp0, otp1, otp2, otp3,otp4,otp5')
   otpInputs!: QueryList<ElementRef>;
@@ -23,6 +31,21 @@ export class Otpverify {
     private readonly modalService: ModalService,
     private readonly loaderService: LoaderService
   ) {}
+  ngOnInit() {
+    this.startCountdown();
+  }
+  startCountdown() {
+    this.countdown = 30;
+
+    let timerInterval = setInterval(() => {
+      if (this.countdown > 0) {
+        this.countdown--;
+      } else {
+        clearInterval(timerInterval);
+      }
+    }, 1000);
+  }
+
   onInput(event: any, index: number) {
     const input = event.target;
     let value = input.value;
@@ -77,6 +100,36 @@ export class Otpverify {
         error: (err) => {
           const message =
             err?.error?.error ?? err?.message ?? 'OTP verification failed';
+          this.modalService.setResContent('Error', message);
+        },
+      });
+  }
+  resendOtp() {
+    this.loaderService.show();
+    let recevied_email = '';
+    this.loaderService.show();
+    this.authService.email$.subscribe((email) => {
+      if (email) {
+        recevied_email = email;
+      }
+    });
+    const reqBody = { email: recevied_email };
+    this.authService
+      .onSignup(reqBody)
+      .pipe(
+        take(1),
+        finalize(() => this.loaderService.hide())
+      )
+      .subscribe({
+        next: (res: any) => {
+          const message =
+            res?.message ?? 'OTP sent to email. Verify to complete signup.';
+          this.modalService.setResContent('Success', message);
+        },
+        error: (err: any) => {
+          console.error('Signup error:', err);
+          const message =
+            err?.error?.error ?? err?.message ?? 'An error occurred';
           this.modalService.setResContent('Error', message);
         },
       });

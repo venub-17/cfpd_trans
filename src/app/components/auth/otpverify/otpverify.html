@@ -64,3 +64,12 @@
     Verify OTP
   </button>
 </div>
+
+<div class="flex flex-col items-center mt-4 text-center space-y-2">
+  <p *ngIf="countdown > 0" class="text-sm">
+    (You can request the OTP in <b> {{ countdown }} </b>seconds.)
+  </p>
+  <p *ngIf="countdown === 0">
+    <a (click)="resendOtp()">Click here to resend OTP</a>
+  </p>
+</div>

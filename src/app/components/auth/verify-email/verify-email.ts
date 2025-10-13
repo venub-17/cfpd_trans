@@ -6,10 +6,11 @@ import { AuthService } from '../../../shared/services/auth.service';
 import { ModalService } from '../../../shared/services/modal.service';
 import { LoaderService } from '../../../shared/services/loader.service';
 import { finalize, take } from 'rxjs/operators';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-verify-email',
-  imports: [CommonModule, FormsModule, Otpverify],
+  imports: [CommonModule, FormsModule, Otpverify, RouterLink],
   templateUrl: './verify-email.html',
   styleUrl: './verify-email.scss',
 })
