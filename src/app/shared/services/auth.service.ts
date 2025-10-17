@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, distinctUntilChanged, Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { authReqBody } from '../types';
 interface AuthResponse {
   token?: string;
@@ -15,11 +15,29 @@ export class AuthService {
   private readonly baseUrl = environment.apiUrl;
   private readonly STORAGE_KEY = 'cfpd_isLoggedIn';
   private readonly TOKEN_KEY = 'cfpd_authToken';
-  private readonly email = new BehaviorSubject<string>('');
-  public readonly email$ = this.email.asObservable();
+  private readonly emailSubject = new BehaviorSubject<string>('');
+  public readonly email$ = this.emailSubject.asObservable();
+
+  constructor(private http: HttpClient) {
+    // On app load, restore email from localStorage if available
+    const savedEmail = localStorage.getItem('resetEmail');
+    if (savedEmail) {
+      this.emailSubject.next(savedEmail);
+    }
+  }
 
   public setEmail(email: string): void {
-    this.email.next(email);
+    localStorage.setItem('resetEmail', email); // Store for future
+    this.emailSubject.next(email);
+  }
+
+  public clearEmail(): void {
+    localStorage.removeItem('resetEmail');
+    this.emailSubject.next('');
+  }
+
+  public getEmail(): string {
+    return this.emailSubject.getValue();
   }
 
   private readonly loggedInStatus = new BehaviorSubject<boolean>(
@@ -29,8 +47,6 @@ export class AuthService {
   public readonly isLoggedIn$ = this.loggedInStatus
     .asObservable()
     .pipe(distinctUntilChanged());
-
-  constructor(private readonly http: HttpClient) {}
 
   private getInitialLoginState(): boolean {
     const v = localStorage.getItem(this.STORAGE_KEY);
@@ -91,10 +107,18 @@ export class AuthService {
 
   public verifyResetToken(
     token: string,
-    email?: string
+    email: string
   ): Observable<{ valid: boolean; email?: string }> {
+    console.log(
+      'AuthService: Verifying reset token:',
+      token,
+      'for email:',
+      email
+    );
+    const params = new HttpParams().set('token', token).set('email', email);
     return this.http.get<{ valid: boolean; email?: string }>(
-      `${this.baseUrl}/auth/verify-reset-token/${token},${email}`
+      `${this.baseUrl}/auth/verify-reset-token`,
+      { params }
     );
   }
   public resetPassword(

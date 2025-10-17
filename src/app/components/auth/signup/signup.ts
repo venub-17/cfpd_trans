@@ -8,7 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { confirmPasswordValidator } from '../../../shared/utils';
 import { AuthService } from '../../../shared/services/auth.service';
 import { LoaderService } from '../../../shared/services/loader.service';
@@ -30,7 +30,8 @@ export class Signup implements OnInit {
     private fb: FormBuilder,
     private readonly authService: AuthService,
     private readonly modalService: ModalService,
-    private readonly loaderService: LoaderService
+    private readonly loaderService: LoaderService,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {
@@ -82,6 +83,7 @@ export class Signup implements OnInit {
           this.modalService.setResContent('Success', message);
           this.signupForm.reset();
           this.isFormSubmitted = false;
+          this.router.navigate(['/login']);
         },
         error: (err) => {
           const message =
