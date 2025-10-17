@@ -14,9 +14,8 @@ export class ResetTokenGuard implements CanActivate {
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
-    const token = route.queryParamMap.get('token') || ''; // Extract token from query params
-
-    // If no token, redirect
+    const token = route.paramMap.get('token');
+    console.log('ResetTokenGuard: Retrieved token:', token);
     if (!token) {
       void this.router.navigate(['/']);
       return of(false);
@@ -31,6 +30,7 @@ export class ResetTokenGuard implements CanActivate {
           void this.router.navigate(['/']);
           return of(false);
         }
+        console.log('ResetTokenGuard: Verifying token for email:', email);
         // Verify the token with the email
         return this.auth.verifyResetToken(token, email).pipe(
           map((res) => !!res.valid), // Map the result to a boolean (true/false)
