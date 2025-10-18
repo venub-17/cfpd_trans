@@ -13,6 +13,7 @@ import { AuthService } from '../../../shared/services/auth.service';
 import { LoaderService } from '../../../shared/services/loader.service';
 import { ModalService } from '../../../shared/services/modal.service';
 import { confirmPasswordValidator } from '../../../shared/utils';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-resetpwd',
@@ -111,8 +112,9 @@ export class Resetpwd implements OnInit {
     if (s === 3) return 'Good';
     return 'Strong';
   }
-
-  // Submit handler
+  togglePasswordVisibility() {
+    this.showNewPassword = !this.showNewPassword;
+  } // Submit handler
   onSubmit() {
     this.isFormSubmitted = true;
 
@@ -127,14 +129,12 @@ export class Resetpwd implements OnInit {
     if (this.resetForm.invalid) return;
 
     this.loader.show();
-    let payloadEmail = '';
-    this.authservice.email$.subscribe((email) => {
-      if (email) payloadEmail = email;
-    });
+    let payloadEmail = this.authservice.getEmail();
     const newPassword = this.resetForm.value.newPassword;
-
+    console.log('Resetpwd: Submitting new password for email:', payloadEmail);
     this.authservice
       .resetPassword(payloadEmail, this.token, newPassword)
+      .pipe(finalize(() => this.loader.hide()))
       .subscribe({
         next: () => {
           this.modal.setResContent(

@@ -15,11 +15,15 @@ export class AuthService {
   private readonly baseUrl = environment.apiUrl;
   private readonly STORAGE_KEY = 'cfpd_isLoggedIn';
   private readonly TOKEN_KEY = 'cfpd_authToken';
-  private readonly email = new BehaviorSubject<string>('');
-  public readonly email$ = this.email.asObservable();
 
-  public setEmail(email: string): void {
-    this.email.next(email);
+  public setEmail(email: string): any {
+    return localStorage.setItem('cfpd_userEmail', email);
+  }
+  public getEmail(): any {
+    return localStorage.getItem('cfpd_userEmail');
+  }
+  public clearEmail(): any {
+    localStorage.removeItem('cfpd_userEmail');
   }
 
   private readonly loggedInStatus = new BehaviorSubject<boolean>(
