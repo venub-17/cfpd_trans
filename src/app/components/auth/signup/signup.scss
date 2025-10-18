@@ -1,3 +1,9 @@
 input.ng-touched.ng-invalid {
-    border: 1px solid #ef4444;
+  border: 1px solid #ef4444;
+}
+.eye_position {
+  position: absolute;
+  top: 38px;
+  right: 10px;
+  cursor: pointer;
 }

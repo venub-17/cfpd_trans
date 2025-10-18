@@ -23,6 +23,7 @@ import { finalize } from 'rxjs/operators';
 })
 export class Signup implements OnInit {
   isFormSubmitted = false;
+  showPassword: boolean = false;
 
   signupForm!: FormGroup;
 
@@ -93,5 +94,9 @@ export class Signup implements OnInit {
           this.modalService.setResContent('Error', message);
         },
       });
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 }

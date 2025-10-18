@@ -24,6 +24,7 @@ export class Login implements OnInit {
   loginDetails: LoginType = { username: '', password: '' };
   loginForm!: FormGroup;
   isFormSubmitted: boolean = false;
+  showPassword: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -61,6 +62,9 @@ export class Login implements OnInit {
   private openModal(title: string, content: string, isConfirmButton = false) {
     this.modalService.setContent({ title, content, isConfirmButton });
     this.modalService.open();
+  }
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
   onSubmit() {
     this.isFormSubmitted = true;
