@@ -31,15 +31,16 @@ export class ResetTokenGuard implements CanActivate {
       tap((valid) => {
         if (!valid) {
           // If the token is invalid, navigate to expired-reset page
-          void this.router.navigate(['/expired-reset']);
+          void this.router.navigate(['/forgot-password']);
         }
       }),
-      catchError(() => {
+      catchError((e) => {
         // If there's an error during the verification, navigate to expired-reset
-        this.modalService.setResContent(
-          'Error',
-          'Failed to verify reset token. Please try again.'
-        );
+        const message =
+          e?.error === 'Token expired'
+            ? 'Your reset token has expired. Please request a new one.'
+            : 'Failed to verify reset token. Please try again.';
+        this.modalService.setResContent('Error', message);
         void this.router.navigate(['/expired-reset']);
         return of(false);
       })
