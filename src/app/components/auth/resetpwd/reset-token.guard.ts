@@ -16,7 +16,6 @@ export class ResetTokenGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
     const token = route.queryParamMap.get('token') || ''; // Extract token from query params
     const email = route.queryParamMap.get('email') || '';
-    console.log('from server api:', 'token:', token, 'email:', email);
     // If no token, redirect
     if (!token || !email) {
       this.modalService.setResContent(
