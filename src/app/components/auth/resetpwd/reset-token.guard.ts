@@ -37,7 +37,7 @@ export class ResetTokenGuard implements CanActivate {
       catchError((e) => {
         // If there's an error during the verification, navigate to expired-reset
         const message =
-          e?.error === 'Token expired'
+          e?.error === 'Token expired' || e?.error === 'Invalid token'
             ? 'Your reset token has expired. Please request a new one.'
             : 'Failed to verify reset token. Please try again.';
         this.modalService.setResContent('Error', message);
