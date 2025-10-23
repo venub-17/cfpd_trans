@@ -45,18 +45,5 @@ export class ResetTokenGuard implements CanActivate {
         return of(false);
       })
     );
-    // Check if email exists, and if so, validate the token
-    // return this.auth.email$.pipe(
-    //   take(1), // Take only the first emission
-    //   switchMap((email) => {
-    //     if (!email) {
-    //       // If email is not available, redirect to home
-    //       void this.router.navigate(['/']);
-    //       return of(false);
-    //     }
-    //     // Verify the token with the email
-
-    //   })
-    // );
   }
 }
