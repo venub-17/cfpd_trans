@@ -14,9 +14,8 @@ export class ResetTokenGuard implements CanActivate {
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
-    const token = route.queryParamMap.get('token') || ''; // Extract token from query params
+    const token = route.queryParamMap.get('token') || '';
     const email = route.queryParamMap.get('email') || '';
-    // If no token, redirect
     if (!token || !email) {
       this.modalService.setResContent(
         'Error',
@@ -27,15 +26,13 @@ export class ResetTokenGuard implements CanActivate {
     }
 
     return this.auth.verifyResetToken(token, email).pipe(
-      map((res) => !!res.valid), // Map the result to a boolean (true/false)
+      map((res) => !!res.valid),
       tap((valid) => {
         if (!valid) {
-          // If the token is invalid, navigate to expired-reset page
           void this.router.navigate(['/forgot-password']);
         }
       }),
       catchError((e) => {
-        // If there's an error during the verification, navigate to expired-reset
         const message =
           e?.error === 'Token expired' || e?.error === 'Invalid token'
             ? 'Your reset token has expired. Please request a new one.'
