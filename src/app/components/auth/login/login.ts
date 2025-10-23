@@ -39,7 +39,6 @@ export class Login implements OnInit {
   }
 
   initForm() {
-    // strict email: must include full domain + TLD (e.g. user@example.com)
     const strictEmailPattern =
       '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[A-Za-z]{2,}$';
 
