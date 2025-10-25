@@ -6,6 +6,7 @@ import { Signup } from './components/auth/signup/signup';
 import { Sites } from './components/user/sites/sites';
 import { VerifyEmail } from './components/auth/verify-email/verify-email';
 import { ResetTokenGuard } from './components/auth/resetpwd/reset-token.guard';
+import { AboutUs } from './components/about-us/about-us';
 
 export const routes: Routes = [
   {
@@ -15,7 +16,11 @@ export const routes: Routes = [
   {
     path: 'home',
     component: Hero,
+  }, {
+    path: 'about-us',
+    component: AboutUs,
   },
+
   {
     path: 'products',
     loadComponent: () =>
