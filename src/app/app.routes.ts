@@ -40,6 +40,13 @@ export const routes: Routes = [
       import('./components/contacts/contacts').then((m) => m.Contacts),
   },
   {
+    path: 'spotlight',
+    loadComponent: () =>
+      import('./components/news-spotlight/news-spotlight').then(
+        (m) => m.NewsSpotlight
+      ),
+  },
+  {
     path: 'products/product-details',
     loadComponent: () =>
       import('./components/products/product-detail/product-detail').then(
