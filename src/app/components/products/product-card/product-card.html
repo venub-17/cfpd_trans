@@ -5,7 +5,12 @@
     class="w-full h-48 bg-neutral-300 rounded-lg mb-4 flex items-center justify-center"
   >
     <span class="text-white text-sm">
-      <img src="{{ product.imgUrl }}" alt="" srcset="" width="75%" />
+      <img
+        src="data:image/jpeg;base64,{{ product.image }}"
+        alt="{{ product.productName }}"
+        srcset=""
+        width="75%"
+      />
     </span>
   </div>
   <h3 class="text-lg mb-2">{{ product.productName }}</h3>
@@ -30,8 +35,8 @@
     <span class="text-lg">{{ product.price }}</span>
     <button
       class="bg-primary-600 text-white px-4 py-2 rounded hover:bg-primary-700"
-      [routerLink]="['/products/product-details']"
       routerLinkActive="router-link-active"
+      (click)="onViewDetails(product)"
     >
       View Details
     </button>

@@ -21,7 +21,7 @@ export class ServiceDataService {
   async loadServices(): Promise<void> {
     try {
       const data = await firstValueFrom(
-        this.http.get<any[]>(`${this.baseUrl}/services/data`)
+        this.http.get<any[]>(`${this.baseUrl}/services`)
       );
       this.services = data ?? [];
       this.servicesSubject.next(this.services);

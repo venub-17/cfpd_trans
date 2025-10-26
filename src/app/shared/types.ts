@@ -18,7 +18,7 @@ export interface Product {
   productId: number;
   productName: string;
   description: string;
-  imgUrl?: string;
+  image?: string;
   voltage?: string;
   type: string;
   price: string;
