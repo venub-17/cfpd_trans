@@ -61,12 +61,10 @@ export class Signup implements OnInit {
 
   onSubmit() {
     this.isFormSubmitted = true; // move here
-    console.log('Form submission initiated.', this.signupForm.valid);
     if (!this.signupForm.valid) {
       this.signupForm.markAllAsTouched(); // ensure errors show
       return;
     }
-    console.log('Signup form submitted with values:', this.signupForm.value);
     this.loaderService.show();
     this.authService
       .onCompleteRegisetration({

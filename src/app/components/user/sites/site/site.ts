@@ -132,7 +132,6 @@ export class Site {
   }
   onRowClick(params: any) {
     this.router.navigate(['/user-details/transformers']);
-    console.log('rowClicke', params.data);
   }
 
   onGoBack() {

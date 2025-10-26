@@ -72,7 +72,6 @@ export class ProductList implements OnInit {
     }
     const startIndex = (this.currentPage - 1) * this.pageSize;
     this.pageData = filtered.slice(startIndex, startIndex + this.pageSize);
-    console.log('Page Data:', this.pageData, this.currentPage, this.totalPages);
   }
 
   onSearchChange(value: string): void {

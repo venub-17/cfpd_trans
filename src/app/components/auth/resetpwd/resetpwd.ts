@@ -131,7 +131,6 @@ export class Resetpwd implements OnInit {
     this.loader.show();
     let payloadEmail = this.authservice.getEmail();
     const newPassword = this.resetForm.value.newPassword;
-    console.log('Resetpwd: Submitting new password for email:', payloadEmail);
     this.authservice
       .resetPassword(payloadEmail, this.token, newPassword)
       .pipe(finalize(() => this.loader.hide()))

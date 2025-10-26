@@ -82,7 +82,6 @@ export class Otpverify implements OnInit {
   submitOtp() {
     this.loaderService.show();
     let recevied_email = this.authService.getEmail();
-    console.log('OTP Verify: Submitting OTP for email:', recevied_email);
     const otp = this.otpValues.join('');
     this.authService
       .verifyOtp({ email: recevied_email, otp })
@@ -103,7 +102,6 @@ export class Otpverify implements OnInit {
   resendOtp() {
     let recevied_email = this.authService.getEmail();
     this.loaderService.show();
-    console.log('OTP Verify: Resending OTP for email:', recevied_email);
     const reqBody = { email: recevied_email };
     this.authService
       .onSignup(reqBody)

@@ -168,23 +168,18 @@ export class NewsSpotlight implements OnInit {
     }
   }
 
-  // ...existing code...
   getCategoryClasses(category: string): string {
+    console.log('Getting classes for category:', category);
     const base =
       'inline-flex items-center rounded-full px-3 py-1 text-xs font-medium transition-colors mb-2';
     const map: Record<string, string> = {
-      announcement:
-        'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300',
-      safety:
-        'bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-300',
-      events:
-        'bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300',
-      community:
-        'bg-orange-100 text-orange-700 dark:bg-orange-950 dark:text-orange-300',
+      announcement: 'bg-blue-100 text-blue-700 ',
+      safety: 'bg-green-100 text-green-700 ',
+      events: 'bg-purple-100 text-purple-700',
+      community: 'bg-orange-100 text-orange-700 ',
     };
-    const color =
-      map[category] ??
-      'bg-gray-100 text-gray-700 dark:bg-gray-950 dark:text-gray-300';
+    const color = map[category] ?? 'bg-gray-100 text-gray-700 ';
+    console.log('Category classes for', category, ':', `${base} ${color}`);
     return `${base} ${color}`;
   }
 }

@@ -17,7 +17,6 @@ export class ProductDetail implements OnInit {
   ) {}
   ngOnInit(): void {
     this.prodcutService.selectedProduct$.subscribe((product) => {
-      console.log('Selected product from service:', product);
       this.product = product;
     });
   }
