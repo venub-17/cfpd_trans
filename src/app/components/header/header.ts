@@ -32,6 +32,7 @@ export class Header implements OnInit {
   ngOnInit(): void {
     this.servicesService.getAllServices().subscribe((services) => {
       this.services = services;
+      console.log(this.services);
     });
   }
   onToggleMenu() {
