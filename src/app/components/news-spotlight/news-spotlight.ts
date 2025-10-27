@@ -5,6 +5,9 @@ import { mockNewsData } from '../../shared/temp/newData';
 import { CommonModule } from '@angular/common';
 import { FilterPipe } from '../../shared/pipes/filter.pipe';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { LoaderService } from '../../shared/services/loader.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-news-spotlight',
@@ -13,7 +16,11 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './news-spotlight.scss',
 })
 export class NewsSpotlight implements OnInit {
-  constructor(private spotlightService: SpotlightService) {}
+  constructor(
+    private spotlightService: SpotlightService,
+    private readonly router: Router,
+    private readonly loader: LoaderService
+  ) {}
 
   fullData: any[] = [];
   filteredData: any[] = [];
@@ -31,17 +38,21 @@ export class NewsSpotlight implements OnInit {
   firstThreeElements: any[] = [];
 
   ngOnInit(): void {
-    this.spotlightService.getSpotlightData().subscribe((data: any) => {
-      this.fullData = data;
+    this.loader.show();
+    this.spotlightService
+      .getSpotlightData()
+      .pipe(finalize(() => this.loader.hide()))
+      .subscribe((data: any) => {
+        this.fullData = data;
 
-      const sortedFull = [...this.fullData].sort((a, b) => {
-        const ta = this.parseItemDate(a)?.getTime() ?? 0;
-        const tb = this.parseItemDate(b)?.getTime() ?? 0;
-        return tb - ta;
+        const sortedFull = [...this.fullData].sort((a, b) => {
+          const ta = this.parseItemDate(a)?.getTime() ?? 0;
+          const tb = this.parseItemDate(b)?.getTime() ?? 0;
+          return tb - ta;
+        });
+        this.firstThreeElements = sortedFull.slice(0, 3);
+        this.applyFilters();
       });
-      this.firstThreeElements = sortedFull.slice(0, 3);
-      this.applyFilters();
-    });
   }
 
   onFilterNews(category: string) {
@@ -169,7 +180,6 @@ export class NewsSpotlight implements OnInit {
   }
 
   getCategoryClasses(category: string): string {
-    console.log('Getting classes for category:', category);
     const base =
       'inline-flex items-center rounded-full px-3 py-1 text-xs font-medium transition-colors mb-2';
     const map: Record<string, string> = {
@@ -179,7 +189,11 @@ export class NewsSpotlight implements OnInit {
       community: 'bg-orange-100 text-orange-700 ',
     };
     const color = map[category] ?? 'bg-gray-100 text-gray-700 ';
-    console.log('Category classes for', category, ':', `${base} ${color}`);
     return `${base} ${color}`;
+  }
+
+  onOpenDetails(item: any) {
+    this.router.navigate(['spotlight/details']);
+    this.spotlightService.setSelectedSpotlight(item);
   }
 }

@@ -47,6 +47,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'spotlight/details',
+    loadComponent: () =>
+      import('./components/news-spotlight/spotlightDetails.component').then(
+        (m) => m.SpotlightDetailsComponent
+      ),
+  },
+  {
     path: 'products/product-details',
     loadComponent: () =>
       import('./components/products/product-detail/product-detail').then(

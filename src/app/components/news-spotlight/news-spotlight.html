@@ -149,10 +149,10 @@
                     {{ data.title }}
                   </h3>
                   <p class="text-muted-foreground line-clamp-3 mb-4">
-                    We've introduced enhanced safety measures to ensure the
-                    wellbeing of all team members across our operations.
+                    {{ data.summary }}
                   </p>
                   <div
+                    (click)="onOpenDetails(data)"
                     class="flex items-center gap-1 text-accent font-medium group-hover:text-primary-600"
                   >
                     <span>Read More</span>
@@ -212,6 +212,7 @@
           <ng-container *ngIf="firstThreeElements.length > 0; else noAside">
             <div
               *ngFor="let item of firstThreeElements"
+              (click)="onOpenDetails(item)"
               class="group cursor-pointer pb-4 pt-4 border-b border-border last:border-0 last:pb-0 hover:opacity-80 transition-opacity"
             >
               <span
@@ -220,7 +221,7 @@
                 >{{ item.category }}</span
               >
               <h4
-                class="font-medium mb-2 line-clamp-2 group-hover:text-accent transition-colors"
+                class="font-medium mb-2 line-clamp-2 group-hover:text-primary-600 transition-colors"
               >
                 {{ item.title }}
               </h4>
