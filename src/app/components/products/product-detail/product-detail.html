@@ -1,28 +1,24 @@
 <section id="product-page" class="pt-1 pb-24 px-4 container mx-auto">
-  <div class="nav_back">
-    <div
-      class="flex items-center justify-center gap-2 p-1"
-      (click)="onGoBack()"
+  <button
+    (click)="onGoBack()"
+    class="inline-flex items-center justify-center gap-2 text-sm font-medium hover:text-primary-600 h-10 px-4 py-2 mb-6"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="size-4"
     >
-      <span
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="size-4"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
-          />
-        </svg>
-      </span>
-      <p>back</p>
-    </div>
-  </div>
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+      />
+    </svg>
+    Back to Products
+  </button>
   <div
     id="product-gallery"
     class="mt-4 bg-neutral-100 rounded-lg h-[350px] flex items-center justify-center"
@@ -59,14 +55,14 @@
             <span class="text-neutral-600">Voltage Ratio</span>
             <span>{{ product.voltage }}</span>
           </li>
-          <li class="flex justify-between py-2 border-b border-neutral-200">
+          <!-- <li class="flex justify-between py-2 border-b border-neutral-200">
             <span class="text-neutral-600">IoT Enabled</span>
             <span>Yes</span>
           </li>
           <li class="flex justify-between py-2 border-b border-neutral-200">
             <span class="text-neutral-600">Warranty</span>
             <span>5 Years</span>
-          </li>
+          </li> -->
         </ul>
         <!-- <div class="mt-6 flex justify-center">
           <div class="">

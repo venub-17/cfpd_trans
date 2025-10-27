@@ -12,7 +12,7 @@ import { SpotlightService } from '../../shared/services/spotlight.service';
         <div class="max-w-4xl mx-auto">
           <button
             (click)="onGoBack()"
-            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:text-accent-foreground h-10 px-4 py-2 mb-6 hover:bg-muted"
+            class="inline-flex items-center justify-center gap-2  text-sm font-medium hover:text-primary-600 h-10 px-4 py-2 mb-6 "
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -42,9 +42,26 @@ import { SpotlightService } from '../../shared/services/spotlight.service';
             </div>
             <div class="p-8 md:p-12">
               <div class="flex items-center justify-between gap-4 mb-4">
-                <span [ngClass]="getCategoryClasses(spotlightData.category)">{{
-                  spotlightData.category
-                }}</span>
+                <span
+                  [ngClass]="{
+                    'bg-blue-100 text-blue-700':
+                      spotlightData.category === 'announcement',
+                    'bg-green-100 text-green-700':
+                      spotlightData.category === 'safety',
+                    'bg-purple-100 text-purple-700':
+                      spotlightData.category === 'events',
+                    'bg-orange-100 text-orange-700':
+                      spotlightData.category === 'community',
+                    'bg-gray-100 text-gray-700': ![
+                      'announcement',
+                      'safety',
+                      'events',
+                      'community'
+                    ].includes(spotlightData.category)
+                  }"
+                  class="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium transition-colors mb-2"
+                  >{{ spotlightData.category }}</span
+                >
               </div>
               <div
                 class="flex items-center gap-2 text-sm text-muted-foreground mb-6"
@@ -96,18 +113,7 @@ export class SpotlightDetailsComponent implements OnInit {
       this.spotlightData = data;
     });
   }
-  getCategoryClasses(category: string): string {
-    const base =
-      'inline-flex items-center rounded-full px-3 py-1 text-xs font-medium transition-colors mb-2';
-    const map: Record<string, string> = {
-      announcement: 'bg-blue-100 text-blue-700 ',
-      safety: 'bg-green-100 text-green-700 ',
-      events: 'bg-purple-100 text-purple-700',
-      community: 'bg-orange-100 text-orange-700 ',
-    };
-    const color = map[category] ?? 'bg-gray-100 text-gray-700 ';
-    return `${base} ${color}`;
-  }
+
   onGoBack() {
     this.location.back();
   }

@@ -179,19 +179,6 @@ export class NewsSpotlight implements OnInit {
     }
   }
 
-  getCategoryClasses(category: string): string {
-    const base =
-      'inline-flex items-center rounded-full px-3 py-1 text-xs font-medium transition-colors mb-2';
-    const map: Record<string, string> = {
-      announcement: 'bg-blue-100 text-blue-700 ',
-      safety: 'bg-green-100 text-green-700 ',
-      events: 'bg-purple-100 text-purple-700',
-      community: 'bg-orange-100 text-orange-700 ',
-    };
-    const color = map[category] ?? 'bg-gray-100 text-gray-700 ';
-    return `${base} ${color}`;
-  }
-
   onOpenDetails(item: any) {
     this.router.navigate(['spotlight/details']);
     this.spotlightService.setSelectedSpotlight(item);

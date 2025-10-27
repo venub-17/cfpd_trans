@@ -1,28 +1,24 @@
 <section id="breadcrumb" class="mb-6">
-  <div class="nav_back">
-    <div
-      class="flex items-center justify-center gap-2 p-1"
-      (click)="onGoBack()"
+  <button
+    (click)="onGoBack()"
+    class="inline-flex items-center justify-center gap-2 text-sm font-medium hover:text-primary-600 h-10 px-4 py-2 mb-6"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="size-4"
     >
-      <span
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="size-4"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
-          />
-        </svg>
-      </span>
-      <p>back</p>
-    </div>
-  </div>
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+      />
+    </svg>
+    Back to Transformers
+  </button>
 </section>
 <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
   <section
