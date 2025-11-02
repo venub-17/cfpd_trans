@@ -17,22 +17,19 @@
         <h1
           class="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
         >
-          Your Trusted Electrical Partner – Available 24/7
+          {{ hero_content.title }}
         </h1>
         <p class="text-xl md:text-2xl text-white/90 mb-10 leading-relaxed">
-          Delivering reliable electrical solutions with a safety-first mindset.
+          {{ hero_content.subtitle }}
         </p>
-        <div class="flex flex-col sm:flex-row gap-4">
-          <button
-            class="inline-flex items-center justify-center gap-2 whitespace-nowrap ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-white text-primary-600 hover:bg-primary/90 font-bold shadow-lg hover:shadow-xl transition-all h-11 rounded-md text-lg px-8 py-6"
-          >
-            Contact Us</button
-          ><button
-            class="inline-flex items-center justify-center gap-2 whitespace-nowrap ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-destructive text-destructive-foreground hover:bg-destructive/90 font-bold shadow-lg hover:shadow-xl transition-all h-11 rounded-md text-lg px-8 py-6"
-          >
-            Emergency Service (24/7)
-          </button>
-        </div>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-4 justify-end">
+        <button
+          (click)="onContactus()"
+          class="inline-flex items-center justify-center gap-2 whitespace-nowrap ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-white text-primary-600 hover:bg-primary/90 font-bold shadow-lg hover:shadow-xl transition-all h-11 rounded-md text-lg px-8 py-6"
+        >
+          Contact Us
+        </button>
       </div>
     </div>
   </section>
@@ -45,16 +42,11 @@
           >
             Who We Are
           </h2>
+          <div>
+            <img src="../../../assets/hero.jpg" alt="hero" />
+          </div>
           <p class="text-lg text-muted-foreground leading-relaxed">
-            With over 20 years of dedicated service, we are a trusted electrical
-            contracting company serving utilities, manufacturing, commercial
-            buildings, municipal facilities, and data centers across the
-            Southeast region. Our team of licensed journeymen linemen,
-            electricians, and certified engineers delivers comprehensive
-            solutions with an unwavering commitment to safety, quality, and
-            reliability. Available 24/7 for emergency response, we bring
-            expertise, state-of-the-art equipment, and a safety-first approach
-            to every project.
+            {{ who_we_are_content.text }}
           </p>
         </div>
         <div class="grid grid-cols-2 gap-6">
@@ -173,21 +165,26 @@
   <section class="py-20 bg-background">
     <div class="container mx-auto px-4">
       <h2
-        class="font-display text-3xl md:text-4xl font-bold text-center text-foreground mb-16"
+        class="font-display text-3xl md:text-4xl font-bold text-foreground mb-16"
       >
-        Our Journey
+        Mile Stones of Excellence
       </h2>
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
         <div
-          *ngFor="let m of timelineData"
+          *ngFor="let m of milestones_content"
           class="rounded-lg border bg-card text-card-foreground shadow-sm relative border-t-4 border-t-primary-600 hover:shadow-xl transition-all duration-300"
         >
           <div class="p-6">
             <div class="text-5xl font-bold text-primary-100 mb-4 font-display">
               {{ m.year }}
             </div>
+            <p
+              class="text-xl font-semibold text-muted-foreground leading-relaxed"
+            >
+              {{ m.title }}
+            </p>
             <p class="text-sm text-muted-foreground leading-relaxed">
-              {{ m.text }}
+              {{ m.description }}
             </p>
           </div>
         </div>
@@ -299,7 +296,7 @@
   <section class="py-20 bg-industrial-light">
     <div class="container mx-auto px-4">
       <h2
-        class="font-display text-3xl md:text-4xl font-bold text-center text-foreground mb-4"
+        class="font-display text-3xl md:text-4xl font-bold text-foreground mb-4"
       >
         Industries We Serve
       </h2>
