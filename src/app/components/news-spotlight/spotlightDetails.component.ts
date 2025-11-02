@@ -35,7 +35,7 @@ import { SpotlightService } from '../../shared/services/spotlight.service';
           >
             <div class="aspect-video overflow-hidden bg-muted">
               <img
-                src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHNlcnZpY2VzfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600"
+                src="{{ spotlightData.attachment_url }}"
                 alt="New Safety Protocols Implemented Across All Facilities"
                 class="w-full h-full object-cover"
               />
