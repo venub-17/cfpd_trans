@@ -1,4 +1,5 @@
 <main class="min-h-screen">
+  <!-- ABOUT US HERO SECTION -->
   <section
     class="relative min-h-[600px] flex items-center justify-center overflow-hidden"
   >
@@ -23,25 +24,28 @@
           {{ hero_content.subtitle }}
         </p>
       </div>
-      <div class="flex flex-col sm:flex-row gap-4 justify-end">
-        <button
-          (click)="onContactus()"
-          class="inline-flex items-center justify-center gap-2 whitespace-nowrap ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-white text-primary-600 hover:bg-primary/90 font-bold shadow-lg hover:shadow-xl transition-all h-11 rounded-md text-lg px-8 py-6"
-        >
-          Contact Us
-        </button>
-      </div>
+    </div>
+    <div
+      class="flex flex-col sm:flex-row gap-4 justify-end absolute bottom-8 right-8 z-10"
+    >
+      <button
+        (click)="onContactus()"
+        class="inline-flex items-center justify-center gap-2 whitespace-nowrap ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-white text-primary-600 hover:bg-primary/90 font-bold shadow-lg hover:shadow-xl transition-all h-11 rounded-md text-lg px-8 py-6"
+      >
+        Contact Us
+      </button>
     </div>
   </section>
-  <section class="py-20 bg-industrial-light">
+  <!-- WHO WE ARE SECTION -->
+  <section class="py-20 bg-gray-50">
     <div class="container mx-auto px-4">
+      <h2
+        class="font-display text-3xl md:text-4xl font-bold text-foreground mb-6"
+      >
+        Who We Are
+      </h2>
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div>
-          <h2
-            class="font-display text-3xl md:text-4xl font-bold text-foreground mb-6"
-          >
-            Who We Are
-          </h2>
           <div>
             <img src="../../../assets/hero.jpg" alt="hero" />
           </div>
@@ -56,15 +60,13 @@
             <div class="p-6 text-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                class="lucide lucide-wrench w-12 h-12 mx-auto mb-4 text-primary group-hover:scale-110 transition-transform duration-300"
+                class="lucide lucide-wrench w-12 h-12 mx-auto mb-4 text-[#b3d0f7] group-hover:text-primary-600 transition-transform duration-300"
               >
                 <path
                   d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
@@ -82,15 +84,13 @@
             <div class="p-6 text-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                class="lucide lucide-clock w-12 h-12 mx-auto mb-4 text-primary group-hover:scale-110 transition-transform duration-300"
+                class="lucide lucide-wrench w-12 h-12 mx-auto mb-4 text-[#b3d0f7] group-hover:text-primary-600 transition-transform duration-300"
               >
                 <circle cx="12" cy="12" r="10"></circle>
                 <polyline points="12 6 12 12 16 14"></polyline>
@@ -109,15 +109,13 @@
             <div class="p-6 text-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                class="lucide lucide-award w-12 h-12 mx-auto mb-4 text-primary group-hover:scale-110 transition-transform duration-300"
+                class="lucide lucide-wrench w-12 h-12 mx-auto mb-4 text-[#b3d0f7] group-hover:text-primary-600 transition-transform duration-300"
               >
                 <path
                   d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"
@@ -138,15 +136,13 @@
             <div class="p-6 text-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="red"
+                stroke="currentColor"
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                class="lucide lucide-shield w-12 h-12 mx-auto mb-4 text-primary group-hover:scale-110 transition-transform duration-300"
+                class="lucide lucide-wrench w-12 h-12 mx-auto mb-4 text-[#b3d0f7] group-hover:text-primary-600 transition-transform duration-300"
               >
                 <path
                   d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
@@ -162,12 +158,13 @@
       </div>
     </div>
   </section>
+  <!-- MILESTONES SECTION -->
   <section class="py-20 bg-background">
     <div class="container mx-auto px-4">
       <h2
         class="font-display text-3xl md:text-4xl font-bold text-foreground mb-16"
       >
-        Mile Stones of Excellence
+        Milestones
       </h2>
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
         <div
@@ -191,27 +188,12 @@
       </div>
     </div>
   </section>
-  <section class="py-20 bg-secondary text-secondary-foreground">
+  <!-- SAFETY & CERTIFICATIONS SECTION -->
+  <section class="py-20 bg-gray-50 text-secondary-foreground">
     <div class="container mx-auto px-4">
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div>
           <div class="flex items-center gap-3 mb-6">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-shield w-10 h-10 text-primary"
-            >
-              <path
-                d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
-              ></path>
-            </svg>
             <h2 class="font-display text-3xl md:text-4xl font-bold">
               Safety &amp; Certifications
             </h2>
@@ -293,14 +275,67 @@
       </div>
     </div>
   </section>
+  <!-- MEET THE EXPORTS IN THE FEILD -->
   <section class="py-20 bg-industrial-light">
+    <div class="container mx-auto px-4">
+      <h2
+        class="font-display text-3xl md:text-4xl font-bold text-foreground mb-4"
+      >
+        Meet the Experts in the Field
+      </h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div
+          class="rounded-lg bg-card text-card-foreground shadow-sm group hover:border-primary border-2 transition-all duration-300 cursor-pointer"
+        >
+          <div class="p-6 text-center flex flex-col items-center">
+            <div class="mb-4">
+              <img
+                class="profile-pic"
+                src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aHVtYW58ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000"
+                alt="Person in white shirt"
+              />
+            </div>
+            <h3
+              class="font-semibold text-lg mb-2 group-hover:text-primary transition-colors"
+            >
+              Micheal Johnson
+            </h3>
+            <p class="text-xs text-muted-foreground mb-2">
+              Senior Electrical Engineer
+            </p>
+            <div class="border-t-2 w-full">
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDUSTRIES WE SERVE SECTION -->
+  <section class="py-20 bg-gray-50">
     <div class="container mx-auto px-4">
       <h2
         class="font-display text-3xl md:text-4xl font-bold text-foreground mb-4"
       >
         Industries We Serve
       </h2>
-      <p class="text-center text-muted-foreground mb-16 max-w-2xl mx-auto">
+      <p class="text-muted-foreground mb-16 max-w-2xl">
         Our expertise spans across multiple sectors, delivering specialized
         electrical solutions tailored to each industry's unique requirements.
       </p>
@@ -308,23 +343,23 @@
         <div
           class="rounded-lg bg-card text-card-foreground shadow-sm group hover:border-primary border-2 transition-all duration-300 hover:shadow-xl cursor-pointer"
         >
-          <div class="p-6 text-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-zap w-16 h-16 mx-auto mb-4 text-primary group-hover:scale-110 transition-transform duration-300"
+          <div class="p-6 text-center flex flex-col items-center">
+            <div
+              class="w-12 h-12 mb-2 text-center bg-[#10b9811a] rounded-lg flex items-center justify-center"
             >
-              <path
-                d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"
-              ></path>
-            </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="#10b981"
+                class="size-6"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.75a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .913-.143Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div>
             <h3
               class="font-semibold text-lg mb-2 group-hover:text-primary transition-colors"
             >
@@ -338,26 +373,30 @@
         <div
           class="rounded-lg bg-card text-card-foreground shadow-sm group hover:border-primary border-2 transition-all duration-300 hover:shadow-xl cursor-pointer"
         >
-          <div class="p-6 text-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-factory w-16 h-16 mx-auto mb-4 text-primary group-hover:scale-110 transition-transform duration-300"
+          <div class="p-6 text-center flex flex-col items-center">
+            <div
+              class="w-12 h-12 mb-2 text-center bg-[#10b9811a] rounded-lg flex items-center justify-center"
             >
-              <path
-                d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"
-              ></path>
-              <path d="M17 18h1"></path>
-              <path d="M12 18h1"></path>
-              <path d="M7 18h1"></path>
-            </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="#10b981"
+                class="size-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-factory w-16 h-16 mx-auto mb-4 text-primary group-hover:scale-110 transition-transform duration-300"
+              >
+                <path
+                  d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"
+                ></path>
+                <path d="M17 18h1"></path>
+                <path d="M12 18h1"></path>
+                <path d="M7 18h1"></path>
+              </svg>
+            </div>
             <h3
               class="font-semibold text-lg mb-2 group-hover:text-primary transition-colors"
             >
@@ -371,27 +410,31 @@
         <div
           class="rounded-lg bg-card text-card-foreground shadow-sm group hover:border-primary border-2 transition-all duration-300 hover:shadow-xl cursor-pointer"
         >
-          <div class="p-6 text-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-building2 w-16 h-16 mx-auto mb-4 text-primary group-hover:scale-110 transition-transform duration-300"
+          <div class="p-6 text-center flex flex-col items-center">
+            <div
+              class="w-12 h-12 mb-2 text-center bg-[#10b9811a] rounded-lg flex items-center justify-center"
             >
-              <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path>
-              <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path>
-              <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path>
-              <path d="M10 6h4"></path>
-              <path d="M10 10h4"></path>
-              <path d="M10 14h4"></path>
-              <path d="M10 18h4"></path>
-            </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="#10b981"
+                class="size-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-building2 w-16 h-16 mx-auto mb-4 text-primary group-hover:scale-110 transition-transform duration-300"
+              >
+                <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path>
+                <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path>
+                <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path>
+                <path d="M10 6h4"></path>
+                <path d="M10 10h4"></path>
+                <path d="M10 14h4"></path>
+                <path d="M10 18h4"></path>
+              </svg>
+            </div>
             <h3
               class="font-semibold text-lg mb-2 group-hover:text-primary transition-colors"
             >
@@ -405,26 +448,25 @@
         <div
           class="rounded-lg bg-card text-card-foreground shadow-sm group hover:border-primary border-2 transition-all duration-300 hover:shadow-xl cursor-pointer"
         >
-          <div class="p-6 text-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-landmark w-16 h-16 mx-auto mb-4 text-primary group-hover:scale-110 transition-transform duration-300"
+          <div class="p-6 text-center flex flex-col items-center">
+            <div
+              class="w-12 h-12 mb-2 text-center bg-[#10b9811a] rounded-lg flex items-center justify-center"
             >
-              <line x1="3" x2="21" y1="22" y2="22"></line>
-              <line x1="6" x2="6" y1="18" y2="11"></line>
-              <line x1="10" x2="10" y1="18" y2="11"></line>
-              <line x1="14" x2="14" y1="18" y2="11"></line>
-              <line x1="18" x2="18" y1="18" y2="11"></line>
-              <polygon points="12 2 20 7 4 7"></polygon>
-            </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="#10b981"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z"
+                />
+              </svg>
+            </div>
             <h3
               class="font-semibold text-lg mb-2 group-hover:text-primary transition-colors"
             >
@@ -438,24 +480,28 @@
         <div
           class="rounded-lg bg-card text-card-foreground shadow-sm group hover:border-primary border-2 transition-all duration-300 hover:shadow-xl cursor-pointer"
         >
-          <div class="p-6 text-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-server w-16 h-16 mx-auto mb-4 text-primary group-hover:scale-110 transition-transform duration-300"
+          <div class="p-6 text-center flex flex-col items-center">
+            <div
+              class="w-12 h-12 mb-2 text-center bg-[#10b9811a] rounded-lg flex items-center justify-center"
             >
-              <rect width="20" height="8" x="2" y="2" rx="2" ry="2"></rect>
-              <rect width="20" height="8" x="2" y="14" rx="2" ry="2"></rect>
-              <line x1="6" x2="6.01" y1="6" y2="6"></line>
-              <line x1="6" x2="6.01" y1="18" y2="18"></line>
-            </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="#10b981"
+                class="size-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-server w-16 h-16 mx-auto mb-4 text-primary group-hover:scale-110 transition-transform duration-300"
+              >
+                <rect width="20" height="8" x="2" y="2" rx="2" ry="2"></rect>
+                <rect width="20" height="8" x="2" y="14" rx="2" ry="2"></rect>
+                <line x1="6" x2="6.01" y1="6" y2="6"></line>
+                <line x1="6" x2="6.01" y1="18" y2="18"></line>
+              </svg>
+            </div>
             <h3
               class="font-semibold text-lg mb-2 group-hover:text-primary transition-colors"
             >
