@@ -1,17 +1,18 @@
 // ...existing code...
 import { Component, OnInit, Inject } from '@angular/core';
 import { SpotlightService } from '../../shared/services/spotlight.service';
-import { mockNewsData } from '../../shared/temp/newData';
 import { CommonModule } from '@angular/common';
-import { FilterPipe } from '../../shared/pipes/filter.pipe';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoaderService } from '../../shared/services/loader.service';
 import { finalize } from 'rxjs';
+import { AuthService } from '../../shared/services/auth.service';
+import { AddNeweventComponent } from './addNewevent.component';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-news-spotlight',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, AddNeweventComponent],
   templateUrl: './news-spotlight.html',
   styleUrl: './news-spotlight.scss',
 })
@@ -19,9 +20,10 @@ export class NewsSpotlight implements OnInit {
   constructor(
     private spotlightService: SpotlightService,
     private readonly router: Router,
-    private readonly loader: LoaderService
+    private readonly loader: LoaderService,
+    public authService: AuthService,
+    private sanitizer: DomSanitizer
   ) {}
-
   fullData: any[] = [];
   filteredData: any[] = [];
   pagedData: any[] = [];
@@ -39,6 +41,7 @@ export class NewsSpotlight implements OnInit {
 
   ngOnInit(): void {
     this.loader.show();
+    console.log('Fetching spotlight data...');
     this.spotlightService
       .getSpotlightData()
       .pipe(finalize(() => this.loader.hide()))
@@ -182,5 +185,15 @@ export class NewsSpotlight implements OnInit {
   onOpenDetails(item: any) {
     this.router.navigate(['spotlight/details']);
     this.spotlightService.setSelectedSpotlight(item);
+  }
+
+  onEnableAddNew() {
+    this.spotlightService.open();
+  }
+  getDirectImageUrl(url: string): SafeResourceUrl {
+    const match = url.match(/\/d\/(.*?)\//);
+    const fileId = match ? match[1] : '';
+    const directUrl = `https://drive.google.com/thumbnail?id=${fileId}`;
+    return this.sanitizer.bypassSecurityTrustResourceUrl(directUrl);
   }
 }

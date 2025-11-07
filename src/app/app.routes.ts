@@ -60,6 +60,7 @@ export const routes: Routes = [
         (m) => m.ProductDetail
       ),
   },
+
   {
     path: 'login',
     component: Login,
