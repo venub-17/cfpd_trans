@@ -11,6 +11,16 @@ export class SpotlightService {
   private readonly selectedSpotlight = new BehaviorSubject<any>(null);
   selectedSpotlight$ = this.selectedSpotlight.asObservable();
 
+  private isOpen = new BehaviorSubject<boolean>(false);
+  isOpen$ = this.isOpen.asObservable();
+
+  open() {
+    this.isOpen.next(true);
+  }
+  close() {
+    this.isOpen.next(false);
+  }
+
   setSelectedSpotlight(spotlight: any) {
     this.selectedSpotlight.next(spotlight);
   }

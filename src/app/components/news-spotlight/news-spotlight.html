@@ -65,6 +65,13 @@
             >
               Community
             </button>
+            <button
+              *ngIf="(authService.userRole$ | async) === 'hr'"
+              (click)="onEnableAddNew()"
+              class="rounded-md border text-primary-600 border-primary-600 px-4 py-2 hover:bg-primary-700 hover:text-white"
+            >
+              Add New
+            </button>
           </div>
           <div class="relative max-w-md">
             <svg
@@ -100,9 +107,10 @@
               <div>
                 <div class="aspect-video bg-muted">
                   <img
-                    src="{{ data.attachment_url }}"
-                    alt="New Safety Protocols Implemented Across All Facilities"
-                    class="w-full h-full object-cover rounded-tr rounded-tl"
+                    [src]="getDirectImageUrl(data.attachment_url)"
+                    alt="{{ data.title }}"
+                    class="w-full h-full object-cover p-1 rounded-t-lg"
+                    loading="lazy"
                   />
                 </div>
                 <div class="p-6">
@@ -220,7 +228,7 @@
           </button>
         </div>
       </div>
-      <aside class="lg:col-span-1 self-start sticky top-8 z-10">
+      <aside class="lg:col-span-1 self-start sticky top-8">
         <div
           class="rounded-lg border bg-card text-card-foreground shadow-sm p-6"
         >
@@ -277,3 +285,4 @@
     </div>
   </main>
 </div>
+<app-add-new-event></app-add-new-event>

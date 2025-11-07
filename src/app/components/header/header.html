@@ -87,7 +87,7 @@
             *ngIf="authService.isLoggedIn$ | async"
             [routerLink]="['/login']"
             routerLinkActive="active"
-            (click)="authService.setLoginStatus(false)"
+            (click)="authService.setLoginStatus(false, '', '', '')"
             class="hover:text-primary-100 transition-colors cursor-pointer"
             >Logout</span
           >

@@ -3,11 +3,15 @@ import { BehaviorSubject, distinctUntilChanged, Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { authReqBody } from '../types';
+
 interface AuthResponse {
   token?: string;
   message?: string;
+  role?: string;
+  email?: string;
   [key: string]: any;
 }
+
 @Injectable({
   providedIn: 'root',
 })
@@ -15,35 +19,55 @@ export class AuthService {
   private readonly baseUrl = environment.apiUrl;
   private readonly STORAGE_KEY = 'cfpd_isLoggedIn';
   private readonly TOKEN_KEY = 'cfpd_authToken';
+  private readonly ROLE_KEY = 'role';
+  private readonly EMAIL_KEY = 'cfpd_userEmail';
 
-  public setEmail(email: string): any {
-    return localStorage.setItem('cfpd_userEmail', email);
-  }
-  public getEmail(): any {
-    return localStorage.getItem('cfpd_userEmail');
-  }
-  public clearEmail(): any {
-    localStorage.removeItem('cfpd_userEmail');
-  }
-
-  private readonly loggedInStatus = new BehaviorSubject<boolean>(
+  private loggedInStatus = new BehaviorSubject<boolean>(
     this.getInitialLoginState()
   );
+  private userRole = new BehaviorSubject<string>(this.getInitialUserRole());
 
   public readonly isLoggedIn$ = this.loggedInStatus
+    .asObservable()
+    .pipe(distinctUntilChanged());
+  public readonly userRole$ = this.userRole
     .asObservable()
     .pipe(distinctUntilChanged());
 
   constructor(private readonly http: HttpClient) {}
 
-  private getInitialLoginState(): boolean {
-    const v = localStorage.getItem(this.STORAGE_KEY);
-    return v === '1' || v === 'true';
+  public setEmail(email: string): void {
+    localStorage.setItem(this.EMAIL_KEY, email);
   }
 
-  public setLoginStatus(status: boolean): void {
+  public getEmail(): any {
+    return localStorage.getItem(this.EMAIL_KEY);
+  }
+
+  private getInitialLoginState(): boolean {
+    return localStorage.getItem(this.STORAGE_KEY) === '1';
+  }
+
+  private getInitialUserRole(): string {
+    return localStorage.getItem(this.ROLE_KEY) ?? '';
+  }
+
+  public setLoginStatus(
+    status: boolean,
+    role: string,
+    email: string,
+    token: string
+  ): void {
     this.loggedInStatus.next(status);
+    this.userRole.next(role);
     localStorage.setItem(this.STORAGE_KEY, status ? '1' : '0');
+    localStorage.setItem(this.ROLE_KEY, role);
+    localStorage.setItem(this.EMAIL_KEY, email);
+    localStorage.setItem(this.TOKEN_KEY, token);
+  }
+
+  public logout(): void {
+    this.setLoginStatus(false, '', '', '');
   }
 
   public onSignup(data: authReqBody): Observable<AuthResponse> {
@@ -77,16 +101,16 @@ export class AuthService {
       .post<AuthResponse>(`${this.baseUrl}/auth/login`, data)
       .pipe(
         tap((res) => {
-          if (res?.token) {
-            localStorage.setItem(this.TOKEN_KEY, res.token);
-            this.setLoginStatus(true);
+          if (res?.token && res?.role && res?.email) {
+            this.setLoginStatus(true, res.role, res.email, res.token);
           }
         })
       );
   }
-  public requestPasswordReset(
-    data: authReqBody
-  ): Observable<{ message: string }> {
+
+  public requestPasswordReset(data: {
+    email: string;
+  }): Observable<{ message: string }> {
     return this.http.post<{ message: string }>(
       `${this.baseUrl}/auth/request-reset`,
       data
@@ -103,22 +127,19 @@ export class AuthService {
       { params }
     );
   }
+
   public resetPassword(
     email: string,
     token: string,
-    newPassword: any
+    newPassword: string
   ): Observable<{ message: string }> {
     return this.http.post<{ message: string }>(
       `${this.baseUrl}/auth/reset-password`,
-      { email, token, newPassword }
+      {
+        email,
+        token,
+        newPassword,
+      }
     );
-  }
-  public logout(): void {
-    localStorage.removeItem(this.TOKEN_KEY);
-    this.setLoginStatus(false);
-  }
-
-  public getToken(): string | null {
-    return localStorage.getItem(this.TOKEN_KEY);
   }
 }
