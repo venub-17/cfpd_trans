@@ -11,9 +11,7 @@
   </div>
   <div class="p-6">
     <div *ngFor="let item of service.items" class="flex flex-col mb-4">
-      <!-- Check if this item has content -->
       <span *ngIf="item.content?.length">
-        <!-- Toggle Button for Section (e.g., Transformer Oil Analysis) -->
         <div class="border rounded shadow mb-1">
           <button
             (click)="toggle(item)"
@@ -37,12 +35,10 @@
             </svg>
           </button>
 
-          <!-- Show the content if this item is toggled -->
           <div
             *ngIf="activeItem === item"
             class="px-4 py-2 bg-white text-gray-700 border-t"
           >
-            <!-- Loop through the content for the section -->
             <ul>
               <li
                 *ngFor="let content of item.content"

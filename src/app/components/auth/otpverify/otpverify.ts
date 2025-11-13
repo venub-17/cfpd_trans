@@ -116,7 +116,6 @@ export class Otpverify implements OnInit {
           this.modalService.setResContent('Success', message);
         },
         error: (err: any) => {
-          console.error('Signup error:', err);
           const message =
             err?.error?.error ?? err?.message ?? 'An error occurred';
           this.modalService.setResContent('Error', message);

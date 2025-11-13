@@ -41,7 +41,6 @@ export class NewsSpotlight implements OnInit {
 
   ngOnInit(): void {
     this.loader.show();
-    console.log('Fetching spotlight data...');
     this.spotlightService
       .getSpotlightData()
       .pipe(finalize(() => this.loader.hide()))

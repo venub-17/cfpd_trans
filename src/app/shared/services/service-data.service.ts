@@ -28,7 +28,6 @@ export class ServiceDataService {
     } catch (err) {
       this.services = [];
       this.servicesSubject.next(this.services);
-      console.error('Failed to load services', err);
     }
   }
 

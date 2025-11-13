@@ -1,0 +1,112 @@
+<div id="main-content" class="max-w-7xl mx-auto px-6 py-12">
+  <div class="flex gap-8">
+    <aside id="sidebar" class="w-64 flex-shrink-0">
+      <div class="bg-primary-600 border border-border rounded sticky">
+        <div class="p-6 border-b border-border">
+          <h3 class="text-lg font-semibold text-white mb-1">Help& Support</h3>
+        </div>
+        <div class="p-4 min-h-[250px]">
+          <ng-container *ngFor="let cat of categories">
+            <button
+              class="w-full flex items-center justify-between px-4 py-3 hover:bg-accent rounded mb-2 transition-colors"
+              [ngClass]="{
+                'bg-primary-700 p-2 text-white ': activeGroup === cat,
+                'text-gray-200': activeGroup !== cat
+              }"
+              (click)="selectGroup(cat)"
+            >
+              <div class="flex items-center space-x-3">
+                <span class="text-base">{{ cat }}</span>
+              </div>
+            </button>
+          </ng-container>
+        </div>
+
+        <div class="p-6 border-t border-border bg-accent">
+          <h4 class="text-sm font-semibold text-gray-950 mb-2">
+            Need more help?
+          </h4>
+          <p class="text-sm text-gray-700 mb-4">Contact our support team</p>
+        </div>
+      </div>
+    </aside>
+
+    <main id="faq-main" class="flex-1 border border-border rounded p-8">
+      <div id="page-header" class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-3">
+          Frequently Asked Questions
+        </h1>
+      </div>
+
+      <div id="faq-accordion" class="space-y-4">
+        <ng-container *ngIf="activeGroup != null">
+          <ng-container
+            *ngIf="groupedFAQs[activeGroup]?.length; else emptyGroup"
+          >
+            <div
+              class="faq-item border border-border rounded bg-white"
+              *ngFor="let faq of groupedFAQs[activeGroup]; let i = index"
+            >
+              <button
+                class="faq-question w-full flex items-center justify-between p-6 text-left hover:bg-accent transition-colors"
+                (click)="toggleFaq(activeGroup!, i)"
+                [attr.aria-expanded]="isFaqOpen(activeGroup!, i)"
+              >
+                <span class="text-lg font-semibold text-gray-900 pr-4">{{
+                  faq.question
+                }}</span>
+                <span class="text-sm text-gray-500">
+                  <ng-container
+                    *ngIf="isFaqOpen(activeGroup!, i); else closedIcon"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="size-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="m4.5 15.75 7.5-7.5 7.5 7.5"
+                      />
+                    </svg>
+                  </ng-container>
+                  <ng-template #closedIcon>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="size-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                      />
+                    </svg>
+                  </ng-template>
+                </span>
+              </button>
+              <div
+                class="faq-answer px-6 pb-6"
+                *ngIf="isFaqOpen(activeGroup!, i)"
+              >
+                <p class="text-base text-gray-600 leading-relaxed">
+                  {{ faq.answer }}
+                </p>
+              </div>
+            </div>
+          </ng-container>
+          <ng-template #emptyGroup>
+            <p class="text-gray-600">No FAQs in this category.</p>
+          </ng-template>
+        </ng-container>
+      </div>
+    </main>
+  </div>
+</div>

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { finalize, Observable } from 'rxjs';
 import { SpotlightService } from '../../shared/services/spotlight.service';
+import { LoaderService } from '../../shared/services/loader.service';
+import { ModalService } from '../../shared/services/modal.service';
 
 @Component({
   selector: 'app-add-new-event',
@@ -129,15 +131,15 @@ import { SpotlightService } from '../../shared/services/spotlight.service';
               <div class="grid grid-cols-2 gap-3">
                 <div id="thumbnail-field" class="form-group">
                   <label
-                    for="thumbnailUrl"
+                    for="thumbnail"
                     class="block text-sm font-medium text-gray-700 mb-2"
                     >Thumbnail URL
                   </label>
                   <input
                     type="url"
-                    id="thumbnailUrl"
-                    name="thumbnailUrl"
-                    [(ngModel)]="addNewForm.thumbnailUrl"
+                    id="thumbnail"
+                    name="thumbnail"
+                    [(ngModel)]="addNewForm.thumbnail"
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500"
                     placeholder="https://..."
                   />
@@ -145,15 +147,15 @@ import { SpotlightService } from '../../shared/services/spotlight.service';
 
                 <div id="hero-field" class="form-group">
                   <label
-                    for="heroImageUrl"
+                    for="hero"
                     class="block text-sm font-medium text-gray-700 mb-2"
                     >Hero Image URL
                   </label>
                   <input
                     type="url"
-                    id="heroImageUrl"
-                    name="heroImageUrl"
-                    [(ngModel)]="addNewForm.heroImageUrl"
+                    id="hero"
+                    name="hero"
+                    [(ngModel)]="addNewForm.hero"
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500"
                     placeholder="https://..."
                   />
@@ -267,15 +269,15 @@ import { SpotlightService } from '../../shared/services/spotlight.service';
                   class="form-group flex items-center gap-2"
                 >
                   <label
-                    for="shareEnabled"
+                    for="share_enabled"
                     class="block text-sm font-medium text-gray-700 mb-2"
                     >Share Enabled</label
                   >
                   <input
-                    id="shareEnabled"
-                    name="shareEnabled"
+                    id="share_enabled"
+                    name="share_enabled"
                     type="checkbox"
-                    [(ngModel)]="addNewForm.shareEnabled"
+                    [(ngModel)]="addNewForm.share_enabled"
                     [disabled]="addNewForm.visibility !== 'public'"
                     class="h-5 w-5"
                   />
@@ -439,12 +441,12 @@ export class AddNeweventComponent implements OnInit {
     date: string; // ISO or date string
     summary: string;
     body: string;
-    thumbnailUrl?: string;
-    heroImageUrl?: string;
+    thumbnail?: string;
+    hero?: string;
     attachment?: string; // when using URL
     tags?: string; // comma separated in form, parsed on submit
     visibility: 'public' | 'portal_only';
-    shareEnabled: boolean;
+    share_enabled: boolean;
     slug: string;
     status: 'draft' | 'published' | 'archived';
     createdBy?: string;
@@ -455,12 +457,12 @@ export class AddNeweventComponent implements OnInit {
     date: '',
     summary: '',
     body: '',
-    thumbnailUrl: '',
-    heroImageUrl: '',
+    thumbnail: '',
+    hero: '',
     attachment: '',
     tags: '',
     visibility: 'public',
-    shareEnabled: false,
+    share_enabled: false,
     slug: '',
     status: 'draft',
     createdBy: '',
@@ -474,7 +476,11 @@ export class AddNeweventComponent implements OnInit {
   selectedFileError = '';
 
   formErrors: string | null = null;
-  constructor(private spotlightService: SpotlightService) {
+  constructor(
+    private spotlightService: SpotlightService,
+    private loader: LoaderService,
+    private readonly modal: ModalService
+  ) {
     this.isOpen$ = this.spotlightService.isOpen$;
   }
   ngOnInit(): void {}
@@ -495,12 +501,12 @@ export class AddNeweventComponent implements OnInit {
       date: '',
       summary: '',
       body: '',
-      thumbnailUrl: '',
-      heroImageUrl: '',
+      thumbnail: '',
+      hero: '',
       attachment: '',
       tags: '',
       visibility: 'public',
-      shareEnabled: false,
+      share_enabled: false,
       slug: '',
       status: 'draft',
       createdBy: '',
@@ -621,6 +627,7 @@ export class AddNeweventComponent implements OnInit {
       // external link
       attachmentPayload = this.addNewForm.attachment.trim();
     }
+    this.loader.show();
 
     const payload = {
       id: this.generateSystemId(),
@@ -631,17 +638,17 @@ export class AddNeweventComponent implements OnInit {
         : nowIso,
       summary: this.addNewForm.summary?.trim() || '',
       body: this.addNewForm.body?.trim() || '',
-      thumbnailUrl: this.addNewForm.thumbnailUrl || null,
-      heroImageUrl: this.addNewForm.heroImageUrl || null,
+      thumbnail: this.addNewForm.thumbnail || null,
+      hero: this.addNewForm.hero || null,
       attachment: attachmentPayload, // either URL string or { filename, mimeType, size, dataUrl }
       tags: (this.addNewForm.tags || '')
         .split(',')
         .map((t) => t.trim())
         .filter(Boolean),
       visibility: this.addNewForm.visibility,
-      shareEnabled:
+      share_enabled:
         this.addNewForm.visibility === 'public'
-          ? !!this.addNewForm.shareEnabled
+          ? !!this.addNewForm.share_enabled
           : false,
       slug: this.addNewForm.slug,
       status: this.addNewForm.status,
@@ -651,9 +658,20 @@ export class AddNeweventComponent implements OnInit {
       updatedAt: nowIso,
     };
 
-    // Replace this with real upload/persisting logic.
-    // If you want server-side upload, send `selectedFile` via FormData to an upload endpoint instead of embedding base64.
-    console.log('New Spotlight Item payload:', payload);
+    this.spotlightService
+      .postSpotlightData(payload)
+      .pipe(finalize(() => this.loader.hide()))
+      .subscribe({
+        next: (res) => {
+          // const message = res?.message ?? 'Password reset link sent to email';
+          // this.modal.setResContent('Success', message);
+        },
+        error: (err) => {
+          const message =
+            err?.error?.error ?? err?.message ?? 'An error occurred';
+          this.modal.setResContent('Error', message);
+        },
+      });
 
     this.closeAddNew();
   }

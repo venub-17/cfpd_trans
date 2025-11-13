@@ -1,12 +1,15 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { SpotlightService } from '../../shared/services/spotlight.service';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { AddNeweventComponent } from './addNewevent.component';
+import { finalize } from 'rxjs';
+import { LoaderService } from '../../shared/services/loader.service';
+import { ModalService } from '../../shared/services/modal.service';
 
 @Component({
   selector: 'app-spotlight-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, AddNeweventComponent],
   template: `
     <div class="spotlight_details_container p-4">
       <div class="min-h-screen bg-background py-12 px-4 sm:px-6 lg:px-8">
@@ -36,7 +39,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
           >
             <div class="aspect-video overflow-hidden bg-muted">
               <img
-                [src]="getDirectImageUrl(spotlightData.attachment_url)"
+                [src]="spotlightData.attachment_url"
                 alt="New Safety Protocols Implemented Across All Facilities"
                 class="w-full h-full object-cover"
               />
@@ -88,7 +91,10 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
                 </div>
 
                 <div class="flex gap-6 ">
-                  <span class="group cursor-pointer">
+                  <span
+                    class="group cursor-pointer"
+                    (click)="onUpdateSpotlight(spotlightData)"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -106,7 +112,10 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
                       />
                     </svg>
                   </span>
-                  <span class="group cursor-pointer">
+                  <span
+                    class="group cursor-pointer"
+                    (click)="onDeleteSpotlight(spotlightData)"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -131,7 +140,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
               </h1>
               <div class="prose prose-lg max-w-none">
                 <p class="mb-4 text-foreground leading-relaxed">
-                  {{ spotlightData.body }}
+                  {{ spotlightData.summary }}
                 </p>
               </div>
             </div>
@@ -139,6 +148,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
         </div>
       </div>
     </div>
+    <app-add-new-event></app-add-new-event>
   `,
   styles: [``],
 })
@@ -146,13 +156,13 @@ export class SpotlightDetailsComponent implements OnInit {
   spotlightData: any;
   constructor(
     private readonly location: Location,
-    private readonly S: SpotlightService,
-    private sanitizer: DomSanitizer
+    private readonly spotlightService: SpotlightService,
+    private readonly loader: LoaderService,
+    private readonly modal: ModalService
   ) {}
 
   ngOnInit(): void {
-    this.S.selectedSpotlight$.subscribe((data) => {
-      console.log('Selected Spotlight Data:', data);
+    this.spotlightService.selectedSpotlight$.subscribe((data) => {
       this.spotlightData = data;
     });
   }
@@ -160,10 +170,25 @@ export class SpotlightDetailsComponent implements OnInit {
   onGoBack() {
     this.location.back();
   }
-  getDirectImageUrl(url: string): SafeResourceUrl {
-    const match = url.match(/\/d\/(.*?)\//);
-    const fileId = match ? match[1] : '';
-    const directUrl = `https://drive.google.com/thumbnail?id=${fileId}`;
-    return this.sanitizer.bypassSecurityTrustResourceUrl(directUrl);
+
+  onUpdateSpotlight(spotLight: any) {
+    this.spotlightService.open();
+  }
+  onDeleteSpotlight(data: any) {
+    this.spotlightService
+      .onDeleteSpotlight(data.id)
+      .pipe(finalize(() => this.loader.hide()))
+      .subscribe({
+        next: (res) => {
+          if (res) {
+            this.modal.setResContent('Success', 'Post Deleted Successfully');
+          }
+        },
+        error: (err) => {
+          const message =
+            err?.error?.error ?? err?.message ?? 'An error occurred';
+          this.modal.setResContent('Error', message);
+        },
+      });
   }
 }

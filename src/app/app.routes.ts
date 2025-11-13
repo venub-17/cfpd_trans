@@ -60,7 +60,11 @@ export const routes: Routes = [
         (m) => m.ProductDetail
       ),
   },
-
+  {
+    path: 'faq_private',
+    loadComponent: () =>
+      import('./components/faq-private/faq-private').then((m) => m.FaqPrivate),
+  },
   {
     path: 'login',
     component: Login,

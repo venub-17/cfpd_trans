@@ -65,8 +65,8 @@
             >
               Community
             </button>
+            <!-- *ngIf="(authService.userRole$ | async) === 'hr'" -->
             <button
-              *ngIf="(authService.userRole$ | async) === 'hr'"
               (click)="onEnableAddNew()"
               class="rounded-md border text-primary-600 border-primary-600 px-4 py-2 hover:bg-primary-700 hover:text-white"
             >
@@ -107,7 +107,7 @@
               <div>
                 <div class="aspect-video bg-muted">
                   <img
-                    [src]="getDirectImageUrl(data.attachment_url)"
+                    [src]="data.attachment_url"
                     alt="{{ data.title }}"
                     class="w-full h-full object-cover p-1 rounded-t-lg"
                     loading="lazy"

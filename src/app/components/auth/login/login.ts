@@ -81,7 +81,6 @@ export class Login implements OnInit {
       .subscribe({
         next: () => this.navigateToUserDetails(),
         error: (err) => {
-          console.error('Login error:', err);
           const message =
             err?.error?.error ??
             err?.message ??

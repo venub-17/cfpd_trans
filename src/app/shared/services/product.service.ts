@@ -15,7 +15,7 @@ export class ProductService {
   onSelectProduct(product: any) {
     this.selectedProduct.next(product);
   }
-  getProductData() {
+  getProductData(limit?: number) {
     return this.http.get(`${this.baseUrl}/products`);
   }
 }
