@@ -28,7 +28,7 @@ export class FaqPrivate implements OnInit {
   ngOnInit() {
     this.loaderService.show();
     this.faqService
-      .getFaqData()
+      .getAdminFaqData()
       .pipe(finalize(() => this.loaderService.hide()))
       .subscribe(
         (data) => {
@@ -49,7 +49,7 @@ export class FaqPrivate implements OnInit {
           this.activeGroup = null;
         }
       );
-    this.faqService.getAdminFaqData().subscribe((data) => {
+    this.faqService.getFaqData().subscribe((data) => {
       console.log('Admin FAQ data:', data);
     });
   }

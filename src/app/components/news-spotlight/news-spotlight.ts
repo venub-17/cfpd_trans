@@ -9,6 +9,7 @@ import { finalize } from 'rxjs';
 import { AuthService } from '../../shared/services/auth.service';
 import { AddNeweventComponent } from './addNewevent.component';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { ModalService } from '../../shared/services/modal.service';
 
 @Component({
   selector: 'app-news-spotlight',
@@ -22,7 +23,8 @@ export class NewsSpotlight implements OnInit {
     private readonly router: Router,
     private readonly loader: LoaderService,
     public authService: AuthService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private modal: ModalService
   ) {}
   fullData: any[] = [];
   filteredData: any[] = [];
@@ -194,5 +196,25 @@ export class NewsSpotlight implements OnInit {
     const fileId = match ? match[1] : '';
     const directUrl = `https://drive.google.com/thumbnail?id=${fileId}`;
     return this.sanitizer.bypassSecurityTrustResourceUrl(directUrl);
+  }
+  onUpdateSpotlight(spotLight: any) {
+    this.spotlightService.open();
+  }
+  onDeleteSpotlight(data: any) {
+    this.spotlightService
+      .onDeleteSpotlight(data.id)
+      .pipe(finalize(() => this.loader.hide()))
+      .subscribe({
+        next: (res) => {
+          if (res) {
+            this.modal.setResContent('Success', 'Post Deleted Successfully');
+          }
+        },
+        error: (err) => {
+          const message =
+            err?.error?.error ?? err?.message ?? 'An error occurred';
+          this.modal.setResContent('Error', message);
+        },
+      });
   }
 }

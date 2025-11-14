@@ -13,6 +13,6 @@ export class FAQService {
     return this.http.get(`${this.baseUrl}/faqs`);
   }
   getAdminFaqData() {
-    return this.http.get(`${this.baseUrl}/admin/faqs`);
+    return this.http.get(`${this.baseUrl}/faqs/admin/faqs`);
   }
 }
