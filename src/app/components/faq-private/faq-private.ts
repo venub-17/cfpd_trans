@@ -3,10 +3,11 @@ import { FAQService } from '../../shared/services/faq.service';
 import { CommonModule } from '@angular/common';
 import { finalize } from 'rxjs';
 import { LoaderService } from '../../shared/services/loader.service';
+import { AddFAQComponent } from './addFAQ.component';
 
 @Component({
   selector: 'app-faq-private',
-  imports: [CommonModule],
+  imports: [CommonModule, AddFAQComponent],
   templateUrl: './faq-private.html',
   styleUrls: ['./faq-private.scss'],
 })
@@ -46,9 +47,6 @@ export class FaqPrivate implements OnInit {
           this.activeGroup = null;
         }
       );
-    this.faqService.getFaqData().subscribe((data) => {
-      console.log('Admin FAQ data:', data);
-    });
   }
 
   selectGroup(category: string | null) {
@@ -67,5 +65,8 @@ export class FaqPrivate implements OnInit {
 
   isFaqOpen(group: string, index: number): boolean {
     return this.openFaqKeys.has(`${group}-${index}`); // Check if the FAQ is open
+  }
+  openAddFaqModal() {
+    // Logic to open the modal for adding a new FAQ
   }
 }

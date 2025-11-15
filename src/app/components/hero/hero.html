@@ -274,13 +274,43 @@
 <section id="client-logos" class="py-12 bg-white">
   <app-clients></app-clients>
 </section>
+<section id="cta" class="py-16 bg-primary-700 text-white">
+  <div class="mx-auto px-4 text-center">
+    <h2 class="text-3xl font-bold mb-4">
+      Ready to Transform Your Power Infrastructure?
+    </h2>
+    <p class="text-primary-100 max-w-2xl mx-auto mb-8">
+      Contact our team today to discuss your transformer needs and discover how
+      our solutions can improve your efficiency and reliability.
+    </p>
+    <div
+      class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4"
+    >
+      <button
+        (click)="onRequestService()"
+        class="bg-white text-primary-700 hover:bg-gray-100 font-medium px-6 py-3 rounded-md transition-colors"
+      >
+        Request a Quote
+      </button>
+      <!-- <button
+        class="bg-transparent border border-white text-white hover:bg-white/10 px-6 py-3 rounded-md transition-colors"
+      >
+        Schedule Consultation
+      </button> -->
+    </div>
+  </div>
+</section>
 <section id="cta" class="py-16 bg-gray-50 text-white">
   <div class="mx-auto px-4">
-    <span class="text-black text-xl font-semibold"> FAQ </span>
+    <span class="text-black text-xl font-semibold p-4"> FAQ </span>
 
-    <h2 class="text-black p-4 text-4xl font-semibold">
+    <h2 class="text-black p-4 mb-1 text-4xl font-semibold">
       Any Questions? Look Here
     </h2>
+    <p class="text-gray-700 p-4">
+      Find answers to common questions about our transformers, services, and
+      support.
+    </p>
   </div>
 
   <!-- use grid with auto-flow rows, and make each card independent -->
@@ -297,18 +327,18 @@
       >
         <span class="font-medium">{{ item.question }}</span>
         <svg
-          class="w-4 h-4 transition-transform duration-200"
           [ngClass]="{ 'rotate-180': activeIndices.has(i) }"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="size-6"
         >
           <path
             stroke-linecap="round"
             stroke-linejoin="round"
-            stroke-width="2"
-            d="M19 9l-7 7-7-7"
+            d="m19.5 8.25-7.5 7.5-7.5-7.5"
           />
         </svg>
       </button>
@@ -324,9 +354,13 @@
   <div class="flex justify-end">
     <button
       class="bg-primary-600 hover:bg-primary-700 mr-10 px-2 py-2 rounded text-white font-medium flex items-center cursor-pointer"
-      [routerLink]="['/faq_private']"
+      [routerLink]="['/faq_public']"
     >
       View All FAQs
     </button>
   </div>
 </section>
+<app-request-quote
+  *ngIf="showRequestModal"
+  [isService]="isService"
+></app-request-quote>

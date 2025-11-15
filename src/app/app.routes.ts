@@ -66,6 +66,11 @@ export const routes: Routes = [
       import('./components/faq-private/faq-private').then((m) => m.FaqPrivate),
   },
   {
+    path: 'faq_public',
+    loadComponent: () =>
+      import('./components/faq-public/faq-public').then((m) => m.FaqPublic),
+  },
+  {
     path: 'login',
     component: Login,
   },

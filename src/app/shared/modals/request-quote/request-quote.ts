@@ -12,6 +12,7 @@ import { LoaderService } from '../../services/loader.service';
 import { ProductService } from '../../services/product.service';
 import { ModalService } from '../../services/modal.service';
 import { finalize } from 'rxjs';
+import { ServiceDataService } from '../../services/service-data.service';
 
 @Component({
   selector: 'app-request-quote',
@@ -24,16 +25,22 @@ export class RequestQuote {
   showPassword: boolean = false;
   count: number = 1;
   requestForm!: FormGroup;
+  services: any[] = [];
+
   @Input() id!: string | number;
+  @Input() isService: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private readonly loaderService: LoaderService,
     private readonly productService: ProductService,
-    private readonly modal: ModalService
+    private readonly modal: ModalService,
+    private servicesService: ServiceDataService
   ) {}
 
   ngOnInit(): void {
     this.initForm();
+    this.getServices();
   }
   initForm() {
     this.requestForm = this.fb.group({
@@ -44,48 +51,58 @@ export class RequestQuote {
         Validators.required,
         Validators.pattern(/^\+?[0-9\s\-()]{7,}$/),
       ]),
+      service: new FormControl(''),
       description: new FormControl('', [
         Validators.required,
-        Validators.minLength(10),
+        Validators.maxLength(500),
       ]),
     });
   }
   get f() {
     return this.requestForm.controls;
   }
-
+  getServices() {
+    this.servicesService.getAllServices().subscribe((services) => {
+      this.services = services;
+    });
+  }
   onSubmit() {
-    this.isFormSubmitted = true;
     if (!this.requestForm.valid) {
       this.requestForm.markAllAsTouched();
       return;
     }
-    const reqBody = {
-      customerName:
-        this.requestForm.value.firstName +
-        ' ' +
-        this.requestForm.value.lastName,
-      email: this.requestForm.value.email,
-      phone: this.requestForm.value.phoneNumber,
-      quantity: this.count,
-      message: this.requestForm.value.description,
-    };
-    this.loaderService.show();
-    this.productService
-      .postRequestQuote(reqBody, this.id)
-      .pipe(finalize(() => this.loaderService.hide()))
-      .subscribe({
-        next: (res) => {
-          this.modal.setResContent(
-            'Success',
-            'Request Quote Submitted Successfully'
-          );
-        },
-        error: (err) => {
-          const errorMessage = err?.error?.message || 'Something went wrong';
-          this.modal.setResContent('Error', errorMessage);
-        },
-      });
+    if (this.isService) {
+      console.log('Service Request ID:', this.requestForm.value);
+    } else {
+      this.isFormSubmitted = true;
+
+      const reqBody = {
+        customerName:
+          this.requestForm.value.firstName +
+          ' ' +
+          this.requestForm.value.lastName,
+        email: this.requestForm.value.email,
+        phone: this.requestForm.value.phoneNumber,
+        quantity: this.count,
+        message: this.requestForm.value.description,
+      };
+      this.loaderService.show();
+      this.productService
+        .postRequestQuote(reqBody, this.id)
+        .pipe(finalize(() => this.loaderService.hide()))
+        .subscribe({
+          next: (res) => {
+            this.modal.setResContent(
+              'Success',
+              'Request Quote Submitted Successfully'
+            );
+          },
+          error: (err) => {
+            const errorMessage = err?.error?.message || 'Something went wrong';
+            this.modal.setResContent('Error', errorMessage);
+          },
+        });
+    }
   }
   onDecrease() {
     if (this.count > 1) {

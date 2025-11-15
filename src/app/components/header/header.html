@@ -32,14 +32,17 @@
           >
 
           <!-- Dropdown menu for Services -->
-          <div class="relative group">
+          <div class="relative group flex items-center gap-1">
             <span
               [ngClass]="{
                 'border-b': router.url.startsWith('/services')
               }"
-              class="hover:text-primary-100 transition-colors cursor-pointer flex items-center gap-1"
+              class="hover:text-primary-100 transition-colors cursor-pointer"
             >
               Services
+            </span>
+
+            <span class="mt-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -88,6 +91,14 @@
             routerLinkActive="active"
             class="hover:text-primary-100 transition-colors cursor-pointer"
             >Dashboard</span
+          >
+          <!-- *ngIf="authService.isLoggedIn$ | async" -->
+          <span
+            [routerLink]="['/faq_private']"
+            routerLinkActive="active"
+            class="hover:text-primary-100 transition-colors cursor-pointer"
+          >
+            Help & Support</span
           >
 
           <span

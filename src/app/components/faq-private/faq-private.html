@@ -16,7 +16,7 @@
               (click)="selectGroup(cat)"
             >
               <div class="flex items-center space-x-3">
-                <span class="text-base">{{ cat }}</span>
+                <span class="text-sm">{{ cat }}</span>
               </div>
             </button>
           </ng-container>
@@ -32,10 +32,18 @@
     </aside>
 
     <main id="faq-main" class="flex-1 border border-border rounded p-8">
-      <div id="page-header" class="mb-8">
+      <div id="page-header" class="mb-8 flex items-center justify-between">
         <h1 class="text-3xl font-bold text-gray-900 mb-3">
           Frequently Asked Questions
         </h1>
+        <div>
+          <button
+            class="bg-primary-600 hover:bg-primary-700 mr-10 px-2 py-2 rounded text-white font-medium flex items-center cursor-pointer"
+            (click)="openAddFaqModal()"
+          >
+            Add FAQ
+          </button>
+        </div>
       </div>
 
       <div id="faq-accordion" class="space-y-4">
@@ -44,11 +52,11 @@
             *ngIf="groupedFAQs[activeGroup]?.length; else emptyGroup"
           >
             <div
-              class="faq-item border border-border rounded bg-white"
               *ngFor="let faq of groupedFAQs[activeGroup]; let i = index"
+              class="border rounded shadow text-black flex flex-col"
             >
               <button
-                class="faq-question w-full flex items-center justify-between p-6 text-left hover:bg-accent transition-colors"
+                class="faq-question w-full flex items-center border justify-between p-6 text-left bg-primary-100"
                 (click)="toggleFaq(activeGroup!, i)"
                 [attr.aria-expanded]="isFaqOpen(activeGroup!, i)"
               >
@@ -92,11 +100,10 @@
                   </ng-template>
                 </span>
               </button>
-              <div
-                class="faq-answer px-6 pb-6"
-                *ngIf="isFaqOpen(activeGroup!, i)"
-              >
-                <p class="text-base text-gray-600 leading-relaxed">
+              <div class="faq-answer" *ngIf="isFaqOpen(activeGroup!, i)">
+                <p
+                  class="text-base bg-primary-100 p-6 text-gray-600 leading-relaxed"
+                >
                   {{ faq.answer }}
                 </p>
               </div>
@@ -110,3 +117,4 @@
     </main>
   </div>
 </div>
+<app-add-faq></app-add-faq>

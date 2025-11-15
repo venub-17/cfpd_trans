@@ -172,7 +172,10 @@
                         data.date | date : "mediumDate"
                       }}</time>
                     </div>
-                    <div class="flex gap-6">
+                    <div
+                      class="flex gap-6"
+                      *ngIf="(authService.userRole$ | async) === 'hr'"
+                    >
                       <span
                         class="group cursor-pointer"
                         (click)="onUpdateSpotlight(data)"

@@ -6,12 +6,12 @@ import { CustomerReviews } from '../customer-reviews/customer-reviews';
 import { Clients } from '../clients/clients';
 import { ProductService } from '../../shared/services/product.service';
 import { map } from 'rxjs';
-import { Product } from '../../shared/types';
 import { FAQService } from '../../shared/services/faq.service';
+import { RequestQuote } from '../../shared/modals/request-quote/request-quote';
 
 @Component({
   selector: 'app-hero',
-  imports: [RouterLink, CommonModule, CustomerReviews, Clients],
+  imports: [RouterLink, RequestQuote, CommonModule, CustomerReviews, Clients],
   templateUrl: './hero.html',
   styleUrl: './hero.scss',
 })
@@ -20,13 +20,18 @@ export class Hero implements OnInit {
     private readonly productService: ProductService,
     private faqService: FAQService
   ) {}
+  showRequestModal: boolean = false;
   activeIndices: Set<number> = new Set();
   activeIndex: any = null;
   products: any[] = [];
   FAQs: any[] = [];
+  isService: boolean = false;
   ngOnInit() {
     this.getProducts();
     this.getFaqs();
+    this.productService.showRequestModal$.subscribe((show) => {
+      this.showRequestModal = show;
+    });
   }
 
   getProducts() {
@@ -64,14 +69,16 @@ export class Hero implements OnInit {
         this.FAQs = data;
       });
   }
-  //   toggleFaq(item: any): void {
-  //     this.activeIndex = this.activeIndex === item ? null : item;
-  //   }
+
   toggleFaq(index: number): void {
     if (this.activeIndices.has(index)) {
       this.activeIndices.delete(index);
     } else {
       this.activeIndices.add(index);
     }
+  }
+  onRequestService(): void {
+    this.isService = true;
+    this.productService.onshowRequestModal(true);
   }
 }

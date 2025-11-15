@@ -1,1 +1,50 @@
-<p>faq-public works!</p>
+<main
+  id="main-content"
+  class="max-w-4xl mx-auto px-6 py-12 border border-border rounded mt-8 mb-8"
+>
+  <div id="page-header" class="text-center mb-12">
+    <h1 class="text-4xl font-bold text-gray-900 mb-4">
+      Frequently Asked Questions
+    </h1>
+    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+      Find quick answers to the most common questions about our platform and
+      services.
+    </p>
+  </div>
+
+  <div id="faq-accordion" class="space-y-4">
+    <div
+      *ngFor="let item of FAQs; let i = index"
+      class="border rounded shadow text-black flex flex-col"
+    >
+      <button
+        (click)="toggleFaq(i)"
+        class="w-full flex items-center justify-between p-6 text-left bg-primary-100 hover:bg-accent transition-colors"
+      >
+        <span class="font-medium">{{ item.question }}</span>
+        <svg
+          [ngClass]="{ 'rotate-180': activeIndices.has(i) }"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="size-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="m19.5 8.25-7.5 7.5-7.5-7.5"
+          />
+        </svg>
+      </button>
+      <!-- *ngIf="activeIndex===i" -->
+      <div
+        *ngIf="activeIndices.has(i)"
+        class="px-4 py-5 bg-primary-100 text-gray-700 border-t"
+      >
+        {{ item.answer }}
+      </div>
+    </div>
+  </div>
+</main>

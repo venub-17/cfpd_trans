@@ -4,10 +4,10 @@
   <div class="image-container">
     <div class="img_inner">
       <div *ngFor="let image of allClientImages" class="client-logo">
-        <img [src]="image" alt="Client Image" />
+        <img [src]="image.icon_url" alt="{{ image.name }}" />
       </div>
       <div *ngFor="let image of allClientImages" class="client-logo">
-        <img [src]="image" alt="Client Image" />
+        <img [src]="image.icon_url" alt="{{ image.name }}" />
       </div>
     </div>
   </div>
