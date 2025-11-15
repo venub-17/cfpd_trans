@@ -43,6 +43,9 @@ export class NewsSpotlight implements OnInit {
 
   ngOnInit(): void {
     this.loader.show();
+    this.onLoadData();
+  }
+  onLoadData() {
     this.spotlightService
       .getSpotlightData()
       .pipe(finalize(() => this.loader.hide()))
@@ -201,20 +204,33 @@ export class NewsSpotlight implements OnInit {
     this.spotlightService.open();
   }
   onDeleteSpotlight(data: any) {
-    this.spotlightService
-      .onDeleteSpotlight(data.id)
-      .pipe(finalize(() => this.loader.hide()))
-      .subscribe({
-        next: (res) => {
-          if (res) {
-            this.modal.setResContent('Success', 'Post Deleted Successfully');
-          }
-        },
-        error: (err) => {
-          const message =
-            err?.error?.error ?? err?.message ?? 'An error occurred';
-          this.modal.setResContent('Error', message);
-        },
-      });
+    this.modal.setResContent(
+      'Delete Confirmation',
+      'Are you sure you want to delete this post?',
+      true
+    );
+
+    // Set the action for the delete button
+    this.modal.setActionButton(() => {
+      this.loader.show();
+      this.spotlightService
+        .onDeleteSpotlight(data.id)
+        .pipe(finalize(() => this.loader.hide()))
+        .subscribe({
+          next: (res) => {
+            if (res) {
+              this.modal.setResContent('Success', 'Post Deleted Successfully');
+
+              this.applyFilters(); // Refresh the list
+              this.onLoadData();
+            }
+          },
+          error: (err) => {
+            const message =
+              err?.error?.error ?? err?.message ?? 'An error occurred';
+            this.modal.setResContent('Error', message);
+          },
+        });
+    });
   }
 }

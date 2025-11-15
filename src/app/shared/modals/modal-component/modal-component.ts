@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ModalService } from '../services/modal.service';
 import { Observable } from 'rxjs';
-import { ModalType } from '../types';
+import { ModalService } from '../../services/modal.service';
+import { ModalType } from '../../types';
 
 @Component({
   selector: 'app-modal-component',

@@ -20,6 +20,7 @@ export class Hero implements OnInit {
     private readonly productService: ProductService,
     private faqService: FAQService
   ) {}
+  activeIndices: Set<number> = new Set();
   activeIndex: any = null;
   products: any[] = [];
   FAQs: any[] = [];
@@ -63,7 +64,14 @@ export class Hero implements OnInit {
         this.FAQs = data;
       });
   }
-  toggleFaq(item: any): void {
-    this.activeIndex = this.activeIndex === item ? null : item;
+  //   toggleFaq(item: any): void {
+  //     this.activeIndex = this.activeIndex === item ? null : item;
+  //   }
+  toggleFaq(index: number): void {
+    if (this.activeIndices.has(index)) {
+      this.activeIndices.delete(index);
+    } else {
+      this.activeIndices.add(index);
+    }
   }
 }

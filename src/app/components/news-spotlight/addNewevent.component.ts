@@ -630,7 +630,7 @@ export class AddNeweventComponent implements OnInit {
     this.loader.show();
 
     const payload = {
-      id: this.generateSystemId(),
+      // id: this.generateSystemId(),
       title: this.addNewForm.title.trim(),
       category: this.addNewForm.category,
       date: this.addNewForm.date

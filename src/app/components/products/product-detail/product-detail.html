@@ -19,11 +19,12 @@
     </svg>
     Back to Products
   </button>
+
   <div
     id="product-gallery"
     class="mt-4 bg-neutral-100 rounded-lg h-[350px] flex items-center justify-center"
   >
-    <div class="text-center p-4">
+    <div class="text-center p-20">
       <img src="{{ product.imageUrl }}" alt="{{ product.productName }}" />
     </div>
   </div>
@@ -62,18 +63,24 @@
             <span>5 Years</span>
           </li> -->
         </ul>
-        <!-- <div class="mt-6 flex justify-center">
+        <div class="mt-6 flex justify-center">
           <div class="">
             <div class="flex gap-4 mt-2">
               <button
                 class="bg-primary-600 text-white py-2 px-4 rounded-md flex items-center justify-center"
+                (click)="onRequestQuote()"
               >
                 Request for Quote
               </button>
             </div>
           </div>
-        </div> -->
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<app-request-quote
+  *ngIf="showRequestModal"
+  [id]="product.productId"
+></app-request-quote>

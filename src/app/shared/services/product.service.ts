@@ -10,6 +10,12 @@ export class ProductService {
   private readonly baseUrl = environment.apiUrl;
   private readonly selectedProduct = new BehaviorSubject<any>(null);
   selectedProduct$ = this.selectedProduct.asObservable();
+  private readonly showRequestModal = new BehaviorSubject<boolean>(false);
+  showRequestModal$ = this.showRequestModal.asObservable();
+
+  onshowRequestModal(show: boolean) {
+    this.showRequestModal.next(show);
+  }
 
   constructor(private readonly http: HttpClient) {}
   onSelectProduct(product: any) {
@@ -17,5 +23,11 @@ export class ProductService {
   }
   getProductData(limit?: number) {
     return this.http.get(`${this.baseUrl}/products`);
+  }
+  postRequestQuote(reqBody: any, id: string | number) {
+    return this.http.post(
+      `${this.baseUrl}/products/${id}/request-quote`,
+      reqBody
+    );
   }
 }
