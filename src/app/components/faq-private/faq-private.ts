@@ -7,7 +7,6 @@ import { LoaderService } from '../../shared/services/loader.service';
 @Component({
   selector: 'app-faq-private',
   imports: [CommonModule],
-
   templateUrl: './faq-private.html',
   styleUrls: ['./faq-private.scss'],
 })
@@ -16,15 +15,13 @@ export class FaqPrivate implements OnInit {
     private readonly faqService: FAQService,
     private readonly loaderService: LoaderService
   ) {}
+
   faqData: any[] = [];
   groupedFAQs: Record<string, any[]> = {};
   categories: string[] = [];
   activeGroup: string | null = null;
-  openFaqKeys = new Set<string>();
-  openFaq: { group: string | null; index: number | null } = {
-    group: null,
-    index: null,
-  };
+  openFaqKeys = new Set<string>(); // Track open FAQs
+
   ngOnInit() {
     this.loaderService.show();
     this.faqService
@@ -56,19 +53,19 @@ export class FaqPrivate implements OnInit {
 
   selectGroup(category: string | null) {
     this.activeGroup = category;
-    this.openFaqKeys.clear();
-    this.openFaq = { group: null, index: null };
+    // No need to clear open FAQs
   }
 
   toggleFaq(group: string, index: number) {
-    if (this.openFaq.group === group && this.openFaq.index === index) {
-      this.openFaq = { group: null, index: null };
+    const faqKey = `${group}-${index}`;
+    if (this.openFaqKeys.has(faqKey)) {
+      this.openFaqKeys.delete(faqKey); // Close the FAQ if it's already open
     } else {
-      this.openFaq = { group, index };
+      this.openFaqKeys.add(faqKey); // Open the FAQ
     }
   }
 
   isFaqOpen(group: string, index: number): boolean {
-    return this.openFaq.group === group && this.openFaq.index === index;
+    return this.openFaqKeys.has(`${group}-${index}`); // Check if the FAQ is open
   }
 }
