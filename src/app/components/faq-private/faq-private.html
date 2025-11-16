@@ -1,16 +1,16 @@
 <div id="main-content" class="max-w-7xl mx-auto px-6 py-12">
   <div class="flex gap-8">
     <aside id="sidebar" class="w-64 flex-shrink-0">
-      <div class="bg-primary-600 border border-border rounded sticky">
+      <div class="bg-primary-700 border border-border rounded sticky">
         <div class="p-6 border-b border-border">
-          <h3 class="text-lg font-semibold text-white mb-1">Help& Support</h3>
+          <h3 class="text-lg font-semibold text-white mb-1">Help & Support</h3>
         </div>
         <div class="p-4 min-h-[250px]">
           <ng-container *ngFor="let cat of categories">
             <button
               class="w-full flex items-center justify-between px-4 py-3 hover:bg-accent rounded mb-2 transition-colors"
               [ngClass]="{
-                'bg-primary-700 p-2 text-white ': activeGroup === cat,
+                'bg-primary-900 p-2 text-white ': activeGroup === cat,
                 'text-gray-200': activeGroup !== cat
               }"
               (click)="selectGroup(cat)"
@@ -46,7 +46,7 @@
         </div>
       </div>
 
-      <div id="faq-accordion" class="space-y-4">
+      <div id="faq-accordion" class="space-y-4 max-h-[440px] overflow-y-auto">
         <ng-container *ngIf="activeGroup != null">
           <ng-container
             *ngIf="groupedFAQs[activeGroup]?.length; else emptyGroup"
@@ -56,7 +56,7 @@
               class="border rounded shadow text-black flex flex-col"
             >
               <button
-                class="faq-question w-full flex items-center border justify-between p-6 text-left bg-[#E6F0F6]"
+                class="faq-question w-full flex items-center border justify-between p-4 text-left bg-[#E6F0F6]"
                 (click)="toggleFaq(activeGroup!, i)"
                 [attr.aria-expanded]="isFaqOpen(activeGroup!, i)"
               >
