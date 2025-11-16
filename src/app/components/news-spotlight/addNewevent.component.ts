@@ -1,4 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  SimpleChanges,
+  OnChanges,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { finalize, Observable } from 'rxjs';
@@ -49,7 +57,6 @@ import { ModalService } from '../../shared/services/modal.service';
                     name="title"
                     required
                     [(ngModel)]="addNewForm.title"
-                    (ngModelChange)="updateSlug()"
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500"
                     placeholder="Enter Title"
                   />
@@ -129,41 +136,41 @@ import { ModalService } from '../../shared/services/modal.service';
               </div>
 
               <div class="grid grid-cols-2 gap-3">
-                <div id="thumbnail-field" class="form-group">
+                <div id="thumbnail_url-field" class="form-group">
                   <label
-                    for="thumbnail"
+                    for="thumbnail_url"
                     class="block text-sm font-medium text-gray-700 mb-2"
                     >Thumbnail URL
                   </label>
                   <input
                     type="url"
-                    id="thumbnail"
-                    name="thumbnail"
-                    [(ngModel)]="addNewForm.thumbnail"
+                    id="thumbnail_url"
+                    name="thumbnail_url"
+                    [(ngModel)]="addNewForm.thumbnail_url"
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500"
                     placeholder="https://..."
                   />
                 </div>
 
-                <div id="hero-field" class="form-group">
+                <div id="hero_image_url-field" class="form-group">
                   <label
-                    for="hero"
+                    for="hero_image_url"
                     class="block text-sm font-medium text-gray-700 mb-2"
                     >Hero Image URL
                   </label>
                   <input
                     type="url"
-                    id="hero"
-                    name="hero"
-                    [(ngModel)]="addNewForm.hero"
+                    id="hero_image_url"
+                    name="hero_image_url"
+                    [(ngModel)]="addNewForm.hero_image_url"
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500"
                     placeholder="https://..."
                   />
                 </div>
               </div>
 
-              <!-- Attachment: can be URL or uploaded file -->
-              <div id="attachment-field" class="form-group">
+              <!-- attachment_url: can be URL or uploaded file -->
+              <div id="attachment_url-field" class="form-group">
                 <label class="block text-sm font-medium text-gray-700 mb-2"
                   >Attachment (PDF or external link)</label
                 >
@@ -172,7 +179,7 @@ import { ModalService } from '../../shared/services/modal.service';
                   <label class="inline-flex items-center gap-2">
                     <input
                       type="radio"
-                      name="attachmentMode"
+                      name="attachment_urlMode"
                       [checked]="!useFileUpload"
                       (change)="useFileUpload = false"
                     />
@@ -181,7 +188,7 @@ import { ModalService } from '../../shared/services/modal.service';
                   <label class="inline-flex items-center gap-2">
                     <input
                       type="radio"
-                      name="attachmentMode"
+                      name="attachment_urlMode"
                       [checked]="useFileUpload"
                       (change)="useFileUpload = true"
                     />
@@ -192,9 +199,9 @@ import { ModalService } from '../../shared/services/modal.service';
                 <div *ngIf="!useFileUpload">
                   <input
                     type="url"
-                    id="attachment"
-                    name="attachment"
-                    [(ngModel)]="addNewForm.attachment"
+                    id="attachment_url"
+                    name="attachment_url"
+                    [(ngModel)]="addNewForm.attachment_url"
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500"
                     placeholder="https://... (or /assets/file.pdf)"
                   />
@@ -203,7 +210,7 @@ import { ModalService } from '../../shared/services/modal.service';
                 <div *ngIf="useFileUpload" class="flex flex-col gap-2">
                   <input
                     type="file"
-                    id="attachmentFile"
+                    id="attachment_urlFile"
                     (change)="onFileSelected($event)"
                     accept=".pdf,application/pdf"
                     class="w-full"
@@ -230,17 +237,17 @@ import { ModalService } from '../../shared/services/modal.service';
                 </div>
               </div>
 
-              <div id="tags-field" class="form-group">
+              <div id="search_tags-field" class="form-group">
                 <label
-                  for="tags"
+                  for="search_tags"
                   class="block text-sm font-medium text-gray-700 mb-2"
-                  >Search Tags
+                  >Search search_tags
                 </label>
                 <input
                   type="text"
-                  id="tags"
-                  name="tags"
-                  [(ngModel)]="addNewForm.tags"
+                  id="search_tags"
+                  name="search_tags"
+                  [(ngModel)]="addNewForm.search_tags"
                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500"
                   placeholder="safety,training,holiday"
                 />
@@ -433,18 +440,19 @@ import { ModalService } from '../../shared/services/modal.service';
     `,
   ],
 })
-export class AddNeweventComponent implements OnInit {
+export class AddNeweventComponent implements OnInit, OnChanges {
   isOpen$: Observable<boolean>;
+  @Input() item: any | null = null;
   addNewForm: {
     title: string;
     category: string;
     date: string; // ISO or date string
     summary: string;
     body: string;
-    thumbnail?: string;
-    hero?: string;
-    attachment?: string; // when using URL
-    tags?: string; // comma separated in form, parsed on submit
+    thumbnail_url?: string;
+    hero_image_url?: string;
+    attachment_url?: string; // when using URL
+    search_tags?: string; // comma separated in form, parsed on submit
     visibility: 'public' | 'portal_only';
     share_enabled: boolean;
     slug: string;
@@ -457,10 +465,10 @@ export class AddNeweventComponent implements OnInit {
     date: '',
     summary: '',
     body: '',
-    thumbnail: '',
-    hero: '',
-    attachment: '',
-    tags: '',
+    thumbnail_url: '',
+    hero_image_url: '',
+    attachment_url: '',
+    search_tags: '',
     visibility: 'public',
     share_enabled: false,
     slug: '',
@@ -468,13 +476,14 @@ export class AddNeweventComponent implements OnInit {
     createdBy: '',
     updatedBy: '',
   };
-  // attachment uploader state
+  // attachment_url uploader state
   useFileUpload = false;
   selectedFile?: File | null = null;
   selectedFileName = '';
   selectedFileSize = 0;
   selectedFileError = '';
-
+  isUpdateMode = false;
+  @Output() eventAdded = new EventEmitter<void>();
   formErrors: string | null = null;
   constructor(
     private spotlightService: SpotlightService,
@@ -485,36 +494,88 @@ export class AddNeweventComponent implements OnInit {
   }
   ngOnInit(): void {}
 
-  onEnableAddNew() {
-    this.formErrors = null;
+  ngOnChanges(changes: SimpleChanges) {
+    if ('item' in changes) {
+      if (this.item) {
+        this.isUpdateMode = true;
+        console.log('Editing existing item:', this.item);
+        // normalize incoming API shape into the form model
+        this.addNewForm = {
+          title: this.item.title ?? '',
+          category: this.normalizeCategory(this.item.category),
+          // input[type=date] expects YYYY-MM-DD — extract from ISO if present
+          date: this.item.date
+            ? String(this.item.date).split('T')[0]
+            : this.item.created_at
+            ? String(this.item.created_at).split('T')[0]
+            : '',
+          summary: this.item.summary ?? '',
+          body: this.item.body ?? '',
+          thumbnail_url: this.item.thumbnail_url ?? '',
+          hero_image_url: this.item.hero_image_url ?? '',
+          // attachment_url can be null, string, or object; for edit keep URL string if provided
+          attachment_url:
+            typeof this.item.attachment_url === 'string'
+              ? this.item.attachment_url
+              : '',
+          // server may send array or comma string or null
+          search_tags:
+            Array.isArray(this.item.search_tags) && this.item.search_tags.length
+              ? this.item.search_tags.join(',')
+              : this.item.search_tags ?? '',
+          visibility: this.item.visibility ?? 'public',
+          share_enabled:
+            this.item.share_enabled === 1 ||
+            this.item.share_enabled === true ||
+            this.item.share_enabled === '1',
+          slug: this.item.slug ?? '',
+          status: this.item.status ?? 'draft',
+          createdBy: this.item.created_by ?? '',
+          updatedBy: this.item.updated_by ?? '',
+        };
+
+        // If the existing item has a file-like attachment, prefer file-upload mode
+        if (
+          this.item.attachment_url &&
+          typeof this.item.attachment_url === 'object'
+        ) {
+          this.useFileUpload = true;
+          this.selectedFileName = this.item.attachment_url.filename || '';
+        } else {
+          this.useFileUpload = false;
+          this.clearSelectedFile();
+        }
+      } else {
+        this.resetAddNewForm();
+      }
+    }
   }
 
-  closeAddNew() {
-    this.spotlightService.close();
-    this.resetAddNewForm();
+  private normalizeCategory(cat: any): string {
+    if (cat == null) return '';
+    const s = String(cat).trim().toLowerCase();
+    if (s.includes('announce')) return 'announcement';
+    if (s.includes('safet')) return 'safety';
+    if (s.includes('event')) return 'event';
+    if (s.includes('commun')) return 'community';
+    // fallback to raw lowercase value
+    return s;
   }
 
-  private resetAddNewForm() {
-    this.addNewForm = {
-      title: '',
-      category: '',
-      date: '',
-      summary: '',
-      body: '',
-      thumbnail: '',
-      hero: '',
-      attachment: '',
-      tags: '',
-      visibility: 'public',
-      share_enabled: false,
-      slug: '',
-      status: 'draft',
-      createdBy: '',
-      updatedBy: '',
-    };
-    this.useFileUpload = false;
-    this.clearSelectedFile();
-    this.formErrors = null;
+  private categoryForApi(cat: string): string {
+    if (!cat) return cat;
+    switch (cat.toLowerCase()) {
+      case 'event':
+        return 'Events'; // match UI/display expectations (plural)
+      case 'announcement':
+        return 'Announcement';
+      case 'safety':
+        return 'Safety';
+      case 'community':
+        return 'Community';
+      default:
+        return cat.charAt(0).toUpperCase() + cat.slice(1);
+    }
   }
 
   updateSlug() {
@@ -589,31 +650,12 @@ export class AddNeweventComponent implements OnInit {
   }
 
   async submitAddNew(): Promise<void> {
-    this.formErrors = null;
-    if (!this.addNewForm.title?.trim() || !this.addNewForm.category?.trim()) {
-      this.formErrors = 'Title and category are required.';
-      return;
-    }
-
-    // if using upload, ensure a file is selected
-    if (this.useFileUpload && !this.selectedFile) {
-      this.formErrors = 'Please select a file to upload (PDF).';
-      return;
-    }
-
-    // ensure slug exists
-    if (!this.addNewForm.slug) {
-      this.updateSlug();
-    }
-
-    const nowIso = new Date().toISOString();
-
-    // prepare attachment: either external URL string or embedded file object (base64)
-    let attachmentPayload: any = null;
+    // prepare attachment_url: either external URL string or embedded file object (base64)
+    let attachment_urlPayload: any = null;
     if (this.useFileUpload && this.selectedFile) {
       try {
         const dataUrl = await this.readFileAsBase64(this.selectedFile);
-        attachmentPayload = {
+        attachment_urlPayload = {
           filename: this.selectedFile.name,
           mimeType: this.selectedFile.type || 'application/pdf',
           size: this.selectedFile.size,
@@ -623,56 +665,132 @@ export class AddNeweventComponent implements OnInit {
         this.formErrors = 'Failed to process selected file.';
         return;
       }
-    } else if (!this.useFileUpload && this.addNewForm.attachment) {
+    } else if (!this.useFileUpload && this.addNewForm.attachment_url) {
       // external link
-      attachmentPayload = this.addNewForm.attachment.trim();
+      attachment_urlPayload = this.addNewForm.attachment_url.trim();
     }
     this.loader.show();
+    if (this.isUpdateMode) {
+      const id = this.item?.id;
+      const payload = {
+        title: this.addNewForm.title.trim(),
+        category: this.categoryForApi(this.addNewForm.category),
+        date: this.addNewForm.date
+          ? new Date(this.addNewForm.date).toISOString()
+          : new Date().toISOString(),
+        summary: this.addNewForm.summary?.trim() || '',
+        body: this.addNewForm.body?.trim() || '',
+        thumbnail_url: this.addNewForm.thumbnail_url || null,
+        hero_image_url: this.addNewForm.hero_image_url || null,
+        attachment_url: attachment_urlPayload,
+        visibility: this.addNewForm.visibility,
+        share_enabled:
+          this.addNewForm.visibility === 'public'
+            ? !!this.addNewForm.share_enabled
+            : false,
+        slug: this.addNewForm.slug,
+        status: this.addNewForm.status,
+      };
 
-    const payload = {
-      // id: this.generateSystemId(),
-      title: this.addNewForm.title.trim(),
-      category: this.addNewForm.category,
-      date: this.addNewForm.date
-        ? new Date(this.addNewForm.date).toISOString()
-        : nowIso,
-      summary: this.addNewForm.summary?.trim() || '',
-      body: this.addNewForm.body?.trim() || '',
-      thumbnail: this.addNewForm.thumbnail || null,
-      hero: this.addNewForm.hero || null,
-      attachment: attachmentPayload, // either URL string or { filename, mimeType, size, dataUrl }
-      tags: (this.addNewForm.tags || '')
-        .split(',')
-        .map((t) => t.trim())
-        .filter(Boolean),
-      visibility: this.addNewForm.visibility,
-      share_enabled:
-        this.addNewForm.visibility === 'public'
-          ? !!this.addNewForm.share_enabled
-          : false,
-      slug: this.addNewForm.slug,
-      status: this.addNewForm.status,
-      createdBy: this.addNewForm.createdBy || 'system',
-      updatedBy: this.addNewForm.updatedBy || 'system',
-      createdAt: nowIso,
-      updatedAt: nowIso,
-    };
+      this.spotlightService
+        .onUpdateSpotlight(id, payload)
+        .pipe(finalize(() => this.loader.hide()))
+        .subscribe({
+          next: (res: any) => {
+            const message = res?.message ?? 'Event added successfully.';
+            this.eventAdded.emit(); // Emit event to parent
+            this.modal.setResContent('Success', message);
+          },
+          error: (err) => {
+            const message =
+              err?.error?.error ?? err?.message ?? 'An error occurred';
+            this.modal.setResContent('Error', message);
+          },
+        });
+    } else {
+      this.formErrors = null;
+      if (!this.addNewForm.title?.trim() || !this.addNewForm.category?.trim()) {
+        this.formErrors = 'Title and category are required.';
+        return;
+      }
 
-    this.spotlightService
-      .postSpotlightData(payload)
-      .pipe(finalize(() => this.loader.hide()))
-      .subscribe({
-        next: (res) => {
-          // const message = res?.message ?? 'Password reset link sent to email';
-          // this.modal.setResContent('Success', message);
-        },
-        error: (err) => {
-          const message =
-            err?.error?.error ?? err?.message ?? 'An error occurred';
-          this.modal.setResContent('Error', message);
-        },
-      });
+      // if using upload, ensure a file is selected
+      if (this.useFileUpload && !this.selectedFile) {
+        this.formErrors = 'Please select a file to upload (PDF).';
+        return;
+      }
 
+      // ensure slug exists
+      if (!this.addNewForm.slug) {
+        this.updateSlug();
+      }
+
+      const nowIso = new Date().toISOString();
+
+      const payload = {
+        title: this.addNewForm.title.trim(),
+        category: this.categoryForApi(this.addNewForm.category),
+        date: this.addNewForm.date
+          ? new Date(this.addNewForm.date).toISOString()
+          : new Date().toISOString(),
+        summary: this.addNewForm.summary?.trim() || '',
+        body: this.addNewForm.body?.trim() || '',
+        thumbnail_url: this.addNewForm.thumbnail_url || null,
+        hero_image_url: this.addNewForm.hero_image_url || null,
+        attachment_url: attachment_urlPayload,
+        visibility: this.addNewForm.visibility,
+        share_enabled:
+          this.addNewForm.visibility === 'public'
+            ? !!this.addNewForm.share_enabled
+            : false,
+        slug: this.addNewForm.slug,
+        status: this.addNewForm.status,
+      };
+
+      this.spotlightService
+        .postSpotlightData(payload)
+        .pipe(finalize(() => this.loader.hide()))
+        .subscribe({
+          next: (res: any) => {
+            const message = res?.message ?? 'Event added successfully.';
+            this.eventAdded.emit(); // Emit event to parent
+            this.modal.setResContent('Success', message);
+          },
+          error: (err) => {
+            const message =
+              err?.error?.error ?? err?.message ?? 'An error occurred';
+            this.modal.setResContent('Error', message);
+          },
+        });
+    }
     this.closeAddNew();
+  }
+
+  closeAddNew() {
+    this.spotlightService.close();
+    this.resetAddNewForm();
+  }
+
+  private resetAddNewForm() {
+    this.addNewForm = {
+      title: '',
+      category: '',
+      date: '',
+      summary: '',
+      body: '',
+      thumbnail_url: '',
+      hero_image_url: '',
+      attachment_url: '',
+      search_tags: '',
+      visibility: 'public',
+      share_enabled: false,
+      slug: '',
+      status: 'draft',
+      createdBy: '',
+      updatedBy: '',
+    };
+    this.useFileUpload = false;
+    this.clearSelectedFile();
+    this.formErrors = null;
   }
 }

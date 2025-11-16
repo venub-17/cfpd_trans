@@ -1,10 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { finalize, Observable } from 'rxjs';
-import { SpotlightService } from '../../shared/services/spotlight.service';
 import { LoaderService } from '../../shared/services/loader.service';
 import { ModalService } from '../../shared/services/modal.service';
+import { FAQService } from '../../shared/services/faq.service';
 
 @Component({
   selector: 'app-add-faq',
@@ -22,7 +30,7 @@ import { ModalService } from '../../shared/services/modal.service';
             <h3
               style="margin:0;padding:1rem 1rem 0.5rem; font-size:1.25rem; font-weight:600;"
             >
-              Add New FAQ
+              {{ item ? 'Edit FAQ' : 'Add New FAQ' }}
             </h3>
           </div>
 
@@ -47,11 +55,10 @@ import { ModalService } from '../../shared/services/modal.service';
                     type="text"
                     id="title"
                     name="title"
+                    [(ngModel)]="addNewForm.question"
                     required
-                    [(ngModel)]="addNewForm.title"
-                    (ngModelChange)="updateSlug()"
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500"
-                    placeholder="Enter Title"
+                    placeholder="Enter Your Question"
                   />
                 </div>
               </div>
@@ -66,11 +73,69 @@ import { ModalService } from '../../shared/services/modal.service';
                   type="text"
                   id="summary"
                   name="summary"
-                  [(ngModel)]="addNewForm.summary"
+                  [(ngModel)]="addNewForm.answer"
                   maxlength="300"
                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500"
-                  placeholder="Enter a short summary"
+                  placeholder="Enter Your Answer"
                 />
+              </div>
+
+              <!-- Category -->
+              <div id="category-field" class="form-group">
+                <label
+                  for="category"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                  >Category</label
+                >
+                <select
+                  id="category"
+                  name="category"
+                  [(ngModel)]="addNewForm.category"
+                  class="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:border-transparent"
+                >
+                  <option value="">Select a service</option>
+                  <option *ngFor="let service of categories" [value]="service">
+                    {{ service }}
+                  </option>
+                </select>
+              </div>
+
+              <!-- Visibility -->
+              <div id="visibility-field" class="form-group">
+                <label
+                  for="visibility"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                  >Visibility</label
+                >
+                <select
+                  id="visibility"
+                  name="visibility"
+                  [(ngModel)]="addNewForm.visibility"
+                  class="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:border-transparent"
+                >
+                  <option value="">Select a Visibility</option>
+                  <option value="public">Public</option>
+                  <option value="internal">Internal</option>
+                </select>
+              </div>
+
+              <!-- Status -->
+              <div id="status-field" class="form-group">
+                <label
+                  for="status"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                  >Status</label
+                >
+                <select
+                  id="status"
+                  name="status"
+                  [(ngModel)]="addNewForm.status"
+                  class="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:border-transparent"
+                >
+                  <option value="">Select a Status</option>
+                  <option value="draft">Draft</option>
+                  <option value="published">Published</option>
+                </select>
               </div>
             </form>
           </div>
@@ -80,7 +145,7 @@ import { ModalService } from '../../shared/services/modal.service';
             <button
               type="button"
               class="border px-4 py-2 rounded-lg hover:text-primary-600 hover:border-primary-600"
-              (click)="closeAddNew()"
+              (click)="onCloseModal()"
             >
               Close
             </button>
@@ -89,7 +154,7 @@ import { ModalService } from '../../shared/services/modal.service';
               class=" bg-primary-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-primary-700 focus:outline-none"
               (click)="submitAddNew()"
             >
-              Add
+              {{ item ? 'Update' : 'Add' }}
             </button>
           </div>
         </div>
@@ -114,7 +179,7 @@ import { ModalService } from '../../shared/services/modal.service';
         padding: 20px;
         border-radius: 5px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        max-width: 900px;
+        max-width: 600px;
         width: 90%;
         max-height: 90vh;
         overflow: hidden; /* children handle scrolling */
@@ -159,263 +224,104 @@ import { ModalService } from '../../shared/services/modal.service';
       .modal-footer button {
         min-width: 80px;
       }
-
-      input[type='file']::file-selector-button {
-        background-color: rgb(2, 132, 199); /* Example background color */
-        color: white; /* Example text color */
-        border: none; /* Remove default border */
-        padding: 10px 20px; /* Add padding */
-        border-radius: 5px; /* Rounded corners */
-        cursor: pointer; /* Indicate it's clickable */
-        font-size: 16px; /* Adjust font size */
-      }
-
-      input[type='file']::file-selector-button:hover {
-        background-color: #0369a1; /* Darker background on hover */
-      }
     `,
   ],
 })
-export class AddFAQComponent implements OnInit {
+export class AddFAQComponent implements OnInit, OnChanges {
   isOpen$: Observable<boolean>;
   addNewForm: {
-    title: string;
-    category: string;
-    date: string; // ISO or date string
-    summary: string;
-    body: string;
-    thumbnail?: string;
-    hero?: string;
-    attachment?: string; // when using URL
-    tags?: string; // comma separated in form, parsed on submit
-    visibility: 'public' | 'portal_only';
-    share_enabled: boolean;
-    slug: string;
-    status: 'draft' | 'published' | 'archived';
-    createdBy?: string;
-    updatedBy?: string;
+    question?: string;
+    answer?: string;
+    category?: string;
+    visibility?: string;
+    status?: string;
+    attachments?: File[];
   } = {
-    title: '',
+    question: '',
+    answer: '',
     category: '',
-    date: '',
-    summary: '',
-    body: '',
-    thumbnail: '',
-    hero: '',
-    attachment: '',
-    tags: '',
     visibility: 'public',
-    share_enabled: false,
-    slug: '',
-    status: 'draft',
-    createdBy: '',
-    updatedBy: '',
+    status: 'draft', // changed from 'active' to match select option
+    attachments: [],
   };
-  // attachment uploader state
-  useFileUpload = false;
-  selectedFile?: File | null = null;
-  selectedFileName = '';
-  selectedFileSize = 0;
-  selectedFileError = '';
-
-  formErrors: string | null = null;
+  isUpdating: boolean = false;
+  @Output() eventAdded = new EventEmitter<void>();
+  @Input() categories: string[] = []; // fixed spelling to 'categories'
+  @Input() item: any | null = null;
   constructor(
-    private spotlightService: SpotlightService,
+    private faqService: FAQService,
     private loader: LoaderService,
     private readonly modal: ModalService
   ) {
-    this.isOpen$ = this.spotlightService.isOpen$;
+    this.isOpen$ = this.faqService.currentAddFAQModalStatus;
   }
   ngOnInit(): void {}
-
-  onEnableAddNew() {
-    this.formErrors = null;
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('Changes detected:', this.item, this.categories);
+    if (changes['item'] && this.item) {
+      this.isUpdating = true;
+      this.patchFormValues(this.item);
+    }
   }
-
-  closeAddNew() {
-    this.spotlightService.close();
-    this.resetAddNewForm();
-  }
-
-  private resetAddNewForm() {
+  patchFormValues(item: any): void {
     this.addNewForm = {
-      title: '',
+      question: item.question || '',
+      answer: item.answer || '',
+      category: item.category || 'Uncategorized',
+      visibility: item.visibility || 'public',
+      status: item.status || 'draft',
+      attachments: item.attachments || [],
+    };
+  }
+  resetForm(): void {
+    this.addNewForm = {
+      question: '',
+      answer: '',
       category: '',
-      date: '',
-      summary: '',
-      body: '',
-      thumbnail: '',
-      hero: '',
-      attachment: '',
-      tags: '',
       visibility: 'public',
-      share_enabled: false,
-      slug: '',
       status: 'draft',
-      createdBy: '',
-      updatedBy: '',
+      attachments: [],
     };
-    this.useFileUpload = false;
-    this.clearSelectedFile();
-    this.formErrors = null;
   }
-
-  updateSlug() {
-    if (!this.addNewForm.slug || this.addNewForm.slug.trim() === '') {
-      // simple slugify: lowercase, replace spaces with -, remove non-alnum/- chars
-      const s = (this.addNewForm.title || '')
-        .toLowerCase()
-        .trim()
-        .replace(/\s+/g, '-')
-        .replace(/[^a-z0-9\-]/g, '');
-      this.addNewForm.slug = s;
-    }
-  }
-
-  private generateSystemId(): string {
-    const rnd = Math.floor(Math.random() * 0xfffff).toString(36);
-    return `sys-${Date.now().toString(36)}-${rnd}`;
-  }
-
-  onFileSelected(event: Event) {
-    this.selectedFileError = '';
-    const input = event.target as HTMLInputElement;
-    if (!input.files || input.files.length === 0) {
-      this.clearSelectedFile();
-      return;
-    }
-    const file = input.files[0];
-    // Basic validation: accept only PDFs (as requested)
-    if (
-      file.type !== 'application/pdf' &&
-      !file.name.toLowerCase().endsWith('.pdf')
-    ) {
-      this.selectedFileError = 'Only PDF files are accepted.';
-      this.clearSelectedFile();
-      return;
-    }
-    // optional: limit size (e.g., 10MB)
-    const maxSize = 10 * 1024 * 1024;
-    if (file.size > maxSize) {
-      this.selectedFileError = 'File is too large (max 10MB).';
-      this.clearSelectedFile();
-      return;
-    }
-
-    this.selectedFile = file;
-    this.selectedFileName = file.name;
-    this.selectedFileSize = file.size;
-  }
-
-  clearSelectedFile() {
-    this.selectedFile = null;
-    this.selectedFileName = '';
-    this.selectedFileSize = 0;
-    this.selectedFileError = '';
-    // clear file input element if needed — easiest approach is to let Angular re-render; not doing DOM ops here
-  }
-
-  private readFileAsBase64(file: File): Promise<string> {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onerror = () => {
-        reader.abort();
-        reject(new Error('Failed to read file.'));
-      };
-      reader.onload = () => {
-        const result = reader.result as string;
-        // result is like "data:application/pdf;base64,JVBERi0x..."
-        resolve(result);
-      };
-      reader.readAsDataURL(file);
-    });
-  }
-
   async submitAddNew(): Promise<void> {
-    this.formErrors = null;
-    if (!this.addNewForm.title?.trim() || !this.addNewForm.category?.trim()) {
-      this.formErrors = 'Title and category are required.';
-      return;
+    if (this.isUpdating && this.item) {
+      // Update existing FAQ
+      this.loader.show();
+
+      this.faqService
+        .updateFAQ(this.item.id, this.addNewForm)
+        .pipe(finalize(() => this.loader.hide()))
+        .subscribe({
+          next: () => {
+            this.eventAdded.emit();
+            this.resetForm();
+            this.faqService.changeAddFAQModalStatus(false);
+            this.isUpdating = false;
+          },
+          error: (err) => {
+            console.error('Error updating FAQ:', err);
+          },
+        });
+    } else {
+      // Add new FAQ
+      this.loader.show();
+      this.faqService
+        .createFAQ(this.addNewForm)
+        .pipe(finalize(() => this.loader.hide()))
+        .subscribe({
+          next: () => {
+            this.eventAdded.emit();
+            this.resetForm();
+            this.faqService.changeAddFAQModalStatus(false);
+          },
+          error: (err) => {
+            console.error('Error creating FAQ:', err);
+          },
+        });
     }
-
-    // if using upload, ensure a file is selected
-    if (this.useFileUpload && !this.selectedFile) {
-      this.formErrors = 'Please select a file to upload (PDF).';
-      return;
-    }
-
-    // ensure slug exists
-    if (!this.addNewForm.slug) {
-      this.updateSlug();
-    }
-
-    const nowIso = new Date().toISOString();
-
-    // prepare attachment: either external URL string or embedded file object (base64)
-    let attachmentPayload: any = null;
-    if (this.useFileUpload && this.selectedFile) {
-      try {
-        const dataUrl = await this.readFileAsBase64(this.selectedFile);
-        attachmentPayload = {
-          filename: this.selectedFile.name,
-          mimeType: this.selectedFile.type || 'application/pdf',
-          size: this.selectedFile.size,
-          dataUrl, // caller/service can upload or persist as needed
-        };
-      } catch (err) {
-        this.formErrors = 'Failed to process selected file.';
-        return;
-      }
-    } else if (!this.useFileUpload && this.addNewForm.attachment) {
-      // external link
-      attachmentPayload = this.addNewForm.attachment.trim();
-    }
-    this.loader.show();
-
-    const payload = {
-      // id: this.generateSystemId(),
-      title: this.addNewForm.title.trim(),
-      category: this.addNewForm.category,
-      date: this.addNewForm.date
-        ? new Date(this.addNewForm.date).toISOString()
-        : nowIso,
-      summary: this.addNewForm.summary?.trim() || '',
-      body: this.addNewForm.body?.trim() || '',
-      thumbnail: this.addNewForm.thumbnail || null,
-      hero: this.addNewForm.hero || null,
-      attachment: attachmentPayload, // either URL string or { filename, mimeType, size, dataUrl }
-      tags: (this.addNewForm.tags || '')
-        .split(',')
-        .map((t) => t.trim())
-        .filter(Boolean),
-      visibility: this.addNewForm.visibility,
-      share_enabled:
-        this.addNewForm.visibility === 'public'
-          ? !!this.addNewForm.share_enabled
-          : false,
-      slug: this.addNewForm.slug,
-      status: this.addNewForm.status,
-      createdBy: this.addNewForm.createdBy || 'system',
-      updatedBy: this.addNewForm.updatedBy || 'system',
-      createdAt: nowIso,
-      updatedAt: nowIso,
-    };
-
-    this.spotlightService
-      .postSpotlightData(payload)
-      .pipe(finalize(() => this.loader.hide()))
-      .subscribe({
-        next: (res) => {
-          // const message = res?.message ?? 'Password reset link sent to email';
-          // this.modal.setResContent('Success', message);
-        },
-        error: (err) => {
-          const message =
-            err?.error?.error ?? err?.message ?? 'An error occurred';
-          this.modal.setResContent('Error', message);
-        },
-      });
-
-    this.closeAddNew();
+  }
+  onCloseModal(): void {
+    this.resetForm();
+    this.faqService.changeAddFAQModalStatus(false);
   }
 }

@@ -45,4 +45,7 @@ export class ServiceDataService {
   getServiceById(title: string): any | null {
     return this.services.find((service) => service.title === title) ?? null;
   }
+  postRequestQuote(data: any) {
+    return this.http.post(`${this.baseUrl}/service-quote/create`, data);
+  }
 }

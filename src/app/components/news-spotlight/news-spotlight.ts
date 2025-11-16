@@ -32,6 +32,7 @@ export class NewsSpotlight implements OnInit {
 
   searchText: string = '';
   activeFilter = 'all';
+  selectedSpotlight: any = null;
 
   dateFrom: string | null = null;
   dateTo: string | null = null;
@@ -43,6 +44,10 @@ export class NewsSpotlight implements OnInit {
 
   ngOnInit(): void {
     this.loader.show();
+    this.onLoadData();
+  }
+
+  onEventAdded() {
     this.onLoadData();
   }
   onLoadData() {
@@ -192,6 +197,7 @@ export class NewsSpotlight implements OnInit {
   }
 
   onEnableAddNew() {
+    this.selectedSpotlight = null;
     this.spotlightService.open();
   }
   getDirectImageUrl(url: string): SafeResourceUrl {
@@ -201,6 +207,7 @@ export class NewsSpotlight implements OnInit {
     return this.sanitizer.bypassSecurityTrustResourceUrl(directUrl);
   }
   onUpdateSpotlight(spotLight: any) {
+    this.selectedSpotlight = { ...spotLight };
     this.spotlightService.open();
   }
   onDeleteSpotlight(data: any) {

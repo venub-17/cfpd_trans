@@ -92,8 +92,9 @@
             class="hover:text-primary-100 transition-colors cursor-pointer"
             >Dashboard</span
           >
-          <!-- *ngIf="authService.isLoggedIn$ | async" -->
+          <!--  -->
           <span
+            *ngIf="(authService.userRole$ | async) === 'hr'"
             [routerLink]="['/faq_private']"
             routerLinkActive="active"
             class="hover:text-primary-100 transition-colors cursor-pointer"

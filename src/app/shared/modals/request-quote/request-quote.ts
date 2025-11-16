@@ -47,7 +47,7 @@ export class RequestQuote {
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
-      phoneNumber: new FormControl('', [
+      phone: new FormControl('', [
         Validators.required,
         Validators.pattern(/^\+?[0-9\s\-()]{7,}$/),
       ]),
@@ -72,7 +72,28 @@ export class RequestQuote {
       return;
     }
     if (this.isService) {
-      console.log('Service Request ID:', this.requestForm.value);
+      this.isFormSubmitted = true;
+
+      this.loaderService.show();
+      this.servicesService
+        .postRequestQuote(this.requestForm.value)
+        .pipe(
+          finalize(() => {
+            this.loaderService.hide(), this.requestForm.reset();
+          })
+        )
+        .subscribe({
+          next: (res) => {
+            this.modal.setResContent(
+              'Success',
+              'Request Quote Submitted Successfully'
+            );
+          },
+          error: (err) => {
+            const errorMessage = err?.error?.message || 'Something went wrong';
+            this.modal.setResContent('Error', errorMessage);
+          },
+        });
     } else {
       this.isFormSubmitted = true;
 
@@ -82,7 +103,7 @@ export class RequestQuote {
           ' ' +
           this.requestForm.value.lastName,
         email: this.requestForm.value.email,
-        phone: this.requestForm.value.phoneNumber,
+        phone: this.requestForm.value.phone,
         quantity: this.count,
         message: this.requestForm.value.description,
       };

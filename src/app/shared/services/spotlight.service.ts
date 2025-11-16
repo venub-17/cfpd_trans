@@ -33,6 +33,9 @@ export class SpotlightService {
   postSpotlightData(data: any) {
     return this.http.post(`${this.baseUrl}/spotlight`, data);
   }
+  onUpdateSpotlight(id: number, data: any) {
+    return this.http.put(`${this.baseUrl}/spotlight/${id}`, data);
+  }
   onDeleteSpotlight(id: number) {
     return this.http.delete(`${this.baseUrl}/spotlight/${id}`);
   }

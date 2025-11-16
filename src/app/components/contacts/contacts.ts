@@ -3,6 +3,9 @@ import { ModalService } from '../../shared/services/modal.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ContactusService } from '../../shared/services/contactus.service';
+import { LoaderService } from '../../shared/services/loader.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-contacts',
@@ -16,7 +19,11 @@ export class Contacts {
   submitSuccess: boolean = false;
   submitError: string | null = null;
   contactFrom: NgForm | undefined;
-  constructor(private modalService: ModalService, private http: HttpClient) {}
+  constructor(
+    private modalService: ModalService,
+    private conactService: ContactusService,
+    private loader: LoaderService
+  ) {}
 
   onOpenModal() {
     this.modalService.open();
@@ -45,30 +52,41 @@ export class Contacts {
   }
 
   onSubmit(form: NgForm) {
-    console.log('Form submitted:', form.value);
-    form.resetForm();
-
     if (!form || !form.valid) {
       form.control.markAllAsTouched();
       return;
     }
 
+    this.loader.show();
     this.isSubmitting = true;
     this.submitError = null;
 
     const payload = form.value;
 
-    // Replace '/api/contact' with your real endpoint
-    // this.http.post('/api/contact', payload).subscribe({
-    //   next: () => {
-    //     this.isSubmitting = false;
-    //     this.submitSuccess = true;
-    //   },
-    //   error: () => {
-    //     this.isSubmitting = false;
-    //     this.submitError = 'Failed to send message. Please try again.';
-    //   },
-    // });
+    this.conactService
+      .postContactus(payload)
+      .pipe(
+        finalize(() => {
+          this.loader.hide();
+          form.resetForm();
+        })
+      )
+      .subscribe({
+        next: (res) => {
+          this.isSubmitting = false;
+          this.modalService.setResContent(
+            'Success',
+            'Your message has been sent successfully.'
+          );
+        },
+        error: (err) => {
+          this.isSubmitting = false;
+          this.modalService.setResContent(
+            'Error',
+            'Some internal issue please try again'
+          );
+        },
+      });
   }
   clearForm(form: NgForm) {
     form.resetForm();

@@ -113,30 +113,13 @@
           applications
         </p>
       </div>
-      <span
-        class="text-primary-600 hover:text-primary-700 font-medium flex items-center cursor-pointer"
-        [routerLink]="['/products']"
+
+      <button
+        class="bg-primary-600 hover:bg-primary-700 mr-10 px-2 py-2 rounded text-white font-medium flex items-center cursor-pointer"
+        [routerLink]="['/faq_public']"
       >
         View all products
-        <i class="ml-2" data-fa-i2svg="">
-          <svg
-            class="svg-inline--fa fa-arrow-right"
-            aria-hidden="true"
-            focusable="false"
-            data-prefix="fas"
-            data-icon="arrow-right"
-            role="img"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 448 512"
-            data-fa-i2svg=""
-          >
-            <path
-              fill="currentColor"
-              d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"
-            ></path>
-          </svg>
-        </i>
-      </span>
+      </button>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -290,7 +273,7 @@
         (click)="onRequestService()"
         class="bg-white text-primary-700 hover:bg-gray-100 font-medium px-6 py-3 rounded-md transition-colors"
       >
-        Request a Quote
+        Request For Service
       </button>
       <!-- <button
         class="bg-transparent border border-white text-white hover:bg-white/10 px-6 py-3 rounded-md transition-colors"
@@ -315,7 +298,7 @@
 
   <!-- use grid with auto-flow rows, and make each card independent -->
   <div
-    class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start p-8 rounded-lg mx-4 md:mx-16 lg:mx-32 text-center"
+    class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start p-8 rounded-lg text-center"
   >
     <div
       *ngFor="let item of FAQs; let i = index"
@@ -323,29 +306,31 @@
     >
       <button
         (click)="toggleFaq(i)"
-        class="w-full flex items-center justify-between p-6 text-left bg-primary-100 hover:bg-accent transition-colors"
+        class="w-full flex items-center justify-between p-6 text-left bg-[#E6F0F6] hover:bg-accent transition-colors"
       >
         <span class="font-medium">{{ item.question }}</span>
-        <svg
-          [ngClass]="{ 'rotate-180': activeIndices.has(i) }"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="size-6"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="m19.5 8.25-7.5 7.5-7.5-7.5"
-          />
-        </svg>
+        <span class="p-3 bg-[#0369A1]/10 rounded-sm">
+          <svg
+            [ngClass]="{ 'rotate-180': activeIndices.has(i) }"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="#0369A1"
+            class="size-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m19.5 8.25-7.5 7.5-7.5-7.5"
+            />
+          </svg>
+        </span>
       </button>
       <!-- *ngIf="activeIndex===i" -->
       <div
         *ngIf="activeIndices.has(i)"
-        class="px-4 py-3 bg-primary-100 text-gray-700 border-t"
+        class="px-4 py-3 bg-[#E6F0F6] text-gray-700 border-t"
       >
         {{ item.answer }}
       </div>

@@ -83,28 +83,25 @@
           name="phone-number"
           class="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:border-transparent"
           placeholder="Please enter your phone number"
-          formControlName="phoneNumber"
+          formControlName="phone"
           [ngClass]="{
             'border-red-500':
-              (f['phoneNumber'].touched || isFormSubmitted) &&
-              f['phoneNumber'].invalid
+              (f['phone'].touched || isFormSubmitted) && f['phone'].invalid
           }"
         />
 
         <div
           *ngIf="
-            f['phoneNumber'].errors &&
-            f['phoneNumber'].errors['required'] &&
-            (f['phoneNumber'].dirty ||
-              f['phoneNumber'].touched ||
-              isFormSubmitted)
+            f['phone'].errors &&
+            f['phone'].errors['required'] &&
+            (f['phone'].dirty || f['phone'].touched || isFormSubmitted)
           "
           class="text-red-500 text-sm mt-1"
         >
           Phone Number is required
         </div>
         <div
-          *ngIf="f['phoneNumber'].errors?.['pattern']"
+          *ngIf="f['phone'].errors?.['pattern']"
           class="text-red-500 text-sm mt-1"
         >
           Enter a valid phone number

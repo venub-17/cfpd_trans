@@ -21,35 +21,49 @@
           <div id="name-field" class="form-group flex justify-between gap-4">
             <div class="w-full">
               <label
-                for="firstName"
+                for="first_name"
                 class="block text-sm font-medium text-gray-700 mb-2"
                 >First Name</label
               >
               <input
                 type="text"
-                id="firstName"
-                name="firstName"
+                id="first_name"
+                name="first_name"
                 ngModel
                 required
                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500"
                 placeholder="Enter your First name"
+                #firstName="ngModel"
               />
+              <p
+                class="text-red-500 text-sm mt-1"
+                *ngIf="firstName.invalid && firstName.touched"
+              >
+                First Name is required
+              </p>
             </div>
             <div class="w-full">
               <label
-                for="lastName"
+                for="last_name"
                 class="block text-sm font-medium text-gray-700 mb-2"
                 >Last Name</label
               >
               <input
                 type="text"
-                id="lastName"
-                name="lastName"
+                id="last_name"
+                name="last_name"
                 ngModel
                 required
                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500"
                 placeholder="Enter your Last name"
+                #lastName="ngModel"
               />
+              <p
+                class="text-red-500 text-sm mt-1"
+                *ngIf="lastName.invalid && lastName.touched"
+              >
+                Last Name is required
+              </p>
             </div>
           </div>
 
@@ -67,7 +81,17 @@
               required
               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500"
               placeholder="Enter your email address"
+              #email="ngModel"
             />
+            <p
+              class="text-red-500 text-sm mt-1"
+              *ngIf="email.invalid && email.touched"
+            >
+              <span *ngIf="email.errors?.['required']">Email is required</span>
+              <span *ngIf="email.errors?.['email']"
+                >Please enter a valid email</span
+              >
+            </p>
           </div>
 
           <div id="phone-field" class="form-group">
@@ -81,10 +105,19 @@
               id="phone"
               name="phone"
               ngModel
+              required
               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500"
               placeholder="Enter your phone number"
+              #phone="ngModel"
             />
+            <p
+              class="text-red-500 text-sm mt-1"
+              *ngIf="phone.invalid && phone.touched"
+            >
+              Phone Number is required
+            </p>
           </div>
+
           <div>
             <label for="subject" class="block text-sm text-neutral-700 mb-2">
               Subject
@@ -93,7 +126,9 @@
               id="subject"
               name="subject"
               ngModel
+              required
               class="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:border-transparent"
+              #subject="ngModel"
             >
               <option value="">Select a subject</option>
               <option value="general">General Inquiry</option>
@@ -102,6 +137,12 @@
               <option value="partnership">Partnership</option>
               <option value="other">Other</option>
             </select>
+            <p
+              class="text-red-500 text-sm mt-1"
+              *ngIf="subject.invalid && subject.touched"
+            >
+              Please select a subject
+            </p>
           </div>
 
           <div id="message-field" class="form-group flex flex-col">
@@ -115,7 +156,6 @@
               name="message"
               rows="6"
               ngModel
-              required
               #messageControl="ngModel"
               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-500 resize-none"
               placeholder="Enter your message here..."
@@ -124,13 +164,6 @@
             <div class="ml-auto">
               {{ messageControl?.value?.length || 0 }}/500
             </div>
-          </div>
-
-          <div *ngIf="submitSuccess" class="text-green-600">
-            Message sent. Thank you.
-          </div>
-          <div *ngIf="submitError" class="text-red-600">
-            {{ submitError }}
           </div>
 
           <div id="submit-section" class="pt-4 flex justify-center">
